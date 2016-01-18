@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="934cdfcc-be0f-42bc-a460-8d4727c148b4" name="RBHCISTD" url="http://localhost/www/MScProjects/RBHCISTD">
+        <fileTransfer accessType="LOCAL" />
+      </webServer>
+    </option>
+  </component>
+</project>
