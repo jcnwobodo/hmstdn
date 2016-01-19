@@ -15,7 +15,7 @@ class LoginCommand extends Command
             $redirect_url = home_url( '/'.User::getDefaultCommand($possible_session->getUserType()), false );
             $requestContext->redirect($redirect_url);//);
         }
-        $requestContext->setView('login.php');
+        $requestContext->setView('index.php');
         if($requestContext->fieldIsSet('login'))
         {
             $this->doLogin($requestContext);
