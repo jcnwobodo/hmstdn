@@ -1,14 +1,18 @@
 @import url("bootstrap.min.css");
+@import url("barebones.css");
 
 body{
-    padding-top: 50px;
     font-family: Cambria, "Times New Roman";
 }
 
 #container-main{
-    min-height: 100vh;
+    min-height: 75vh;
+    padding: 2em 3%;
 }
 
+.navbar{
+    border-radius: 0;
+}
 .footer-nav{
     border-bottom: none;
     margin-bottom: 0;

@@ -16,13 +16,20 @@ $page_title = isset($data['page-title']) ? $data['page-title'] : site_info('name
     <link rel="icon" href="<?php home_url('/Assets/favicon.ico'); ?>">
 
     <!-- Custom CSS and Bootstrap core CSS -->
-    <link href="<?php home_url('/Assets/css/style.css'); ?>" type="text/css" rel="stylesheet">
+    <link href="<?php stylesheet_url(); ?>" type="text/css" rel="stylesheet">
 </head>
 
 <body>
+<div class="container-fluid" id="top">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h1><?php site_info('full-name'); ?></h1>
+        </div>
+    </div>
+</div>
 
 <!-- Fixed Top navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -31,31 +38,16 @@ $page_title = isset($data['page-title']) ? $data['page-title'] : site_info('name
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php home_url('')?>"><?php site_info('name'); ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="<?= ($rc->isRequestUrl('conference') ? 'active': ''); ?> dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Conference Center<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">General Assembly</a></li>
-                        <li><a href="#">Current Issues</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="<?= ($rc->isRequestUrl('') ? 'active': ''); ?> dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">People's Parliament <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-<!--                        <li><a href="#">Current Issues</a></li>-->
-                            <li><a href="<?php home_url('/poll')?>">Polls</a></li>
-                        <li><a href="#">Resolutions</a></li>
-                    </ul>
-                </li>
-                
-                <!--<li <?//= $s = ($rc->isRequestUrl('news') ? 'class="active"': ''); ?>><a href="#">News</a></li>-->
+            <ul class="nav navbar-nav">
+                <li <?= ($rc->isRequestUrl('') ? 'class="active"': ''); ?>><a href="<?php home_url()?>"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li <?= ($rc->isRequestUrl('page/about') ? 'class="active"': ''); ?>><a href="<?php home_url('/page/about/')?>"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+                <li <?= ($rc->isRequestUrl('stat-summary') ? 'class="active"': ''); ?>><a href="<?php home_url('/stat-summary/')?>"><span class="glyphicon glyphicon-flash"></span> Stat. Summaries</a></li>
+                <li <?= ($rc->isRequestUrl('contact') ? 'class="active"': ''); ?>><a href="<?php home_url('/contact/')?>"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php home_url('/login') ?>">Login/Register</a></li>
-                <!--<li><a href="#">Register</a></li>-->
+                <li <?= ($rc->isRequestUrl('register') ? 'class="active"': ''); ?>><a href="<?php home_url('/register/')?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

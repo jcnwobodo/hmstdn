@@ -7,109 +7,84 @@
  * Time: 12:17 PM
  */
 
+$requestContext = \System\Request\RequestContext::instance();
+$response_data = $requestContext->getFlashData();
+
 include_once('header.php');
 ?>
-
-    <div class="container-fluid ">
-    
-
-        <div class="row">
-        <div class="col-md-8" style="">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="Assets/images/slider.jpg" alt="">
-                        <div class="carousel-caption">
-                            ANPC
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="Assets/images/slider-1.jpg" alt="">
-                        <div class="carousel-caption">
-                            ANPC
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="Assets/images/slider-2.jpg" alt="">
-                        <div class="carousel-caption">
-                            Vote for the Best Poll
-                        </div>
-                    </div>
-                </div>
-                <a class="left carousel-control" href="#carousel-example" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
-                        <span class="sr-only">previous</span>
-                        
-                </a>
-                <a class="right carousel-control" href="#carousel-example" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
-                        <span class="sr-only">next</span>
-                        
-                </a>
-            </div>
-            
-        </div>
-        <div class="col-md-4">
-            <div class="row col-md-12">
-                        <hr/>
-
-            </div>
-            <div class="col-md-10">
-            <h2>Polls</h2>
-            <h5>Ongoing Polls</h5>
-            <h6>Caption 1</h6>
-            <h6>Caption 1</h6>
-            <hr/>
-            <h5>Upcoming Polls</h5>
-            <h6>Caption 1</h6>
-            <h6>Caption 1</h6>  
-            <hr/>
-            </div>
-            <div class="col-md-10">
-                <h3>Resolution</h3>
-                <hr/>
-                <h3>Press Room</h3>
-            </div>
-            
-            <div class="row col-md-12">
-            <hr/>
-            <h6><a target="_blank" href="www.facebook.com/anpc"><img src="Assets/images/facebook.png"></a>
-            <a target="_blank" href="www.facebook.com/anpc"><img src="Assets/images/twitter.png"></a></h6>
-            <hr/>
-            <div class="input-group col-md-10">
-                
-                <input type="email" placeHolder="Email subcription" class="form-control" aria-label="Email">
-                <!--<input type="email" placeHolder="Email" class="form-control" aria-label="Email">-->
-                <div class="input-group-btn">
-                    <button class="btn btn-default">Subscribe</button>
-                </div>
-            </div>
-            <!--<h6><a><i class="glyphicon glyphicon-edit"></i>&nbsp;&nbsp;Notification  service</a> </h6>-->
-            <hr/>
-            <h6><a href="<?php home_url('/login')?>"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Login/Sign up Form</a></h6>
-            <!--<span class="glyphicon glyphicon-briefcase"></span>-->
-            <!--<span class="glyphicon glyphicon-file"></span>-->
-            </div>
-        </div>
-            </div>
-    
-    <div class="row">
-        <div class="col-md-8">
-        
-            </div>
-        <div class="col-md-4">
-            
-            
-        </div>
+<div class="row">
+    <div class="col-md-7">
+        <span class="lead">Welcome to</span>
+        <h3 class="page-header"><?php site_info('full-name'); ?></h3>
+        <p class="text-left">... {abstract} ...</p>
+        <p class="text-right">
+            <a href="#" class="btn btn-sm btn-primary">Learn more</a>
+        </p>
     </div>
-    
 
+    <div class="col-md-4 col-md-offset-1">
+        <form action="<?php home_url('/login/'); ?>" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Login</legend>
+
+                <?php
+                if($requestContext->fieldIsSet('login'))
+                {
+                    ?>
+                    <div class="text-danger bg-danger text-center lead">
+                        <?php print_r($response_data); ?>
+                    </div>
+                    <?php
+                }
+                ?>
+
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-xs-4 text-nowrap">
+                            <label for="username"><span class="glyphicon glyphicon-user"></span> Email</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input name="username" id="username" type="email" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input name="password" id="password" type="password" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="btn-group pull-right">
+                            <button name="login" id="login" type="submit" class="btn btn-primary">
+                                Login
+                                <span class="glyphicon glyphicon-log-in"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <br/><br/>
+            <fieldset>
+                <legend>Take your research to the next level <span class="glyphicon glyphicon-forward"></span></legend>
+                Join our researchers network to get more insights on recent tropical diseases, causes, treatments and
+                much more just for <strong>FREE</strong>
+                <p class="text-right">
+                    <a href="<?php home_url('/register'); ?>" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Register Now !</a>
+                </p>
+            </fieldset>
+        </form>
+    </div>
 </div>
-
-<?php include_once("footer.php"); ?>
+<?php
+include_once("footer.php");
+?>

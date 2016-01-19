@@ -22,12 +22,11 @@
         </div>
         <div id="navbar-footer" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li <?= ($rc->isRequestUrl('assembly') ? 'class="active"': ''); ?>><a href="#">About <?php site_info('name'); ?></a></li>
-                <li <?= ($rc->isRequestUrl('assembly') ? 'class="active"': ''); ?>><a href="#">Terms of Use</a></li>
-                <li <?= $s = ($rc->isRequestUrl('news') ? 'class="active"': ''); ?>><a href="#">Legal Notice</a></li>
+                <li <?= ($rc->isRequestUrl('page/terms-of-use') ? 'class="active"': ''); ?>><a href="#"><span class="glyphicon glyphicon-list"></span> Terms of Use</a></li>
+                <li <?= ($rc->isRequestUrl('page/legal-notice') ? 'class="active"': ''); ?>><a href="#"><span class="glyphicon glyphicon-bullhorn"></span> Legal Notice</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php home_url('/admin-login')?>">Admin Login</a></li>
+                <li><a href="#top"><span class="glyphicon glyphicon-circle-arrow-up"></span> Back to top</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
