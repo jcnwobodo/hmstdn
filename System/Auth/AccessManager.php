@@ -30,6 +30,12 @@ class AccessManager
 
     public function login($username, $password)
     {
+        if(!strlen($username) or !strlen($password))
+        {
+            $this->setMessage("Please supply a username and password");
+            return false;
+        }
+
         $UserMapper = User::getMapper("User");
         $UserObj = $UserMapper->findByUsername($username);
 
