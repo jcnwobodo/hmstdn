@@ -9,7 +9,7 @@
 
 $site_info = array(
     'name'                  => "RBHCISTD",
-    'description'           => "Research-based Heath Care Information System for Tropical Diseases",
+    'full-name'           => "Research-Based Heath Care Information System for Tropical Diseases",
     'contact_email'         => "jc.nwobodo@gmail.com",
     'charset'               => "UTF-8",
     'session-cookie-domain' => "127.0.0.1",
