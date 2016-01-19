@@ -26,27 +26,13 @@ class FrontController
 
     public function handleRequest()
     {
-	    $requestContext = RequestContext::instance();
-        $requestUrl = $requestContext->getRequestUrl();
-        $posts_mapper = Models\Post::getMapper("Post");
-
-        //Check if link points to a specific post/page
-        if(!empty($requestUrl))
-        {
-            $possible_post = $posts_mapper->findByPamalink($requestUrl);
-            if(! is_null($possible_post) and $possible_post->isPublished())
-            {
-                $requestContext->resetCommandChain();
-                $requestContext->addCommand('Posts');
-                $requestContext->setResponseData($possible_post);
-            }
-        }
-
-        //if none of the above conditions were met, requestContext sets commandChain[0] to 'DefaultCommand',
-        //thus, the homepage is loaded
+        $requestContext = RequestContext::instance();
         $cmd_resolver = new CommandResolver();
         $this->r_run( $requestContext, $cmd_resolver);
+        /*
+         * take off this comment when domain object's mappers are ready to communicate with the DB
         DomainObjectWatcher::instance()->performOperations();
+        */
     }
 
     private function r_run(RequestContext $requestContext, CommandResolver $cmd_resolver, $start=0)
