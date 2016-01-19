@@ -25,7 +25,6 @@ class User extends DomainObject
     private $email;
     private $phone;
     private $biography;
-    private $office_location;
     public static $gender_enum = array('m', 'f', 'male', 'female');
 
     const USER_TYPE_ADMIN = 'admin';
@@ -285,16 +284,6 @@ class User extends DomainObject
     {
         $this->biography = $biography;
         $this->markDirty();
-        return $this;
-    }
-
-    public function getOfficeLocation()
-    {
-        return $this->office_location;
-    }
-    public function setOfficeLocation(OfficeLocation $office_location)
-    {
-        $this->office_location = $office_location;
         return $this;
     }
 

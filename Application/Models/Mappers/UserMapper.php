@@ -23,8 +23,8 @@ class UserMapper extends Mapper
         $this->selectByUsernameStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE username=?");
         $this->selectByGenderStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE gender=?");
         $this->selectByEmailStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE email=?");
-        $this->updateStmt = self::$PDO->prepare("UPDATE site_users set username=?,password=?,user_type=?,status=?,photo=?,first_name=?, last_name=?, other_names=?, gender=?, date_of_birth=?, nationality=?, state_of_origin=?, lga=?, residence_country=?, residence_state=?, residence_city=?, residence_street=?, email=?, phone=?, biography=?, office_location=? WHERE id=?");
-        $this->insertStmt = self::$PDO->prepare("INSERT INTO site_users (username,password,user_type,status,photo,first_name,last_name,other_names,gender,date_of_birth,nationality,state_of_origin,lga,residence_country,residence_state,residence_city,residence_street,email,phone,biography,office_location)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $this->updateStmt = self::$PDO->prepare("UPDATE site_users set username=?,password=?,user_type=?,status=?,photo=?,first_name=?, last_name=?, other_names=?, gender=?, date_of_birth=?, nationality=?, state_of_origin=?, lga=?, residence_country=?, residence_state=?, residence_city=?, residence_street=?, email=?, phone=?, biography=? WHERE id=?");
+        $this->insertStmt = self::$PDO->prepare("INSERT INTO site_users (username,password,user_type,status,photo,first_name,last_name,other_names,gender,date_of_birth,nationality,state_of_origin,lga,residence_country,residence_state,residence_city,residence_street,email,phone,biography)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM site_users WHERE id=?");
 
         $this->selectAllByUserTypeStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE user_type=?;");
@@ -100,8 +100,6 @@ class UserMapper extends Mapper
         $object->setEmail($array['email']);
         $object->setPhone($array['phone']);
         $object->setBiography($array['biography']);
-        $office_location = Models\OfficeLocation::getMapper('OfficeLocation')->find($array['office_location']);
-        if(! is_null($office_location)) $object->setOfficeLocation($office_location);
 
         return $object;
     }
@@ -128,8 +126,7 @@ class UserMapper extends Mapper
             $object->getResidenceStreet(),
             $object->getEmail(),
             $object->getPhone(),
-            $object->getBiography(),
-            (!is_null($object->getOfficeLocation()) ? $object->getOfficeLocation()->getId() : null)
+            $object->getBiography()
         );
         $this->insertStmt->execute( $values );
         $id = self::$PDO->lastInsertId();
@@ -159,7 +156,6 @@ class UserMapper extends Mapper
             $object->getEmail(),
             $object->getPhone(),
             $object->getBiography(),
-            (!is_null($object->getOfficeLocation()) ? $object->getOfficeLocation()->getId() : null ),
             $object->getId()
         );
         $this->updateStmt->execute( $values );
