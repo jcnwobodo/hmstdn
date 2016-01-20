@@ -9,7 +9,7 @@
 
 namespace Application\Models;
 
-class Admin extends User
+class Admin extends Employee
 {
     public function __construct($id=null)
     {

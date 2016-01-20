@@ -10,7 +10,7 @@
 namespace Application\Models;
 
 
-class Receptionist extends User
+class Receptionist extends Employee
 {
     public function __construct($id)
     {

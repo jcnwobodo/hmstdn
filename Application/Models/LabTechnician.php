@@ -10,7 +10,7 @@
 namespace Application\Models;
 
 
-class LabTechnician extends User
+class LabTechnician extends Employee
 {
     public function __construct($id)
     {
