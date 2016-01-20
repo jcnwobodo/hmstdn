@@ -14,5 +14,6 @@ class Admin extends User
     public function __construct($id=null)
     {
         parent::__construct($id);
+        $this->setUserType(self::UT_ADMIN);
     }
 }

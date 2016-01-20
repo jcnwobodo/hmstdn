@@ -15,6 +15,8 @@ use System\Utilities\DateTime;
 
 class UserMapper extends Mapper
 {
+    private $target_class;
+
     public function __construct()
     {
         parent::__construct();
@@ -67,7 +69,7 @@ class UserMapper extends Mapper
 
     protected function targetClass()
     {
-        return "Application\\Models\\User";
+        return "Application\\Models\\{$this->target_class}";
     }
 
     protected function getCollection( array $raw )
@@ -77,6 +79,7 @@ class UserMapper extends Mapper
 
     protected function doCreateObject( array $array )
     {
+        $this->target_class = ucfirst($array['user_type']);
         $class = $this->targetClass();
         $object = new $class($array['id']);
         $object->setUsername($array['username']);

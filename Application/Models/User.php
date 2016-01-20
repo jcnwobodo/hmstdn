@@ -1,9 +1,10 @@
 <?php
 namespace Application\Models;
 
+use System\Models\I_StatefulObject;
 use System\Utilities\DateTime;
 
-class User extends DomainObject
+abstract class User extends DomainObject implements I_StatefulObject
 {
     private $username;
     private $password;
@@ -27,11 +28,11 @@ class User extends DomainObject
     private $biography;
     public static $gender_enum = array('m', 'f', 'male', 'female');
 
-    const USER_TYPE_ADMIN = 'admin';
-    const USER_TYPE_MODERATOR = 'moderator';
-    const USER_TYPE_MEMBER = 'member';
-    const STATUS_ACTIVE = 1;
-    const STATUS_INACTIVE = 0;
+    const UT_ADMIN = 'Admin';
+    const UT_LAB_TECH = 'LabTechnician';
+    const UT_RECEPTIONIST = 'Receptionist';
+    const UT_DOCTOR = 'Doctor';
+    const UT_RESEARCHER = 'Researcher';
 
     public function __construct($id=null)
     {
@@ -85,7 +86,7 @@ class User extends DomainObject
      */
     public function setUserType($user_type)
     {
-        $this->user_type = $user_type;
+        $this->user_type = ucfirst($user_type);
         $this->markDirty();
         return $this;
     }
@@ -290,17 +291,17 @@ class User extends DomainObject
     public static function getDefaultCommand($user_type)
     {
         $command = null;
-        switch(strtolower($user_type))
+        switch(ucfirst($user_type))
         {
-            case (User::USER_TYPE_ADMIN) :{
+            case (User::UT_ADMIN) :{
                 $command = 'admin-area';
             } break;
 
-            case (User::USER_TYPE_MODERATOR) :{
+            case (User::UT_LAB_TECH) :{
                 $command = 'moderator-area';
             } break;
 
-            case (User::USER_TYPE_MEMBER) :{
+            case (User::UT_RECEPTIONIST) :{
                 $command = 'member-area';
             } break;
         }
