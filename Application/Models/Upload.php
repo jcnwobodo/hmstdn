@@ -9,9 +9,10 @@
 
 namespace Application\Models;
 
+use System\Models\I_StatefulObject;
 use System\Utilities\DateTime;
 
-class Upload extends DomainObject
+class Upload extends DomainObject implements I_StatefulObject
 {
     private $author;
     private $upload_time;
