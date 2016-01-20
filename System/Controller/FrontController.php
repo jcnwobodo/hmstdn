@@ -29,10 +29,7 @@ class FrontController
         $requestContext = RequestContext::instance();
         $cmd_resolver = new CommandResolver();
         $this->r_run( $requestContext, $cmd_resolver);
-        /*
-         * take off this comment when domain object's mappers are ready to communicate with the DB
         DomainObjectWatcher::instance()->performOperations();
-        */
     }
 
     private function r_run(RequestContext $requestContext, CommandResolver $cmd_resolver, $start=0)

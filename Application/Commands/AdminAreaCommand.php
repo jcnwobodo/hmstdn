@@ -14,15 +14,17 @@ use Application\Models\Post;
 use Application\Models\User;
 use Application\Models\Comment;
 use Application\Models\Location;
+use Application\Models\Upload;
 use System\Models\DomainObjectWatcher;
 use System\Request\RequestContext;
 use System\Utilities\DateTime;
+use System\Utilities\UploadHandler;
 
 class AdminAreaCommand extends SecureCommand
 {
     public function execute(RequestContext $requestContext)
     {
-        if($this->securityPass($requestContext, User::USER_TYPE_ADMIN, 'admin-area'))
+        if($this->securityPass($requestContext, User::UT_ADMIN, 'admin-area'))
         {
             parent::execute($requestContext);
         }
@@ -744,5 +746,209 @@ class AdminAreaCommand extends SecureCommand
         $data['page-title'] = "Add Location (".ucwords($type).")";
         $requestContext->setResponseData($data);
         $requestContext->setView('admin/add-location.php');
+    }
+
+    //User Management
+    protected function ManageUsers(RequestContext $requestContext)
+    {
+        $types = array('admin', 'doctor', 'lab_technician', 'receptionist', 'researcher');
+        $type = ($requestContext->fieldIsSet('type') and in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
+        $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'active';
+        $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
+        $user_ids = $requestContext->fieldIsSet('user-ids') ? $requestContext->getField('user-ids') : array();
+
+        switch(strtolower($action))
+        {
+            case 'activate' : {
+                foreach($user_ids as $user_id)
+                {
+                    $user_obj = User::getMapper('User')->find($user_id);
+                    if(is_object($user_obj)) $user_obj->setStatus(User::STATUS_ACTIVE);
+                }
+            } break;
+            case 'delete' : {
+                foreach($user_ids as $user_id)
+                {
+                    $user_obj = User::getMapper('User')->find($user_id);
+                    if(is_object($user_obj)) $user_obj->setStatus(User::STATUS_DELETED);
+                }
+            } break;
+            case 'deactivate' : {
+                foreach($user_ids as $user_id)
+                {
+                    $user_obj = User::getMapper('User')->find($user_id);
+                    if(is_object($user_obj)) $user_obj->setStatus(User::STATUS_INACTIVE);
+                }
+            } break;
+            case 'restore' : {
+                foreach($user_ids as $user_id)
+                {
+                    $user_obj = User::getMapper('User')->find($user_id);
+                    if(is_object($user_obj)) $user_obj->setStatus(User::STATUS_ACTIVE);
+                }
+            } break;
+            case 'delete permanently' : {
+                foreach($user_ids as $user_id)
+                {
+                    $user_obj = User::getMapper('User')->find($user_id);
+                    if(is_object($user_obj)) $user_obj->markDelete();
+                }
+            } break;
+            default : {}
+        }
+        DomainObjectWatcher::instance()->performOperations();
+
+        switch($status)
+        {
+            case 'active' : {
+                $users = User::getMapper('User')->findTypeByStatus($type, User::STATUS_ACTIVE);
+            } break;
+            case 'inactive' : {
+                $users = User::getMapper('User')->findTypeByStatus($type, User::STATUS_INACTIVE);
+            } break;
+            case 'deleted' : {
+                $users = User::getMapper('User')->findTypeByStatus($type, User::STATUS_DELETED);
+            } break;
+            default : {
+                $users = User::getMapper('User')->findAll();
+            }
+        }
+
+        $data = array();
+        $data['type'] = $type;
+        $data['status'] = $status;
+        $data['users'] = $users;
+        $data['page-title'] = ucwords($status)." Staff Members (".ucwords($type).")";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/manage-users.php');
+    }
+
+    protected function AddUser(RequestContext $requestContext)
+    {
+        $data = array();
+        $types = array('admin', 'doctor', 'lab_technician', 'receptionist', 'researcher');
+        $type = ( $requestContext->fieldIsSet('type') && in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
+        $data['type'] = $type;
+
+        if($requestContext->fieldIsSet("add"))
+        {
+            $data['status'] = false;
+            $fields = $requestContext->getAllFields();
+
+            $first_name = $fields['first-name'];
+            $last_name = $fields['last-name'];
+            $other_names = $fields['other-names'];
+            $gender = $fields['gender'];
+            $dob = $fields['date-of-birth'];
+            $nationality = $fields['nationality'];
+            $state_of_origin = $fields['state-of-origin'];
+            $lga_of_origin = $fields['lga-of-origin'];
+            $res_country = $fields['residence-country'];
+            $res_state = $fields['residence-state'];
+            $res_city = $fields['residence-city'];
+            $res_street = $fields['residence-street'];
+            $contact_email = $fields['contact-email'];
+            $contact_phone = $fields['contact-phone'];
+            $passport = !empty($_FILES['passport-photo']) ? $requestContext->getFile('passport-photo') : null;
+            $employee_id = $fields['employee-id'];
+            $department = $fields['department'];
+            $specialization = $fields['specialization'];
+            $password1 = $fields['password1'];
+            $password2 = $fields['password2'];
+
+            $date_is_correct = checkdate($dob['month'], $dob['day'], $dob['year']);
+            /*Ensure that mandatory data is supplied, then create a report object*/
+            if(
+                strlen($first_name)
+                and strlen($last_name)
+                and in_array(strtolower($gender),User::$gender_enum)
+                and $date_is_correct
+                and strlen($nationality)
+                and strlen($state_of_origin)
+                and strlen($lga_of_origin)
+                and strlen($res_country)
+                and strlen($res_state)
+                and strlen($res_city)
+                and strlen($res_street)
+                and strlen($contact_email)
+                and (strlen($contact_phone)==11)
+                and !is_null($passport)
+                and strlen($employee_id)
+                and strlen($department)
+                and strlen($specialization)
+                and strlen($password1) and $password1 === $password2
+            )
+            {
+                $date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
+
+                //Handle photo upload
+                $photo_handled = false;
+                $uploader = new UploadHandler('passport-photo', uniqid('passport_'));
+                $uploader->setAllowedExtensions(array('jpg'));
+                $uploader->setUploadDirectory("Uploads/passports");
+                $uploader->setMaxUploadSize(0.2);
+                $uploader->doUpload();
+
+                if($uploader->getUploadStatus())
+                {
+                    $photo = new Upload();
+                    //$photo->setAuthor($profile);
+                    $photo->setUploadTime(new DateTime());
+                    $photo->setLocation($uploader->getUploadDirectory());
+                    $photo->setFileName($uploader->getOutputFileName().".".$uploader->getFileExtension());
+                    $photo->setFileSize($uploader->getFileSize());
+
+                    $photo_handled = true;
+                }
+                else
+                {
+                    $data['status'] = false;
+                    $requestContext->setFlashData("Error Uploading Photo - ".$uploader->getStatusMessage());
+                }
+
+                if($photo_handled)
+                {
+                    $user_class = str_replace(' ', '', ucwords(str_replace('_', ' ', $type)) );
+                    $class = "\\Application\\Models\\".$user_class;
+                    $profile = new $class();
+                    $profile->setUsername($employee_id);
+                    $profile->setUserType($user_class);
+                    $profile->setStatus($profile::STATUS_ACTIVE);
+                    $profile->setProfilePhoto($photo);
+                    $profile->setFirstName($first_name);
+                    $profile->setLastName($last_name);
+                    $profile->setOtherNames($other_names);
+                    $profile->setGender($gender);
+                    $profile->setDateOfBirth($date_of_birth);
+                    $profile->setNationality($nationality);
+                    $profile->setStateOfOrigin($state_of_origin);
+                    $profile->setLga($lga_of_origin);
+                    $profile->setResidenceCountry($res_country);
+                    $profile->setResidenceState($res_state);
+                    $profile->setResidenceCity($res_city);
+                    $profile->setResidenceStreet($res_street);
+                    $profile->setEmail($contact_email);
+                    $profile->setPhone($contact_phone);
+                    $profile->setDepartment($department);
+                    $profile->setSpecialization($specialization);
+                    $profile->setPassword($password1);
+
+                    $requestContext->setFlashData("Staff profile has been created successfully.");
+                    $data['status'] = true;
+                }
+            }
+            else{
+                $data['status'] = false;
+                $requestContext->setFlashData("Please fill out all fields with valid data, then try again.");
+
+                //Try returning more helpful error messages
+                if($password1 !== $password2) $requestContext->setFlashData("Password confirmation does not match");
+                if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
+            }
+        }
+
+        $data['page-title'] = "Add Staff (".ucwords($type).")";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/add-user.php');
     }
 }

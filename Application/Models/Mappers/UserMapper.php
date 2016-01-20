@@ -30,6 +30,7 @@ class UserMapper extends Mapper
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM site_users WHERE id=?");
 
         $this->selectAllByUserTypeStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE user_type=?;");
+        $this->selectTypeByStatusStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE user_type=? AND status=?;");
         $this->selectRandomByUserTypeStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE user_type=:user_type AND status=:user_status ORDER BY RAND() LIMIT :num");
     }
 
@@ -54,6 +55,13 @@ class UserMapper extends Mapper
     {
         $this->selectAllByUserTypeStmt->execute( array($user_type) );
         $raw_data = $this->selectAllByUserTypeStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
+    }
+
+    public function findTypeByStatus($type, $status)
+    {
+        $this->selectTypeByStatusStmt->execute( array($type, $status) );
+        $raw_data = $this->selectTypeByStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
 
