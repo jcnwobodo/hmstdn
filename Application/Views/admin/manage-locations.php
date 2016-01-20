@@ -121,7 +121,7 @@ require_once("header.php");
         {
             ?>
             <div class="clear-both text-center text-primary">
-                <p class="lead">There are currently no <?= $data['status']; ?> location.</p>
+                <p class="lead">There are currently no <?= $data['status'].' '.$data['type']; ?>s.</p>
             </div>
             <?php
         }
