@@ -81,15 +81,15 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
             <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="btn-link">
-                        <span class="glyphicon glyphicon-briefcase"></span> Patients
+                        <span class="glyphicon glyphicon-leaf"></span> Patients
                     </a>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse <?= in_array($method, $group1)? 'in': ''; ?>" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body no-padding">
                     <ul class="btn-group btn-group-vertical list-unstyled">
-                        <li><a href="<?php home_url('/admin-area/add-patient/'); ?>" class="btn"><span class="glyphicon glyphicon-map-marker"></span> Add Patient</a></li>
-                        <li><a href="<?php home_url('/admin-area/manage-patients/'); ?>" class="btn"><span class="glyphicon glyphicon-unchecked"></span> Manage Patients</a></li>
+                        <li><a href="<?php home_url('/admin-area/add-patient/'); ?>" class="btn"><span class="glyphicon glyphicon-plus-sign"></span> Add Patient</a></li>
+                        <li><a href="<?php home_url('/admin-area/manage-patients/'); ?>" class="btn"><span class="glyphicon glyphicon-tasks"></span> Manage Patients</a></li>
                     </ul>
                 </div>
             </div>
@@ -106,8 +106,8 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
             <div id="collapse-5" class="panel-collapse collapse <?= in_array($method, $group5)? 'in': ''; ?>" role="tabpanel" aria-labelledby="heading-5">
                 <div class="panel-body no-padding">
                     <ul class="btn-group btn-group-vertical list-unstyled">
-                        <li><a href="<?php home_url('/admin-area/add-consultation/'); ?>" class="btn"><span class="glyphicon glyphicon-map-marker"></span> Add Consultation</a></li>
-                        <li><a href="<?php home_url('/admin-area/manage-consultations/'); ?>" class="btn"><span class="glyphicon glyphicon-unchecked"></span> Manage Consultations</a></li>
+                        <li><a href="<?php home_url('/admin-area/add-consultation/'); ?>" class="btn"><span class="glyphicon glyphicon-plus-sign"></span> Add Consultation</a></li>
+                        <li><a href="<?php home_url('/admin-area/manage-consultations/'); ?>" class="btn"><span class="glyphicon glyphicon-tasks"></span> Manage Consultations</a></li>
                     </ul>
                 </div>
             </div>
@@ -117,14 +117,14 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
             <div class="panel-heading" role="tab" id="heading-6">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse-6" aria-expanded="false" aria-controls="collapse-6" class="btn-link">
-                        <span class="glyphicon glyphicon-briefcase"></span> Med. Lab. Records
+                        <span class="glyphicon glyphicon-record"></span> Med. Lab. Records
                     </a>
                 </h4>
             </div>
             <div id="collapse-6" class="panel-collapse collapse <?= in_array($method, $group6)? 'in': ''; ?>" role="tabpanel" aria-labelledby="heading-6">
                 <div class="panel-body no-padding">
                     <ul class="btn-group btn-group-vertical list-unstyled">
-                        <li><a href="<?php home_url('/admin-area/manage-test-records/'); ?>" class="btn"><span class="glyphicon glyphicon-unchecked"></span> Manage Test Records</a></li>
+                        <li><a href="<?php home_url('/admin-area/manage-test-records/'); ?>" class="btn"><span class="glyphicon glyphicon-tasks"></span> Manage Test Records</a></li>
                     </ul>
                 </div>
             </div>
@@ -134,7 +134,7 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
             <div class="panel-heading" role="tab" id="heading-7">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse-7" aria-expanded="false" aria-controls="collapse-7" class="btn-link">
-                        <span class="glyphicon glyphicon-briefcase"></span> Miscellaneous
+                        <span class="glyphicon glyphicon-cog"></span> Miscellaneous
                     </a>
                 </h4>
             </div>
@@ -142,8 +142,8 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
                 <div class="panel-body no-padding">
                     <ul class="btn-group btn-group-vertical list-unstyled">
                         <li><a href="<?php home_url('/admin-area/manage-locations/'); ?>" class="btn"><span class="glyphicon glyphicon-map-marker"></span> Manage Locations</a></li>
-                        <li><a href="<?php home_url('/admin-area/manage-diseases/'); ?>" class="btn"><span class="glyphicon glyphicon-map-marker"></span> Manage Diseases</a></li>
-                        <li><a href="<?php home_url('/admin-area/manage-disease-categories/'); ?>" class="btn"><span class="glyphicon glyphicon-unchecked"></span> Manage Disease Cats.</a></li>
+                        <li><a href="<?php home_url('/admin-area/manage-diseases/'); ?>" class="btn"><span class="glyphicon glyphicon-warning-sign"></span> Manage Diseases</a></li>
+                        <li><a href="<?php home_url('/admin-area/manage-disease-categories/'); ?>" class="btn"><span class="glyphicon glyphicon-tags"></span> Manage Disease Cats.</a></li>
                     </ul>
                 </div>
             </div>
