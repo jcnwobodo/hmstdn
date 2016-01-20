@@ -27,11 +27,11 @@ foreach($__autoload as $file)
     }
 }
 
-function __autoload( $class )
+function __autoload( $path )
 {
-    if ( preg_match( '/\\\\/', $class ) )
+    if ( preg_match( '/\\\\/', $path ) )
     {
-        $path = str_replace('\\', DIRECTORY_SEPARATOR, $class );
+        $path = str_replace('\\', DIRECTORY_SEPARATOR, $path );
         $path .= ".php";
     }
     if(!is_file($path))
