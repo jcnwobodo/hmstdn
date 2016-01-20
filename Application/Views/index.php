@@ -51,7 +51,7 @@ include_once('header.php');
 
                 <div class="form-group form-group-sm">
                     <div class="row">
-                        <div class="col-xs-4">
+                        <div class="col-xs-4 text-nowrap">
                             <label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
                         </div>
                         <div class="col-xs-8">
