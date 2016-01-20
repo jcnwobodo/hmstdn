@@ -563,7 +563,7 @@ class AdminAreaCommand extends SecureCommand
     //Location Management
     protected function ManageLocations(RequestContext $requestContext)
     {
-        $type = $requestContext->fieldIsSet('type') ? $requestContext->getField('type') : 'district';
+        $type = $requestContext->fieldIsSet('type') ? $requestContext->getField('type') : 'state';
         $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'approved';
         $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
         $location_ids = $requestContext->fieldIsSet('location-ids') ? $requestContext->getField('location-ids') : array();
