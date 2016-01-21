@@ -12,7 +12,7 @@ namespace Application\Models;
 
 class Doctor extends Employee
 {
-    public function __construct($id)
+    public function __construct($id=null)
     {
         parent::__construct($id);
         $this->setUserType(self::UT_DOCTOR);

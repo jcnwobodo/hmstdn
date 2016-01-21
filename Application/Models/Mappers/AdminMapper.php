@@ -9,7 +9,7 @@
 
 namespace Application\Models\Mappers;
 
-class AdminMapper extends UserMapper
+class AdminMapper extends EmployeeMapper
 {
     protected function targetClass()
     {

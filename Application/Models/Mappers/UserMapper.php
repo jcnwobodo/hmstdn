@@ -11,7 +11,6 @@ namespace Application\Models\Mappers;
 
 use Application\Models;
 use Application\Models\Collections\UserCollection;
-use System\Utilities\DateTime;
 
 class UserMapper extends Mapper
 {
@@ -23,10 +22,8 @@ class UserMapper extends Mapper
         $this->selectStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE id=?");
         $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM site_users");
         $this->selectByUsernameStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE username=?");
-        $this->selectByGenderStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE gender=?");
-        $this->selectByEmailStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE email=?");
-        $this->updateStmt = self::$PDO->prepare("UPDATE site_users set username=?,password=?,user_type=?,status=?,photo=?,first_name=?, last_name=?, other_names=?, gender=?, date_of_birth=?, nationality=?, state_of_origin=?, lga=?, residence_country=?, residence_state=?, residence_city=?, residence_street=?, email=?, phone=?, biography=? WHERE id=?");
-        $this->insertStmt = self::$PDO->prepare("INSERT INTO site_users (username,password,user_type,status,photo,first_name,last_name,other_names,gender,date_of_birth,nationality,state_of_origin,lga,residence_country,residence_state,residence_city,residence_street,email,phone,biography)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $this->updateStmt = self::$PDO->prepare("UPDATE site_users set username=?,password=?,user_type=?,status=? WHERE id=?");
+        $this->insertStmt = self::$PDO->prepare("INSERT INTO site_users (username,password,user_type,status)VALUES(?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM site_users WHERE id=?");
 
         $this->selectAllByUserTypeStmt = self::$PDO->prepare("SELECT * FROM site_users WHERE user_type=?;");
@@ -37,18 +34,6 @@ class UserMapper extends Mapper
     public function findByUsername($username)
     {
         return $this->findHelper($username, $this->selectByUsernameStmt, 'username');
-    }
-
-    public function findByGender($gender)
-    {
-        $this->selectByGenderStmt->execute( array($gender) );
-        $raw_data = $this->selectByGenderStmt->fetchAll(\PDO::FETCH_ASSOC);
-        return $this->getCollection( $raw_data );
-    }
-
-    public function findByEmail($email)
-    {
-        return $this->findHelper($email, $this->selectByEmailStmt, 'email');
     }
 
     public function findByUserType($user_type)
@@ -94,23 +79,8 @@ class UserMapper extends Mapper
         $object->setPassword($array['password']);
         $object->setUserType($array['user_type']);
         $object->setStatus($array['status']);
-        $profile_photo = Models\Upload::getMapper('Upload')->find($array['photo']);
-        if(! is_null($profile_photo)) $object->setProfilePhoto($profile_photo);
-        $object->setFirstName($array['first_name']);
-        $object->setLastName($array['last_name']);
-        $object->setOtherNames($array['other_names']);
-        $object->setGender($array['gender']);
-        $object->setDateOfBirth(DateTime::getDateTimeObjFromInt($array['date_of_birth']));
-        $object->setNationality($array['nationality']);
-        $object->setStateOfOrigin($array['state_of_origin']);
-        $object->setLga($array['lga']);
-        $object->setResidenceCountry($array['residence_country']);
-        $object->setResidenceState($array['residence_state']);
-        $object->setResidenceCity($array['residence_city']);
-        $object->setResidenceStreet($array['residence_street']);
-        $object->setEmail($array['email']);
-        $object->setPhone($array['phone']);
-        $object->setBiography($array['biography']);
+        $personal_info = Models\PersonalInfo::getMapper('PersonalInfo')->find($array['id']);
+        if(! is_null($personal_info)) $object->setPersonalInfo($personal_info);
 
         return $object;
     }
@@ -121,23 +91,7 @@ class UserMapper extends Mapper
             $object->getUsername(),
             $object->getPassword(),
             $object->getUserType(),
-            $object->getStatus(),
-            is_object($object->getProfilePhoto()) ? $object->getProfilePhoto()->getId() : NULL,
-            $object->getFirstName(),
-            $object->getLastName(),
-            $object->getOtherNames(),
-            $object->getGender(),
-            $object->getDateOfBirth()->getDateTimeInt(),
-            $object->getNationality(),
-            $object->getStateOfOrigin(),
-            $object->getLga(),
-            $object->getResidenceCountry(),
-            $object->getResidenceState(),
-            $object->getResidenceCity(),
-            $object->getResidenceStreet(),
-            $object->getEmail(),
-            $object->getPhone(),
-            $object->getBiography()
+            $object->getStatus()
         );
         $this->insertStmt->execute( $values );
         $id = self::$PDO->lastInsertId();
@@ -151,22 +105,6 @@ class UserMapper extends Mapper
             $object->getPassword(),
             $object->getUserType(),
             $object->getStatus(),
-            is_object($object->getProfilePhoto()) ? $object->getProfilePhoto()->getId() : NULL,
-            $object->getFirstName(),
-            $object->getLastName(),
-            $object->getOtherNames(),
-            $object->getGender(),
-            $object->getDateOfBirth()->getDateTimeInt(),
-            $object->getNationality(),
-            $object->getStateOfOrigin(),
-            $object->getLga(),
-            $object->getResidenceCountry(),
-            $object->getResidenceState(),
-            $object->getResidenceCity(),
-            $object->getResidenceStreet(),
-            $object->getEmail(),
-            $object->getPhone(),
-            $object->getBiography(),
             $object->getId()
         );
         $this->updateStmt->execute( $values );

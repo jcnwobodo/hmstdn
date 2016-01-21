@@ -12,10 +12,9 @@ namespace Application\Models;
 
 abstract class Employee extends User
 {
-    private $department;
-    private $specialization;
+    private $employment_data;
 
-    public function __construct($id)
+    public function __construct($id=null)
     {
         parent::__construct($id);
     }
@@ -23,36 +22,18 @@ abstract class Employee extends User
     /**
      * @return mixed
      */
-    public function getDepartment()
+    public function getEmploymentData()
     {
-        return $this->department;
+        return $this->employment_data;
     }
 
     /**
-     * @param mixed $department
+     * @param mixed $employment_data
      * @return Employee
      */
-    public function setDepartment($department)
+    public function setEmploymentData($employment_data)
     {
-        $this->department = $department;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSpecialization()
-    {
-        return $this->specialization;
-    }
-
-    /**
-     * @param mixed $specialization
-     * @return Employee
-     */
-    public function setSpecialization($specialization)
-    {
-        $this->specialization = $specialization;
+        $this->employment_data = $employment_data;
         return $this;
     }
 }

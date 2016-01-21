@@ -67,13 +67,15 @@ require_once("header.php");
                             $sn = 0;
                             foreach($data['users'] as $user)
                             {
+                                $p = $user->getPersonalInfo();
+                                $e = $user->getEmploymentData();
                                 ?>
                                 <tr>
                                     <td><?= ++$sn; ?></td>
-                                    <td><?= $user->getNames(); ?></td>
+                                    <td><?= $p->getNames(); ?></td>
                                     <td><?= $user->getUsername(); ?></td>
-                                    <td><?= $user->getDepartment(); ?></td>
-                                    <td><?= $user->getSpecialization(); ?></td>
+                                    <td><?= $e->getDepartment(); ?></td>
+                                    <td><?= $e->getSpecialization(); ?></td>
                                     <td><input type="checkbox" name="user-ids[]" value="<?= $user->getId(); ?>"></td>
                                 </tr>
                                 <?php

@@ -10,7 +10,7 @@
 namespace Application\Models\Mappers;
 
 
-class DoctorMapper extends UserMapper
+class DoctorMapper extends EmployeeMapper
 {
     protected function targetClass()
     {

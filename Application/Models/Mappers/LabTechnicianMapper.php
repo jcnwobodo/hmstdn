@@ -10,7 +10,7 @@
 namespace Application\Models\Mappers;
 
 
-class LabTechnicianMapper extends UserMapper
+class LabTechnicianMapper extends EmployeeMapper
 {
     protected function targetClass()
     {

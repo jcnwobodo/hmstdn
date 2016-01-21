@@ -10,6 +10,9 @@
 namespace Application\Commands;
 
 use Application\Models\Category;
+use Application\Models\Employee;
+use Application\Models\EmploymentData;
+use Application\Models\PersonalInfo;
 use Application\Models\Post;
 use Application\Models\User;
 use Application\Models\Comment;
@@ -791,26 +794,31 @@ class AdminAreaCommand extends SecureCommand
                 foreach($user_ids as $user_id)
                 {
                     $user_obj = User::getMapper('User')->find($user_id);
-                    if(is_object($user_obj)) $user_obj->markDelete();
+                    if(is_object($user_obj))
+                    {
+                        $user_obj->getPersonalInfo()->markDelete();
+                        if($user_obj instanceof Employee) $user_obj->getEmploymentData()->markDelete();
+                        $user_obj->markDelete();
+                    }
                 }
             } break;
             default : {}
         }
-        DomainObjectWatcher::instance()->performOperations();
+        if(!is_null($action)) DomainObjectWatcher::instance()->performOperations();
 
         switch($status)
         {
             case 'active' : {
-                $users = User::getMapper('User')->findTypeByStatus($type, User::STATUS_ACTIVE);
+                $users = Employee::getMapper('Employee')->findTypeByStatus($type, User::STATUS_ACTIVE);
             } break;
             case 'inactive' : {
-                $users = User::getMapper('User')->findTypeByStatus($type, User::STATUS_INACTIVE);
+                $users = Employee::getMapper('Employee')->findTypeByStatus($type, User::STATUS_INACTIVE);
             } break;
             case 'deleted' : {
-                $users = User::getMapper('User')->findTypeByStatus($type, User::STATUS_DELETED);
+                $users = Employee::getMapper('Employee')->findTypeByStatus($type, User::STATUS_DELETED);
             } break;
             default : {
-                $users = User::getMapper('User')->findAll();
+                $users = Employee::getMapper('Employee')->findAll();
             }
         }
 
@@ -861,7 +869,7 @@ class AdminAreaCommand extends SecureCommand
             if(
                 strlen($first_name)
                 and strlen($last_name)
-                and in_array(strtolower($gender),User::$gender_enum)
+                and in_array(strtolower($gender),PersonalInfo::$gender_enum)
                 and $date_is_correct
                 and strlen($nationality)
                 and strlen($state_of_origin)
@@ -910,10 +918,15 @@ class AdminAreaCommand extends SecureCommand
                 {
                     $user_class = str_replace(' ', '', ucwords(str_replace('_', ' ', $type)) );
                     $class = "\\Application\\Models\\".$user_class;
-                    $profile = new $class();
-                    $profile->setUsername($employee_id);
-                    $profile->setUserType($user_class);
-                    $profile->setStatus($profile::STATUS_ACTIVE);
+                    $user = new $class();
+                    $user->setUsername(strtolower($employee_id));
+                    $user->setPassword($password1);
+                    $user->setUserType($user_class);
+                    $user->setStatus($user::STATUS_ACTIVE);
+                    $user->mapper()->insert($user);
+
+                    $profile = new PersonalInfo();
+                    $profile->setId($user->getId());
                     $profile->setProfilePhoto($photo);
                     $profile->setFirstName($first_name);
                     $profile->setLastName($last_name);
@@ -927,11 +940,13 @@ class AdminAreaCommand extends SecureCommand
                     $profile->setResidenceState($res_state);
                     $profile->setResidenceCity($res_city);
                     $profile->setResidenceStreet($res_street);
-                    $profile->setEmail($contact_email);
+                    $profile->setEmail(strtolower($contact_email));
                     $profile->setPhone($contact_phone);
-                    $profile->setDepartment($department);
-                    $profile->setSpecialization($specialization);
-                    $profile->setPassword($password1);
+
+                    $emp_data = new EmploymentData();
+                    $emp_data->setId($user->getId());
+                    $emp_data->setDepartment($department);
+                    $emp_data->setSpecialization($specialization);
 
                     $requestContext->setFlashData("Staff profile has been created successfully.");
                     $data['status'] = true;

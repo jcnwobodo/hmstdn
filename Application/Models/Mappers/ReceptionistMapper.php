@@ -10,7 +10,7 @@
 namespace Application\Models\Mappers;
 
 
-class ReceptionistMapper extends UserMapper
+class ReceptionistMapper extends EmployeeMapper
 {
     protected function targetClass()
     {
