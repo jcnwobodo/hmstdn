@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2016 at 05:33 AM
+-- Generation Time: Jan 22, 2016 at 10:49 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -23,6 +23,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `app_consultations`
+--
+
+CREATE TABLE `app_consultations` (
+  `id` int(16) NOT NULL,
+  `doctor` int(16) DEFAULT NULL,
+  `patient` int(16) DEFAULT NULL,
+  `meeting_date` int(20) NOT NULL,
+  `start_time` int(20) NOT NULL,
+  `end_time` int(20) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `app_employment_data`
 --
 
@@ -38,7 +54,8 @@ CREATE TABLE `app_employment_data` (
 
 INSERT INTO `app_employment_data` (`id`, `department`, `specialization`) VALUES
 (1, 'IT', 'Security'),
-(4, 'Customer Service', 'Receptionist');
+(4, 'Customer Service', 'Receptionist'),
+(5, 'Dentistry', 'Dental Surgery');
 
 -- --------------------------------------------------------
 
@@ -48,7 +65,7 @@ INSERT INTO `app_employment_data` (`id`, `department`, `specialization`) VALUES
 
 CREATE TABLE `app_patients` (
   `id` int(16) NOT NULL,
-  `card_number` int(10) NOT NULL,
+  `card_number` varchar(10) NOT NULL,
   `blood_group` varchar(2) NOT NULL,
   `genotype` varchar(2) NOT NULL,
   `personal_info` varchar(17) DEFAULT NULL,
@@ -60,7 +77,7 @@ CREATE TABLE `app_patients` (
 --
 
 INSERT INTO `app_patients` (`id`, `card_number`, `blood_group`, `genotype`, `personal_info`, `status`) VALUES
-(13, 3, 'O+', 'AA', 'p13', 1);
+(13, '000013', 'O+', 'AA', 'p13', 1);
 
 -- --------------------------------------------------------
 
@@ -961,6 +978,7 @@ CREATE TABLE `site_personal_info` (
 INSERT INTO `site_personal_info` (`id`, `photo`, `first_name`, `last_name`, `other_names`, `gender`, `date_of_birth`, `nationality`, `state_of_origin`, `lga`, `residence_country`, `residence_state`, `residence_city`, `residence_street`, `email`, `phone`, `biography`) VALUES
 ('1', NULL, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 500000000, 'NIGERIAN', 'ENUGU', 'AKANU-EAST', 'NIGERIA', 'ENUGU', 'ENUGU', 'NWOSU TERRACE', 'jc.nwobodo@gmail.com', '08133621591', NULL),
 ('4', 3, 'Nice', 'Victor', 'John', 'F', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'Isolo', 'ROAD T HOUSE 1', 'chukwudi@gmail.com', '08124345567', NULL),
+('5', 17, 'Michael', 'Ndubuisi', 'Chukwuemeka', 'M', 191286000, 'Nigerian', 'Enugu', 'Udi', 'Nigeria', 'Enugu', 'Nsukka', 'Alvan-Ikoku Hostel, Rm 128, UNN', 'ndu11michael@gmail.com', '08131206054', NULL),
 ('p13', 16, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'TEXAS', 'ROAD T HOUSE 1', 'aniekwevictor3@hotmail2.com', '08124345570', NULL);
 
 -- --------------------------------------------------------
@@ -1010,7 +1028,7 @@ CREATE TABLE `site_sessions` (
 
 INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_time`, `user_agent`, `ip_address`, `last_activity_time`, `status`) VALUES
 (2, '569f5f262931c8.72247079', 1, 'Admin', 1453285158, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453289019, 0),
-(3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453437137, 1);
+(3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453450953, 1);
 
 -- --------------------------------------------------------
 
@@ -1046,7 +1064,8 @@ INSERT INTO `site_uploads` (`id`, `author`, `upload_time`, `location`, `file_nam
 (13, NULL, 1453428392, 'Uploads/passports', 'passport_56a18ea88a1b3.jpg', 135712, 2),
 (14, NULL, 1453436257, 'Uploads/passports', 'passport_56a1ad60e3659.jpg', 135712, 2),
 (15, NULL, 1453436459, 'Uploads/passports', 'passport_56a1ae2b2eacb.jpg', 135712, 2),
-(16, NULL, 1453437114, 'Uploads/passports', 'passport_56a1b0ba90fb9.jpg', 135712, 2);
+(16, NULL, 1453437114, 'Uploads/passports', 'passport_56a1b0ba90fb9.jpg', 135712, 2),
+(17, NULL, 1453447854, 'Uploads/passports', 'passport_56a1daae30d8a.jpg', 135712, 2);
 
 -- --------------------------------------------------------
 
@@ -1068,11 +1087,18 @@ CREATE TABLE `site_users` (
 
 INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) VALUES
 (1, 'admin@site.com', 'some-key', 'admin', 1),
-(4, 'chukwudi.ezich@provost.com', 'some-key', 'Receptionist', 1);
+(4, 'chukwudi.ezich@provost.com', 'some-key', 'Receptionist', 1),
+(5, 'michael.ndubuisi@site.com', 'mikiwhiteb', 'Doctor', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `app_consultations`
+--
+ALTER TABLE `app_consultations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `app_employment_data`
@@ -1146,6 +1172,11 @@ ALTER TABLE `site_users`
 --
 
 --
+-- AUTO_INCREMENT for table `app_consultations`
+--
+ALTER TABLE `app_consultations`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `app_patients`
 --
 ALTER TABLE `app_patients`
@@ -1179,12 +1210,12 @@ ALTER TABLE `site_sessions`
 -- AUTO_INCREMENT for table `site_uploads`
 --
 ALTER TABLE `site_uploads`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `site_users`
 --
 ALTER TABLE `site_users`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
