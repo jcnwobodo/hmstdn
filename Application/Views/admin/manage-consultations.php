@@ -23,8 +23,8 @@ require_once("header.php");
             </h3>
 
             <div class="btn-group pull-right">
-                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=booked'); ?>" class="btn btn-primary">Booked</a>
-                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=canceled'); ?>" class="btn btn-warning">Canceled</a>
+                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=booked'); ?>" class="btn btn-success">Booked</a>
+                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=canceled'); ?>" class="btn btn-danger">Canceled</a>
             </div>
 
 
@@ -80,7 +80,7 @@ require_once("header.php");
                         {
                             case 'booked' : {
                                 ?>
-                                <input name="action" type="submit" class="btn btn-warning" value="Cancel">
+                                <input name="action" type="submit" class="btn btn-danger" value="Cancel">
                                 <?php
                             } break;
                             case 'canceled' : {
@@ -99,7 +99,7 @@ require_once("header.php");
             {
                 ?>
                 <div class="clear-both text-center text-primary">
-                    <p class="lead">There are currently no <?= $data['status']; ?> news posts.</p>
+                    <p class="lead">There are currently no <?= $data['status']; ?> consultations.</p>
                 </div>
                 <?php
             }
