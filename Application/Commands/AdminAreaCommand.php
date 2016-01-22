@@ -10,6 +10,8 @@
 namespace Application\Commands;
 
 use Application\Models\Category;
+use Application\Models\Consultation;
+use Application\Models\Doctor;
 use Application\Models\Employee;
 use Application\Models\EmploymentData;
 use Application\Models\Patient;
@@ -1169,5 +1171,174 @@ class AdminAreaCommand extends SecureCommand
         $data['page-title'] = "Add Patient";
         $requestContext->setResponseData($data);
         $requestContext->setView('admin/add-patient.php');
+    }
+
+    //Consultations management
+    protected function ManageConsultations(RequestContext $requestContext)
+    {
+        $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'booked';
+        $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
+        $consultation_ids = $requestContext->fieldIsSet('consultation-ids') ? $requestContext->getField('consultation-ids') : array();
+
+        switch(strtolower($action))
+        {
+            case 'cancel' : {
+                foreach($consultation_ids as $consultation_id)
+                {
+                    $consultation_obj = Consultation::getMapper('Consultation')->find($consultation_id);
+                    if(is_object($consultation_obj)) $consultation_obj->setStatus(Consultation::STATUS_CANCELED);
+                }
+            } break;
+            case 'restore' : {
+                foreach($consultation_ids as $consultation_id)
+                {
+                    $consultation_obj = Consultation::getMapper('Consultation')->find($consultation_id);
+                    if(is_object($consultation_obj)) $consultation_obj->setStatus(Consultation::STATUS_BOOKED);
+                }
+            } break;
+            case 'delete permanently' : {
+                foreach($consultation_ids as $consultation_id)
+                {
+                    $consultation_obj = Consultation::getMapper('Consultation')->find($consultation_id);
+                    if(is_object($consultation_obj)) $consultation_obj->markDelete();
+                }
+            } break;
+            default : {}
+        }
+        DomainObjectWatcher::instance()->performOperations();
+
+        switch($status)
+        {
+            case 'booked' : {
+                $consultations = Consultation::getMapper('Consultation')->findByStatus(Consultation::STATUS_BOOKED);
+            } break;
+            case 'canceled' : {
+                $consultations = Consultation::getMapper('Consultation')->findByStatus(Consultation::STATUS_CANCELED);
+            } break;
+            default : {
+                $consultations = Consultation::getMapper('Consultation')->findAll();
+            }
+        }
+
+        $data = array();
+        $data['status'] = $status;
+        $data['consultations'] = $consultations;
+        $data['page-title'] = ucwords($status)." Consultations";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/manage-consultations.php');
+    }
+
+    protected function AddConsultation(RequestContext $requestContext)
+    {
+        $data = array();
+
+        $data['mode'] = 'add-consultation';
+        $data['page-title'] = "Add Consultation";
+        $data['doctors'] = Doctor::getMapper('Doctor')->findTypeByStatus(Doctor::UT_DOCTOR, Doctor::STATUS_ACTIVE);
+        $data['patients'] = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_ACTIVE);
+
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/consultation-editor.php');
+
+        if($requestContext->fieldIsSet($data['mode']))
+        {
+            $this->processConsultationEditor($requestContext);
+        }
+    }
+
+    protected function UpdateConsultation(RequestContext $requestContext)
+    {
+        $data = array();
+
+        $data['mode'] = 'update-consultation';
+        $data['page-title'] = "Update Consultation";
+        $data['doctors'] = Doctor::getMapper('Doctor')->findTypeByStatus(Doctor::UT_DOCTOR, Doctor::STATUS_ACTIVE);
+        $data['patients'] = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_ACTIVE);
+
+        $consultation = $requestContext->fieldIsSet('consultation-id') ? Consultation::getMapper('Consultation')->find($requestContext->getField('consultation-id')) : null;
+        $fields = array();
+        if(is_object($consultation))
+        {
+            $fields['doctor'] = $consultation->getDoctor()->getId();
+            $fields['patient'] = $consultation->getPatient()->getId();
+
+            $fields['meeting-date']['month'] = $consultation->getMeetingDate()->getMonth();
+            $fields['meeting-date']['day'] = $consultation->getMeetingDate()->getDay();
+            $fields['meeting-date']['year'] = $consultation->getMeetingDate()->getYear();
+
+            $fields['start-time']['hour'] = $consultation->getStartTime()->getHour();
+            $fields['start-time']['minute'] = $consultation->getStartTime()->getMinute();
+            $fields['start-time']['am_pm'] = $consultation->getStartTime()->getAmPm();
+
+            $fields['end-time']['hour'] = $consultation->getEndTime()->getHour();
+            $fields['end-time']['minute'] = $consultation->getEndTime()->getMinute();
+            $fields['end-time']['am_pm'] = $consultation->getEndTime()->getAmPm();
+
+            $data['consultation-id'] = $fields['consultation-id'] = $consultation->getId();
+        }
+        $data['fields'] = $fields;
+
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/consultation-editor.php');
+
+        if($requestContext->fieldIsSet($data['mode']))
+        {
+            $this->processConsultationEditor($requestContext);
+        }
+
+    }
+
+    private function processConsultationEditor(RequestContext $requestContext)
+    {
+        $data = $requestContext->getResponseData();
+        $fields = $requestContext->getAllFields();
+
+        $doctor = Doctor::getMapper("Doctor")->find($fields['doctor']);
+        $patient = Patient::getMapper("Patient")->find($fields['patient']);
+        $meeting_date = $fields['meeting-date'];
+        $start_time = $fields['start-time'];
+        $end_time = $fields['end-time'];
+
+        preProcessTimeArr($start_time);
+        preProcessTimeArr($end_time);
+
+        $meeting_dateTime = new DateTime(mktime(0, 0, 0, $meeting_date['month'], $meeting_date['day'], $meeting_date['year']));
+        $start_dateTime = new DateTime(mktime($start_time['hour'], $start_time['minute'], 0, $meeting_date['month'], $meeting_date['day'], $meeting_date['year']));
+        $end_dateTime = new DateTime(mktime($end_time['hour'], $end_time['minute'], 0, $meeting_date['month'], $meeting_date['day'], $meeting_date['year']));
+
+        if(
+            is_object($doctor)
+            and is_object($patient)
+            and checkdate($meeting_date['month'], $meeting_date['day'], $meeting_date['year'])
+            and DateTime::checktime($start_time['hour'], $start_time['minute'])
+            and DateTime::checktime($end_time['hour'], $end_time['minute'])
+            and $start_dateTime->getDateTimeInt() < $end_dateTime->getDateTimeInt()
+        )
+        {
+            $consultation = $data['mode'] == 'add-consultation' ? new Consultation() : Consultation::getMapper('Consultation')->find($data['consultation-id']);
+            if(is_object($consultation))
+            {
+                $consultation->setDoctor($doctor);
+                $consultation->setPatient($patient);
+                $consultation->setMeetingDate($meeting_dateTime);
+                $consultation->setStartTime($start_dateTime);
+                $consultation->setEndTime($end_dateTime);
+                if($consultation->getId() == -1) $consultation->setStatus(Consultation::STATUS_BOOKED);
+
+                DomainObjectWatcher::instance()->performOperations();
+                $requestContext->setFlashData($data['mode'] == 'add-consultation' ? "Consultation booked successfully" : "Consultation updated successfully");
+
+                $data['status'] = 1;
+                $data['consultation-id'] = $consultation->getId();
+                $data['mode'] = 'update-consultation';
+                $data['fields'] = &$fields;
+            }
+        }
+        else
+        {
+            $requestContext->setFlashData('Mandatory field(s) not set or invalid input detected');
+            $data['status'] = 0;
+        }
+        $requestContext->setResponseData($data);
     }
 }

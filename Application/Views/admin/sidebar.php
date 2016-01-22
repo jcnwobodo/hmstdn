@@ -14,13 +14,13 @@ $group1 = array('add-patient', 'manage-patients');
 $group2 = array('add-user', 'manage-users');
 $group3 = array('add-post', 'manage-posts', 'update-post', 'manage-categories', 'add-category', 'manage-comments');
 $group4 = array('add-page', 'manage-pages', 'update-page');
-$group5 = array('add-consultation', 'manage-consultations');
+$group5 = array('add-consultation', 'manage-consultations', 'update-consultation');
 $group6 = array('manage-test-records');
-$group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-location', 'manage-disease-categories', 'add-disease-category');
+$group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-location');
 ?>
 <div class="col-sm-3 col-md-2 sidebar">
 
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingTwo">
@@ -106,7 +106,6 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
                     <ul class="btn-group btn-group-vertical list-unstyled">
                         <li><a href="<?php home_url('/admin-area/manage-locations/'); ?>" class="btn"><span class="glyphicon glyphicon-map-marker"></span> Manage Locations</a></li>
                         <li><a href="<?php home_url('/admin-area/manage-diseases/'); ?>" class="btn"><span class="glyphicon glyphicon-warning-sign"></span> Manage Diseases</a></li>
-                        <li><a href="<?php home_url('/admin-area/manage-disease-categories/'); ?>" class="btn"><span class="glyphicon glyphicon-tags"></span> Manage Disease Cats.</a></li>
                     </ul>
                 </div>
             </div>
@@ -114,7 +113,7 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
 
     </div>
 
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingThree">
