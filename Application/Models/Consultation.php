@@ -11,6 +11,7 @@ namespace Application\Models;
 
 
 use System\Models\I_StatefulObject;
+use System\Utilities\DateTime;
 
 class Consultation extends DomainObject implements I_StatefulObject
 {
@@ -38,7 +39,7 @@ class Consultation extends DomainObject implements I_StatefulObject
      * @param mixed $doctor
      * @return Consultation
      */
-    public function setDoctor($doctor)
+    public function setDoctor(Doctor $doctor)
     {
         $this->doctor = $doctor;
         $this->markDirty();
@@ -57,7 +58,7 @@ class Consultation extends DomainObject implements I_StatefulObject
      * @param mixed $patient
      * @return Consultation
      */
-    public function setPatient($patient)
+    public function setPatient(Patient $patient)
     {
         $this->patient = $patient;
         $this->markDirty();
@@ -76,7 +77,7 @@ class Consultation extends DomainObject implements I_StatefulObject
      * @param mixed $meeting_date
      * @return Consultation
      */
-    public function setMeetingDate($meeting_date)
+    public function setMeetingDate(DateTime $meeting_date)
     {
         $this->meeting_date = $meeting_date;
         $this->markDirty();
@@ -95,7 +96,7 @@ class Consultation extends DomainObject implements I_StatefulObject
      * @param mixed $start_time
      * @return Consultation
      */
-    public function setStartTime($start_time)
+    public function setStartTime(DateTime $start_time)
     {
         $this->start_time = $start_time;
         $this->markDirty();
@@ -114,7 +115,7 @@ class Consultation extends DomainObject implements I_StatefulObject
      * @param mixed $end_time
      * @return Consultation
      */
-    public function setEndTime($end_time)
+    public function setEndTime(DateTime $end_time)
     {
         $this->end_time = $end_time;
         $this->markDirty();
