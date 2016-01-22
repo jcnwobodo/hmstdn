@@ -23,13 +23,13 @@ $page_title = isset($data['page-title']) ? $data['page-title'] : site_info('name
 <div class="container-fluid" id="top">
     <div class="row">
         <div class="col-xs-12 text-center">
-            <h1><?php site_info('full-name'); ?></h1>
+            <h1 class="mid-margin-bottom full-margin-top"><?php site_info('full-name'); ?></h1>
         </div>
     </div>
 </div>
 
 <!-- Fixed Top navbar -->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

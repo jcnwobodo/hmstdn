@@ -12,10 +12,14 @@ $response_data = $requestContext->getFlashData();
 
 include_once('header.php');
 ?>
-<div class="row">
+
+    <div class="row">
     <div class="col-md-7">
+        <p>
+            <img src="<?php home_url("/Assets/images/image-3.png") ?>" class="img-responsive"/>
+        </p>
         <span class="lead">Welcome to</span>
-        <h3 class="page-header"><?php site_info('full-name'); ?></h3>
+        <h3 class="page-header no-margin"><?php site_info('full-name'); ?></h3>
         <p class="text-left">... {abstract} ...</p>
         <p class="text-right">
             <a href="#" class="btn btn-sm btn-primary">Learn more</a>
