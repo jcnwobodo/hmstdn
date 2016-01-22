@@ -10,11 +10,14 @@
 namespace Application\Models;
 
 
-class Disease extends DomainObject
+use System\Models\I_StatefulObject;
+
+class Disease extends DomainObject implements I_StatefulObject
 {
     private $name;
     private $causative_organisms;
     private $signs_and_symptoms;
+    private $status;
 
     public function __construct($id=null)
     {
@@ -74,6 +77,25 @@ class Disease extends DomainObject
     public function setSignsAndSymptoms($signs_and_symptoms)
     {
         $this->signs_and_symptoms = $signs_and_symptoms;
+        $this->markDirty();
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     * @return Disease
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
         $this->markDirty();
         return $this;
     }

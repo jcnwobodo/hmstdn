@@ -19,9 +19,17 @@ class DiseaseMapper extends Mapper
         parent::__construct();
         $this->selectStmt = self::$PDO->prepare("SELECT * FROM app_diseases WHERE id=?");
         $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_diseases");
-        $this->updateStmt = self::$PDO->prepare("UPDATE app_diseases SET name=?, causative_organisms=?, signs_and_symptoms=? WHERE id=?");
-        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_diseases (name,causative_organisms,signs_and_symptoms) VALUES (?,?,?)");
+        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_diseases WHERE status=?");
+        $this->updateStmt = self::$PDO->prepare("UPDATE app_diseases SET name=?, causative_organisms=?, signs_and_symptoms=?, status=? WHERE id=?");
+        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_diseases (name,causative_organisms,signs_and_symptoms,status) VALUES (?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_diseases WHERE id=?");
+    }
+
+    public function findByStatus($status)
+    {
+        $this->selectByStatusStmt->execute( array($status) );
+        $raw_data = $this->selectByStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
     }
 
     protected function targetClass()
@@ -41,6 +49,7 @@ class DiseaseMapper extends Mapper
         $object->setName($array['name']);
         $object->setCausativeOrganisms($array['causative_organisms']);
         $object->setSignsAndSymptoms($array['signs_and_symptoms']);
+        $object->setStatus($array['status']);
 
         return $object;
     }
@@ -50,7 +59,8 @@ class DiseaseMapper extends Mapper
         $values = array(
             $object->getName(),
             $object->getCausativeOrganisms(),
-            $object->getSignsAndSymptoms()
+            $object->getSignsAndSymptoms(),
+            $object->getStatus()
         );
         $this->insertStmt->execute( $values );
         $id = self::$PDO->lastInsertId();
@@ -63,6 +73,7 @@ class DiseaseMapper extends Mapper
             $object->getName(),
             $object->getCausativeOrganisms(),
             $object->getSignsAndSymptoms(),
+            $object->getStatus(),
             $object->getId()
         );
         $this->updateStmt->execute( $values );

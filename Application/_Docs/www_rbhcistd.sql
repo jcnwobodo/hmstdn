@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2016 at 06:15 PM
+-- Generation Time: Jan 22, 2016 at 07:14 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -54,8 +54,16 @@ CREATE TABLE `app_diseases` (
   `id` int(16) NOT NULL,
   `name` varchar(100) NOT NULL,
   `causative_organisms` text NOT NULL,
-  `signs_and_symptoms` text NOT NULL
+  `signs_and_symptoms` text NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `app_diseases`
+--
+
+INSERT INTO `app_diseases` (`id`, `name`, `causative_organisms`, `signs_and_symptoms`, `status`) VALUES
+(1, 'Dracunculiasis', '<p>Dracunculus medinensis,\r</p><p>Echinococcus granulosus</p>', '<p>painful burning sensation, fever, nausea, and vomiting. allergi, rashes, nausea, diarrhea, dizziness, and localized edema.</p>', 1);
 
 -- --------------------------------------------------------
 
@@ -1051,7 +1059,7 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (2, '569f5f262931c8.72247079', 1, 'Admin', 1453285158, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453289019, 0),
 (3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453467329, 0),
 (4, '56a2271e4e17d8.74607779', 1, 'Admin', 1453467422, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453477176, 0),
-(5, '56a2512c1d6b00.39876575', 1, 'Admin', 1453478188, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453481698, 1);
+(5, '56a2512c1d6b00.39876575', 1, 'Admin', 1453478188, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453486447, 1);
 
 -- --------------------------------------------------------
 
@@ -1209,7 +1217,7 @@ ALTER TABLE `app_consultations`
 -- AUTO_INCREMENT for table `app_diseases`
 --
 ALTER TABLE `app_diseases`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `app_patients`
 --
