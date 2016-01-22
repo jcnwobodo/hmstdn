@@ -38,7 +38,14 @@ class AdminAreaCommand extends SecureCommand
 
     protected function doExecute(RequestContext $requestContext)
     {
+        $approved_comments = Comment::getMapper('Comment')->findByStatus(Comment::STATUS_APPROVED);
+        $pending_comments = Comment::getMapper('Comment')->findByStatus(Comment::STATUS_PENDING);
+        $deleted_comments = Comment::getMapper('Comment')->findByStatus(Comment::STATUS_DELETED);
+
         $data = array();
+        $data['num_approved_comments'] = $approved_comments ? $approved_comments->size() : 0;
+        $data['num_pending_comments'] = $pending_comments ? $pending_comments->size() : 0;
+        $data['num_deleted_comments'] = $deleted_comments ? $deleted_comments->size() : 0;
 
         $data['page-title'] = "Admin Dashboard";
         $requestContext->setResponseData($data);
