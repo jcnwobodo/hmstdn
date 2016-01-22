@@ -34,6 +34,7 @@ abstract class Employee extends User
     public function setEmploymentData($employment_data)
     {
         $this->employment_data = $employment_data;
+        $this->markDirty();
         return $this;
     }
 }

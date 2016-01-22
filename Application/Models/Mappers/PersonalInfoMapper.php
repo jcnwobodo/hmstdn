@@ -96,8 +96,6 @@ class PersonalInfoMapper extends Mapper
             $object->getBiography()
         );
         $this->insertStmt->execute( $values );
-        $id = self::$PDO->lastInsertId();
-        $object->setId( $id );
     }
 
     protected function doUpdate(Models\DomainObject $object )

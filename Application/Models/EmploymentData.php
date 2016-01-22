@@ -35,6 +35,7 @@ class EmploymentData extends DomainObject
     public function setDepartment($department)
     {
         $this->department = $department;
+        $this->markDirty();
         return $this;
     }
 
@@ -53,6 +54,7 @@ class EmploymentData extends DomainObject
     public function setSpecialization($specialization)
     {
         $this->specialization = $specialization;
+        $this->markDirty();
         return $this;
     }
 }
