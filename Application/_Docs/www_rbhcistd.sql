@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2016 at 01:54 AM
+-- Generation Time: Jan 22, 2016 at 05:33 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -48,10 +48,19 @@ INSERT INTO `app_employment_data` (`id`, `department`, `specialization`) VALUES
 
 CREATE TABLE `app_patients` (
   `id` int(16) NOT NULL,
-  `card_number` varchar(10) NOT NULL,
-  `personal_info` int(16) NOT NULL,
+  `card_number` int(10) NOT NULL,
+  `blood_group` varchar(2) NOT NULL,
+  `genotype` varchar(2) NOT NULL,
+  `personal_info` varchar(17) DEFAULT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `app_patients`
+--
+
+INSERT INTO `app_patients` (`id`, `card_number`, `blood_group`, `genotype`, `personal_info`, `status`) VALUES
+(13, 3, 'O+', 'AA', 'p13', 1);
 
 -- --------------------------------------------------------
 
@@ -951,9 +960,8 @@ CREATE TABLE `site_personal_info` (
 
 INSERT INTO `site_personal_info` (`id`, `photo`, `first_name`, `last_name`, `other_names`, `gender`, `date_of_birth`, `nationality`, `state_of_origin`, `lga`, `residence_country`, `residence_state`, `residence_city`, `residence_street`, `email`, `phone`, `biography`) VALUES
 ('1', NULL, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 500000000, 'NIGERIAN', 'ENUGU', 'AKANU-EAST', 'NIGERIA', 'ENUGU', 'ENUGU', 'NWOSU TERRACE', 'jc.nwobodo@gmail.com', '08133621591', NULL),
-('2', 1, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 190940400, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'Lagos', 'Isolo', '14 Olanipekun-olainukan, isolo Lagos', 'Aniekwevictor@hotmail.com', '08130004114', NULL),
-('3', 2, 'chukwudi', 'ezichi', 'e', 'M', 348620400, 'Nigeria', 'Abia', 'Abiriba', 'USA', 'ALASKA', 'TEXAS', 'ROAD T HOUSE 1', 'CHUKWUDI@GMAIL.COM', '08124345566', NULL),
-('4', 3, 'Nice', 'Victor', 'John', 'F', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'Isolo', 'ROAD T HOUSE 1', 'chukwudi@gmail.com', '08124345566', NULL);
+('4', 3, 'Nice', 'Victor', 'John', 'F', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'Isolo', 'ROAD T HOUSE 1', 'chukwudi@gmail.com', '08124345567', NULL),
+('p13', 16, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'TEXAS', 'ROAD T HOUSE 1', 'aniekwevictor3@hotmail2.com', '08124345570', NULL);
 
 -- --------------------------------------------------------
 
@@ -1002,7 +1010,7 @@ CREATE TABLE `site_sessions` (
 
 INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_time`, `user_agent`, `ip_address`, `last_activity_time`, `status`) VALUES
 (2, '569f5f262931c8.72247079', 1, 'Admin', 1453285158, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453289019, 0),
-(3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453423986, 1);
+(3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453437137, 1);
 
 -- --------------------------------------------------------
 
@@ -1027,7 +1035,18 @@ CREATE TABLE `site_uploads` (
 INSERT INTO `site_uploads` (`id`, `author`, `upload_time`, `location`, `file_name`, `file_size`, `status`) VALUES
 (1, NULL, 1453297033, 'Uploads/passports', 'passport_569f8d89cf40e.jpg', 135712, 2),
 (2, NULL, 1453299477, 'Uploads/passports', 'passport_569f9715e9a10.jpg', 135712, 2),
-(3, NULL, 1453417785, 'Uploads/passports', 'passport_56a16539d5386.jpg', 135712, 2);
+(3, NULL, 1453417785, 'Uploads/passports', 'passport_56a16539d5386.jpg', 135712, 2),
+(6, NULL, 1453426538, 'Uploads/passports', 'passport_56a1876a57ad8.jpg', 135712, 2),
+(7, NULL, 1453427014, 'Uploads/passports', 'passport_56a1894675310.jpg', 135712, 2),
+(8, NULL, 1453427423, 'Uploads/passports', 'passport_56a18adf750c5.jpg', 135712, 2),
+(9, NULL, 1453427496, 'Uploads/passports', 'passport_56a18b28bc09c.jpg', 135712, 2),
+(10, NULL, 1453427797, 'Uploads/passports', 'passport_56a18c5528c11.jpg', 135712, 2),
+(11, NULL, 1453427913, 'Uploads/passports', 'passport_56a18cc95ac12.jpg', 135712, 2),
+(12, NULL, 1453428112, 'Uploads/passports', 'passport_56a18d9060607.jpg', 135712, 2),
+(13, NULL, 1453428392, 'Uploads/passports', 'passport_56a18ea88a1b3.jpg', 135712, 2),
+(14, NULL, 1453436257, 'Uploads/passports', 'passport_56a1ad60e3659.jpg', 135712, 2),
+(15, NULL, 1453436459, 'Uploads/passports', 'passport_56a1ae2b2eacb.jpg', 135712, 2),
+(16, NULL, 1453437114, 'Uploads/passports', 'passport_56a1b0ba90fb9.jpg', 135712, 2);
 
 -- --------------------------------------------------------
 
@@ -1092,6 +1111,8 @@ ALTER TABLE `site_locations`
 --
 ALTER TABLE `site_personal_info`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `phone` (`phone`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `photo_id` (`photo`);
 
 --
@@ -1128,7 +1149,7 @@ ALTER TABLE `site_users`
 -- AUTO_INCREMENT for table `app_patients`
 --
 ALTER TABLE `app_patients`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `site_categories`
 --
@@ -1158,7 +1179,7 @@ ALTER TABLE `site_sessions`
 -- AUTO_INCREMENT for table `site_uploads`
 --
 ALTER TABLE `site_uploads`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `site_users`
 --

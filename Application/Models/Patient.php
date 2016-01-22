@@ -15,6 +15,8 @@ use System\Models\I_StatefulObject;
 class Patient extends DomainObject implements I_StatefulObject
 {
     private $card_number;
+    private $blood_group;
+    private $genotype;
     private $personal_info;
     private $status;
 
@@ -38,6 +40,45 @@ class Patient extends DomainObject implements I_StatefulObject
     public function setCardNumber($card_number)
     {
         $this->card_number = $card_number;
+        $this->markDirty();
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBloodGroup()
+    {
+        return $this->blood_group;
+    }
+
+    /**
+     * @param mixed $blood_group
+     * @return Patient
+     */
+    public function setBloodGroup($blood_group)
+    {
+        $this->blood_group = $blood_group;
+        $this->markDirty();
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGenotype()
+    {
+        return $this->genotype;
+    }
+
+    /**
+     * @param mixed $genotype
+     * @return Patient
+     */
+    public function setGenotype($genotype)
+    {
+        $this->genotype = $genotype;
+        $this->markDirty();
         return $this;
     }
 
@@ -56,6 +97,7 @@ class Patient extends DomainObject implements I_StatefulObject
     public function setPersonalInfo(PersonalInfo $personal_info)
     {
         $this->personal_info = $personal_info;
+        $this->markDirty();
         return $this;
     }
 
@@ -74,6 +116,7 @@ class Patient extends DomainObject implements I_StatefulObject
     public function setStatus($status)
     {
         $this->status = $status;
+        $this->markDirty();
         return $this;
     }
 }

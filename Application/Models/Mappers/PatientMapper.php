@@ -21,8 +21,8 @@ class PatientMapper extends Mapper
         $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_patients");
         $this->selectByCardNumberStmt = self::$PDO->prepare("SELECT * FROM app_patients WHERE card_number=?");
         $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_patients WHERE status=?");
-        $this->updateStmt = self::$PDO->prepare("UPDATE app_patients set card_number=?,personal_info=?,status=? WHERE id=?");
-        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_patients (card_number,personal_info,status)VALUES(?,?,?)");
+        $this->updateStmt = self::$PDO->prepare("UPDATE app_patients set card_number=?,blood_group=?,genotype=?,personal_info=?,status=? WHERE id=?");
+        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_patients (card_number,blood_group,genotype,personal_info,status)VALUES(?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_patients WHERE id=?");
     }
 
@@ -53,6 +53,8 @@ class PatientMapper extends Mapper
         $class = $this->targetClass();
         $object = new $class($array['id']);
         $object->setCardNumber($array['card_number']);
+        $object->setBloodGroup($array['blood_group']);
+        $object->setGenotype($array['genotype']);
         $personal_info = Models\PersonalInfo::getMapper('PersonalInfo')->find($array['personal_info']);
         if(! is_null($personal_info)) $object->setPersonalInfo($personal_info);
         $object->setStatus($array['status']);
@@ -64,7 +66,9 @@ class PatientMapper extends Mapper
     {
         $values = array(
             $object->getCardNumber(),
-            $object->getPersonalInfo()->getId(),
+            $object->getBloodGroup(),
+            $object->getGenotype(),
+            ($object instanceof Models\PersonalInfo) ? $object->getPersonalInfo()->getId() : NULL,
             $object->getStatus()
         );
         $this->insertStmt->execute( $values );
@@ -76,6 +80,8 @@ class PatientMapper extends Mapper
     {
         $values = array(
             $object->getCardNumber(),
+            $object->getBloodGroup(),
+            $object->getGenotype(),
             $object->getPersonalInfo()->getId(),
             $object->getStatus(),
             $object->getId()
