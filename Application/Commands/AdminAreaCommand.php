@@ -11,6 +11,7 @@ namespace Application\Commands;
 
 use Application\Models\Category;
 use Application\Models\Consultation;
+use Application\Models\Disease;
 use Application\Models\Doctor;
 use Application\Models\Employee;
 use Application\Models\EmploymentData;
@@ -1348,4 +1349,92 @@ class AdminAreaCommand extends SecureCommand
         }
         $requestContext->setResponseData($data);
     }
+
+    //Disease management
+    protected function ManageDiseases(RequestContext $requestContext)
+    {
+        $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'approved';
+        $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
+        $disease_ids = $requestContext->fieldIsSet('disease-ids') ? $requestContext->getField('disease-ids') : array();
+
+        switch(strtolower($action))
+        {
+            case 'delete' : {
+                foreach($disease_ids as $disease_id)
+                {
+                    $disease_obj = Disease::getMapper('Disease')->find($disease_id);
+                    if(is_object($disease_obj)) $disease_obj->setStatus(Disease::STATUS_DELETED);
+                }
+            } break;
+            case 'restore' : {
+                foreach($disease_ids as $disease_id)
+                {
+                    $disease_obj = Disease::getMapper('Disease')->find($disease_id);
+                    if(is_object($disease_obj)) $disease_obj->setStatus(Disease::STATUS_APPROVED);
+                }
+            } break;
+            case 'delete permanently' : {
+                foreach($disease_ids as $disease_id)
+                {
+                    $disease_obj = Disease::getMapper('Disease')->find($disease_id);
+                    if(is_object($disease_obj)) $disease_obj->markDelete();
+                }
+            } break;
+            default : {}
+        }
+        DomainObjectWatcher::instance()->performOperations();
+
+        switch($status)
+        {
+            case 'approved' : {
+                $diseases = Disease::getMapper('Disease')->findByStatus(Disease::STATUS_APPROVED);
+            } break;
+            case 'deleted' : {
+                $diseases = Disease::getMapper('Disease')->findByStatus(Disease::STATUS_DELETED);
+            } break;
+            default : {
+                $diseases = Disease::getMapper('Disease')->findAll();
+            }
+        }
+
+        $data = array();
+        $data['status'] = $status;
+        $data['diseases'] = $diseases;
+        $data['page-title'] = ucwords($status)." Diseases";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/manage-diseases.php');
+    }
+
+    protected function AddDisease(RequestContext $requestContext)
+    {
+        $data = array();
+
+        $fields = $requestContext->getAllFields();
+        if($requestContext->fieldIsSet('add'))
+        {
+            $name = $fields['name'];
+            $causes = format_text($fields['causes']);
+            $signs = format_text($fields['signs']);
+
+            if(strlen($name) and strlen($causes) and strlen($signs))
+            {
+                $disease = new Disease();
+                $disease->setName($name)->setCausativeOrganisms($causes)->setSignsAndSymptoms($signs)->setStatus(Disease::STATUS_APPROVED);
+
+                $requestContext->setFlashData("Disease '{$name}' added successfully");
+                $data['status'] = 1;
+            }
+            else
+            {
+                $requestContext->setFlashData('Mandatory fields not set');
+                $data['status'] = 0;
+            }
+        }
+        DomainObjectWatcher::instance()->performOperations();
+
+        $data['page-title'] = "Add Disease";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/add-disease.php');
+    }
+
 }
