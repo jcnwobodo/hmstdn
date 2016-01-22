@@ -844,7 +844,7 @@ class AdminAreaCommand extends SecureCommand
     protected function AddUser(RequestContext $requestContext)
     {
         $data = array();
-        $types = array('admin', 'doctor', 'lab_technician', 'receptionist', 'researcher');
+        $types = array('admin', 'doctor', 'lab_technician', 'receptionist');
         $type = ( $requestContext->fieldIsSet('type') && in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
         $data['type'] = $type;
 

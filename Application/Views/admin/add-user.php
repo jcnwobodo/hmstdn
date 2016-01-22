@@ -31,7 +31,6 @@ require_once("header.php");
                         <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=doctor'); ?>" class="btn btn-primary">Doctor</a>
                         <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=lab_technician'); ?>" class="btn btn-primary">Lab. Technician</a>
                         <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=receptionist'); ?>" class="btn btn-primary">Receptionist</a>
-                        <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=researcher'); ?>" class="btn btn-primary">Researcher</a>
                     </div>
                 </div>
             </div>
