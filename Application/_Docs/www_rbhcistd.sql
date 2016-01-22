@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2016 at 10:49 AM
+-- Generation Time: Jan 22, 2016 at 06:15 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -34,6 +34,27 @@ CREATE TABLE `app_consultations` (
   `start_time` int(20) NOT NULL,
   `end_time` int(20) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `app_consultations`
+--
+
+INSERT INTO `app_consultations` (`id`, `doctor`, `patient`, `meeting_date`, `start_time`, `end_time`, `status`) VALUES
+(2, 5, 13, 1453417200, 1453471920, 1453475520, 1),
+(3, 5, 13, 1453417200, 1453472820, 1453476420, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_diseases`
+--
+
+CREATE TABLE `app_diseases` (
+  `id` int(16) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `causative_organisms` text NOT NULL,
+  `signs_and_symptoms` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1028,7 +1049,9 @@ CREATE TABLE `site_sessions` (
 
 INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_time`, `user_agent`, `ip_address`, `last_activity_time`, `status`) VALUES
 (2, '569f5f262931c8.72247079', 1, 'Admin', 1453285158, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453289019, 0),
-(3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453450953, 1);
+(3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453467329, 0),
+(4, '56a2271e4e17d8.74607779', 1, 'Admin', 1453467422, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453477176, 0),
+(5, '56a2512c1d6b00.39876575', 1, 'Admin', 1453478188, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453481698, 1);
 
 -- --------------------------------------------------------
 
@@ -1098,6 +1121,12 @@ INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) V
 -- Indexes for table `app_consultations`
 --
 ALTER TABLE `app_consultations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `app_diseases`
+--
+ALTER TABLE `app_diseases`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1175,6 +1204,11 @@ ALTER TABLE `site_users`
 -- AUTO_INCREMENT for table `app_consultations`
 --
 ALTER TABLE `app_consultations`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `app_diseases`
+--
+ALTER TABLE `app_diseases`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `app_patients`
@@ -1205,7 +1239,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --
