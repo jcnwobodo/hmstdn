@@ -968,6 +968,82 @@ class AdminAreaCommand extends SecureCommand
         $requestContext->setView('admin/add-user.php');
     }
 
+    //Patient Management
+    protected function ManagePatients(RequestContext $requestContext)
+    {
+        $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'active';
+        $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
+        $patient_ids = $requestContext->fieldIsSet('patient-ids') ? $requestContext->getField('patient-ids') : array();
+
+        switch(strtolower($action))
+        {
+            case 'activate' : {
+                foreach($patient_ids as $patient_id)
+                {
+                    $patient_obj = Patient::getMapper('Patient')->find($patient_id);
+                    if(is_object($patient_obj)) $patient_obj->setStatus(Patient::STATUS_ACTIVE);
+                }
+            } break;
+            case 'delete' : {
+                foreach($patient_ids as $patient_id)
+                {
+                    $patient_obj = Patient::getMapper('Patient')->find($patient_id);
+                    if(is_object($patient_obj)) $patient_obj->setStatus(Patient::STATUS_DELETED);
+                }
+            } break;
+            case 'deactivate' : {
+                foreach($patient_ids as $patient_id)
+                {
+                    $patient_obj = Patient::getMapper('Patient')->find($patient_id);
+                    if(is_object($patient_obj)) $patient_obj->setStatus(Patient::STATUS_INACTIVE);
+                }
+            } break;
+            case 'restore' : {
+                foreach($patient_ids as $patient_id)
+                {
+                    $patient_obj = Patient::getMapper('Patient')->find($patient_id);
+                    if(is_object($patient_obj)) $patient_obj->setStatus(Patient::STATUS_ACTIVE);
+                }
+            } break;
+            case 'delete permanently' : {
+                foreach($patient_ids as $patient_id)
+                {
+                    $patient_obj = Patient::getMapper('Patient')->find($patient_id);
+                    if(is_object($patient_obj))
+                    {
+                        $patient_obj->getPersonalInfo()->markDelete();
+                        $patient_obj->markDelete();
+                    }
+                }
+            } break;
+            default : {}
+        }
+        if(!is_null($action)) DomainObjectWatcher::instance()->performOperations();
+
+        switch($status)
+        {
+            case 'active' : {
+                $patients = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_ACTIVE);
+            } break;
+            case 'inactive' : {
+                $patients = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_INACTIVE);
+            } break;
+            case 'deleted' : {
+                $patients = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_DELETED);
+            } break;
+            default : {
+                $patients = Employee::getMapper('Employee')->findAll();
+            }
+        }
+
+        $data = array();
+        $data['status'] = $status;
+        $data['patients'] = $patients;
+        $data['page-title'] = ucwords($status)." Patients";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin/manage-patients.php');
+    }
+
     protected function AddPatient(RequestContext $requestContext)
     {
         $data = array();
