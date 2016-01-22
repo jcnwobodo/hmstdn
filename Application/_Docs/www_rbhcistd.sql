@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2016 at 04:30 AM
+-- Generation Time: Jan 22, 2016 at 01:54 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -19,6 +19,39 @@ SET time_zone = "+00:00";
 --
 -- Database: `www_rbhcistd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_employment_data`
+--
+
+CREATE TABLE `app_employment_data` (
+  `id` int(16) NOT NULL COMMENT 'site_users.id',
+  `department` varchar(50) NOT NULL,
+  `specialization` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `app_employment_data`
+--
+
+INSERT INTO `app_employment_data` (`id`, `department`, `specialization`) VALUES
+(1, 'IT', 'Security'),
+(4, 'Customer Service', 'Receptionist');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_patients`
+--
+
+CREATE TABLE `app_patients` (
+  `id` int(16) NOT NULL,
+  `card_number` varchar(10) NOT NULL,
+  `personal_info` int(16) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -889,6 +922,42 @@ INSERT INTO `site_locations` (`id`, `parent`, `location_name`, `slogan`, `locati
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `site_personal_info`
+--
+
+CREATE TABLE `site_personal_info` (
+  `id` varchar(17) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` int(16) DEFAULT NULL COMMENT 'uploads.id',
+  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `other_names` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` char(1) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_of_birth` int(32) NOT NULL,
+  `nationality` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_countries.id',
+  `state_of_origin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_states.id',
+  `lga` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_lga.id',
+  `residence_country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_countries.id',
+  `residence_state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_states.id',
+  `residence_city` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `residence_street` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `biography` text COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `site_personal_info`
+--
+
+INSERT INTO `site_personal_info` (`id`, `photo`, `first_name`, `last_name`, `other_names`, `gender`, `date_of_birth`, `nationality`, `state_of_origin`, `lga`, `residence_country`, `residence_state`, `residence_city`, `residence_street`, `email`, `phone`, `biography`) VALUES
+('1', NULL, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 500000000, 'NIGERIAN', 'ENUGU', 'AKANU-EAST', 'NIGERIA', 'ENUGU', 'ENUGU', 'NWOSU TERRACE', 'jc.nwobodo@gmail.com', '08133621591', NULL),
+('2', 1, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 190940400, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'Lagos', 'Isolo', '14 Olanipekun-olainukan, isolo Lagos', 'Aniekwevictor@hotmail.com', '08130004114', NULL),
+('3', 2, 'chukwudi', 'ezichi', 'e', 'M', 348620400, 'Nigeria', 'Abia', 'Abiriba', 'USA', 'ALASKA', 'TEXAS', 'ROAD T HOUSE 1', 'CHUKWUDI@GMAIL.COM', '08124345566', NULL),
+('4', 3, 'Nice', 'Victor', 'John', 'F', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'Isolo', 'ROAD T HOUSE 1', 'chukwudi@gmail.com', '08124345566', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `site_posts`
 --
 
@@ -932,7 +1001,8 @@ CREATE TABLE `site_sessions` (
 --
 
 INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_time`, `user_agent`, `ip_address`, `last_activity_time`, `status`) VALUES
-(1, '569ebf6a6ebe15.98050855', 1, 'admin', 1453244266, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453260445, 1);
+(2, '569f5f262931c8.72247079', 1, 'Admin', 1453285158, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453289019, 0),
+(3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453423986, 1);
 
 -- --------------------------------------------------------
 
@@ -950,6 +1020,15 @@ CREATE TABLE `site_uploads` (
   `status` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `site_uploads`
+--
+
+INSERT INTO `site_uploads` (`id`, `author`, `upload_time`, `location`, `file_name`, `file_size`, `status`) VALUES
+(1, NULL, 1453297033, 'Uploads/passports', 'passport_569f8d89cf40e.jpg', 135712, 2),
+(2, NULL, 1453299477, 'Uploads/passports', 'passport_569f9715e9a10.jpg', 135712, 2),
+(3, NULL, 1453417785, 'Uploads/passports', 'passport_56a16539d5386.jpg', 135712, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -961,35 +1040,33 @@ CREATE TABLE `site_users` (
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'lawyer',
-  `status` int(1) NOT NULL DEFAULT '0',
-  `photo` int(16) DEFAULT NULL COMMENT 'uploads.id',
-  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `other_names` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` char(1) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_of_birth` int(32) NOT NULL,
-  `nationality` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_countries.id',
-  `state_of_origin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_states.id',
-  `lga` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_lga.id',
-  `residence_country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_countries.id',
-  `residence_state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_states.id',
-  `residence_city` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `residence_street` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `biography` text COLLATE utf8mb4_unicode_ci
+  `status` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `site_users`
 --
 
-INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`, `photo`, `first_name`, `last_name`, `other_names`, `gender`, `date_of_birth`, `nationality`, `state_of_origin`, `lga`, `residence_country`, `residence_state`, `residence_city`, `residence_street`, `email`, `phone`, `biography`) VALUES
-(1, 'admin@site.com', 'some-key', 'admin', 1, NULL, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 500000000, 'NIGERIAN', 'ENUGU', 'NKANU-EAST', 'NIGERIA', 'ENUGU', 'ENUGU', 'NWOSU TERRACE', 'jc.nwobodo@gmail.com', '08133621591', NULL);
+INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) VALUES
+(1, 'admin@site.com', 'some-key', 'admin', 1),
+(4, 'chukwudi.ezich@provost.com', 'some-key', 'Receptionist', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `app_employment_data`
+--
+ALTER TABLE `app_employment_data`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `app_patients`
+--
+ALTER TABLE `app_patients`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `card_number` (`card_number`);
 
 --
 -- Indexes for table `site_categories`
@@ -1009,6 +1086,13 @@ ALTER TABLE `site_comments`
 --
 ALTER TABLE `site_locations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `site_personal_info`
+--
+ALTER TABLE `site_personal_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `photo_id` (`photo`);
 
 --
 -- Indexes for table `site_posts`
@@ -1034,13 +1118,17 @@ ALTER TABLE `site_uploads`
 -- Indexes for table `site_users`
 --
 ALTER TABLE `site_users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `photo_id` (`photo`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `app_patients`
+--
+ALTER TABLE `app_patients`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `site_categories`
 --
@@ -1065,17 +1153,17 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --
 ALTER TABLE `site_uploads`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `site_users`
 --
 ALTER TABLE `site_users`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
