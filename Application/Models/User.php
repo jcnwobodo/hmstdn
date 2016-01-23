@@ -119,13 +119,26 @@ abstract class User extends DomainObject implements I_StatefulObject
             } break;
 
             case (User::UT_LAB_TECH) :{
-                $command = 'moderator-area';
+                $command = 'lab-tech-area';
             } break;
 
             case (User::UT_RECEPTIONIST) :{
-                $command = 'member-area';
+                $command = 'reception';
             } break;
+
+            case (User::UT_DOCTOR) :{
+                $command = 'doctor-area';
+            } break;
+
+            case (User::UT_RESEARCHER) :{
+                $command = 'research-center';
+            }
         }
         return $command;
+    }
+
+    public function defaultCommand()
+    {
+        return self::getDefaultCommand($this->getUserType());
     }
 }
