@@ -140,6 +140,7 @@ class Consultation extends DomainObject implements I_StatefulObject
     public function setNotes($notes)
     {
         $this->notes = $notes;
+        $this->markDirty();
         return $this;
     }
 
@@ -158,6 +159,7 @@ class Consultation extends DomainObject implements I_StatefulObject
     public function setDiagnoses($diagnoses)
     {
         $this->diagnoses = $diagnoses;
+        $this->markDirty();
         return $this;
     }
 
@@ -176,6 +178,7 @@ class Consultation extends DomainObject implements I_StatefulObject
     public function setTreatment($treatment)
     {
         $this->treatment = $treatment;
+        $this->markDirty();
         return $this;
     }
 
