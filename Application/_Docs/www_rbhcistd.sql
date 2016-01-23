@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2016 at 08:14 AM
+-- Generation Time: Jan 23, 2016 at 12:05 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -44,7 +44,7 @@ CREATE TABLE `app_consultations` (
 --
 
 INSERT INTO `app_consultations` (`id`, `doctor`, `patient`, `meeting_date`, `start_time`, `end_time`, `notes`, `diagnoses`, `treatment`, `status`) VALUES
-(2, 5, 13, 1453417200, 1453471920, 1453475520, '', '', '', 2),
+(2, 5, 13, 1453417200, 1453471920, 1453475520, 'some observations worth taking note of during conversation with patient', 'predictions based on observations', '', 2),
 (3, 5, 13, 1453417200, 1453472820, 1453476420, '', '', '', 1);
 
 -- --------------------------------------------------------
@@ -88,6 +88,24 @@ INSERT INTO `app_employment_data` (`id`, `department`, `specialization`) VALUES
 (1, 'IT', 'Security'),
 (4, 'Customer Service', 'Receptionist'),
 (5, 'Dentistry', 'Dental Surgery');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_lab_tests`
+--
+
+CREATE TABLE `app_lab_tests` (
+  `id` int(16) NOT NULL DEFAULT '0',
+  `consultation` int(16) NOT NULL,
+  `operator` int(16) DEFAULT NULL,
+  `disease` int(16) NOT NULL,
+  `requst_date` int(20) NOT NULL,
+  `test_date` int(20) DEFAULT NULL,
+  `patient_location` int(16) DEFAULT NULL,
+  `result` int(1) DEFAULT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1066,7 +1084,7 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (6, '56a276cf839d73.62592753', 1, 'Admin', 1453487823, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453488642, 0),
 (7, '56a2e218583196.95183725', 5, 'Doctor', 1453515288, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453522338, 0),
 (8, '56a2fdabc6ab57.27640447', 1, 'Admin', 1453522347, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453522841, 0),
-(9, '56a2ffa178b929.37198388', 5, 'Doctor', 1453522849, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453532286, 1);
+(9, '56a2ffa178b929.37198388', 5, 'Doctor', 1453522849, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453536660, 1);
 
 -- --------------------------------------------------------
 
@@ -1148,6 +1166,12 @@ ALTER TABLE `app_diseases`
 -- Indexes for table `app_employment_data`
 --
 ALTER TABLE `app_employment_data`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `app_lab_tests`
+--
+ALTER TABLE `app_lab_tests`
   ADD PRIMARY KEY (`id`);
 
 --
