@@ -23,8 +23,9 @@ require_once("header.php");
             </h3>
 
             <div class="btn-group pull-right">
-                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=booked'); ?>" class="btn btn-success">Booked</a>
+                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=booked'); ?>" class="btn btn-primary">Booked</a>
                 <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=canceled'); ?>" class="btn btn-danger">Canceled</a>
+                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=completed'); ?>" class="btn btn-success">Completed</a>
             </div>
 
 

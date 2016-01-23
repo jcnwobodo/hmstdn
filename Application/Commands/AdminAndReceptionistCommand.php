@@ -272,6 +272,9 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
             case 'canceled' : {
                 $consultations = Consultation::getMapper('Consultation')->findByStatus(Consultation::STATUS_CANCELED);
             } break;
+            case 'completed' : {
+                $consultations = Consultation::getMapper('Consultation')->findByStatus(Consultation::STATUS_COMPLETED);
+            } break;
             default : {
                 $consultations = Consultation::getMapper('Consultation')->findAll();
             }
