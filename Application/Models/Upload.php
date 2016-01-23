@@ -27,6 +27,10 @@ class Upload extends DomainObject implements I_StatefulObject
         $this->setStatus(self::STATUS_PENDING);
     }
 
+    public function getFullPath()
+    {
+        return $this->getLocation()."/".$this->getFileName();
+    }
     /**
      * @return mixed
      */
