@@ -100,7 +100,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
         $data['patients'] = $patients;
         $data['page-title'] = ucwords($status)." Patients";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-patients.php');
+        $requestContext->setView('admin-area/manage-patients.php');
     }
 
     protected function AddPatient(RequestContext $requestContext)
@@ -227,7 +227,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 
         $data['page-title'] = "Add Patient";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/add-patient.php');
+        $requestContext->setView('admin-area/add-patient.php');
     }
 
     //Consultations management
@@ -282,7 +282,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
         $data['consultations'] = $consultations;
         $data['page-title'] = ucwords($status)." Consultations";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-consultations.php');
+        $requestContext->setView('admin-area/manage-consultations.php');
     }
 
     protected function AddConsultation(RequestContext $requestContext)
@@ -295,7 +295,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
         $data['patients'] = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_ACTIVE);
 
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/consultation-editor.php');
+        $requestContext->setView('admin-area/consultation-editor.php');
 
         if($requestContext->fieldIsSet($data['mode']))
         {
@@ -336,7 +336,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
         $data['fields'] = $fields;
 
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/consultation-editor.php');
+        $requestContext->setView('admin-area/consultation-editor.php');
 
         if($requestContext->fieldIsSet($data['mode']))
         {

@@ -29,17 +29,17 @@ require_once("header.php");
                 <div class="col-sm-12 lead"><span class="glyphicon glyphicon-comment"></span> Comments</div>
             </div>
             <div class="row">
-                <a href="<?php home_url('/admin-area/manage-comments/?status=approved'); ?>">
+                <a href="<?php home_url('/admin-area-area/manage-comments/?status=approved'); ?>">
                     <div class="col-sm-4">
                         <span class="glyphicon glyphicon-check"></span> Approved: <?= $data['num_approved_comments']; ?>
                     </div>
                 </a>
-                <a href="<?php home_url('/admin-area/manage-comments/?status=pending'); ?>">
+                <a href="<?php home_url('/admin-area-area/manage-comments/?status=pending'); ?>">
                     <div class="col-sm-4">
                         <span class="glyphicon glyphicon-hourglass"></span> Pending: <?= $data['num_pending_comments']; ?>
                     </div>
                 </a>
-                <a href="<?php home_url('/admin-area/manage-comments/?status=deleted'); ?>">
+                <a href="<?php home_url('/admin-area-area/manage-comments/?status=deleted'); ?>">
                     <div class="col-sm-4">
                         <span class="glyphicon glyphicon-trash"></span> Deleted: <?= $data['num_deleted_comments']; ?>
                     </div>

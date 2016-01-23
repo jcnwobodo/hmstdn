@@ -47,7 +47,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
         $data['page-title'] = "Admin Dashboard";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/dashboard.php');
+        $requestContext->setView('admin-area/dashboard.php');
     }
 
     //Comments management
@@ -119,7 +119,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['comments'] = $comments;
         $data['page-title'] = ucwords($status)." Comments";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-comments.php');
+        $requestContext->setView('admin-area/manage-comments.php');
     }
 
     //Categories management
@@ -176,7 +176,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['categories'] = $categories;
         $data['page-title'] = ucwords($status)." Categories (".ucwords($type).")";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-categories.php');
+        $requestContext->setView('admin-area/manage-categories.php');
     }
 
     protected function AddCategory(RequestContext $requestContext)
@@ -222,7 +222,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
         $data['page-title'] = "Add Category (".ucwords($type).")";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/add-category.php');
+        $requestContext->setView('admin-area/add-category.php');
     }
 
     //Post management
@@ -236,7 +236,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['categories'] = $post_categories;
 
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/post-editor.php');
+        $requestContext->setView('admin-area/post-editor.php');
 
         if($requestContext->fieldIsSet($data['mode']))
         {
@@ -270,7 +270,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['fields'] = $fields;
 
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/post-editor.php');
+        $requestContext->setView('admin-area/post-editor.php');
 
         if($requestContext->fieldIsSet($data['mode']))
         {
@@ -347,7 +347,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['posts'] = $posts;
         $data['page-title'] = ucwords($status)." News Posts";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-posts.php');
+        $requestContext->setView('admin-area/manage-posts.php');
     }
 
     private function processPostEditor(RequestContext $requestContext)
@@ -411,7 +411,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['page-title'] = "Create Page";
 
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/page-editor.php');
+        $requestContext->setView('admin-area/page-editor.php');
 
         if($requestContext->fieldIsSet($data['mode']))
         {
@@ -445,7 +445,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['fields'] = $fields;
 
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/page-editor.php');
+        $requestContext->setView('admin-area/page-editor.php');
 
         if($requestContext->fieldIsSet($data['mode']))
         {
@@ -522,7 +522,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['pages'] = $posts;
         $data['page-title'] = ucwords($status)." Pages";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-pages.php');
+        $requestContext->setView('admin-area/manage-pages.php');
     }
 
     private function processPageEditor(RequestContext $requestContext)
@@ -644,7 +644,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['locations'] = $locations;
         $data['page-title'] = ucwords($status)." Locations (".ucwords($type).")";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-locations.php');
+        $requestContext->setView('admin-area/manage-locations.php');
     }
 
     protected function AddLocation(RequestContext $requestContext)
@@ -756,13 +756,13 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
         $data['page-title'] = "Add Location (".ucwords($type).")";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/add-location.php');
+        $requestContext->setView('admin-area/add-location.php');
     }
 
     //User Management
     protected function ManageUsers(RequestContext $requestContext)
     {
-        $types = array('admin', 'doctor', 'lab_technician', 'receptionist');
+        $types = array('admin-area', 'doctor', 'lab_technician', 'receptionist');
         $type = ($requestContext->fieldIsSet('type') and in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
         $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'active';
         $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
@@ -836,13 +836,13 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['users'] = $users;
         $data['page-title'] = ucwords($status)." Staff Members (".ucwords($type).")";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-users.php');
+        $requestContext->setView('admin-area/manage-users.php');
     }
 
     protected function AddUser(RequestContext $requestContext)
     {
         $data = array();
-        $types = array('admin', 'doctor', 'lab_technician', 'receptionist');
+        $types = array('admin-area', 'doctor', 'lab_technician', 'receptionist');
         $type = ( $requestContext->fieldIsSet('type') && in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
         $data['type'] = $type;
 
@@ -972,7 +972,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
         $data['page-title'] = "Add Staff (".ucwords($type).")";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/add-user.php');
+        $requestContext->setView('admin-area/add-user.php');
     }
 
     //Disease management
@@ -1027,7 +1027,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $data['diseases'] = $diseases;
         $data['page-title'] = ucwords($status)." Diseases";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/manage-diseases.php');
+        $requestContext->setView('admin-area/manage-diseases.php');
     }
 
     protected function AddDisease(RequestContext $requestContext)
@@ -1059,7 +1059,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
         $data['page-title'] = "Add Disease";
         $requestContext->setResponseData($data);
-        $requestContext->setView('admin/add-disease.php');
+        $requestContext->setView('admin-area/add-disease.php');
     }
 
 }

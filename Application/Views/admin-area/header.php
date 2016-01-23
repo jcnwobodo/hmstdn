@@ -49,7 +49,7 @@ $page_title = isset($data['page-title']) ? $data['page-title'] : site_info('name
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li <?= $s = ($requestContext->isRequestUrl('admin-area') ? 'class="active"': ''); ?>><a href="<?php home_url('/admin-area/');?>"><span class="glyphicon glyphicon-cog"></span> ADMIN-AREA</a></li>
+                <li <?= $s = ($requestContext->isRequestUrl($requestContext->getSession()->getSessionUser()->defaultCommand()) ? 'class="active"': ''); ?>><a href="<?php home_url('/'.$requestContext->getRequestUrlParam(1).'/');?>"><span class="glyphicon glyphicon-dashboard"></span> DASHBOARD</a></li>
                 <li <?= $s = ($requestContext->isRequestUrl('account-setting') ? 'class="active"': ''); ?>><a href="<?php home_url('/account-settings/');?>"><span class="glyphicon glyphicon-user"></span> MY ACCOUNT</a></li>
                 <li <?= $s = ($requestContext->isRequestUrl('logout') ? 'class="active"': ''); ?>><a href="<?php home_url('/logout/');?>"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
             </ul>

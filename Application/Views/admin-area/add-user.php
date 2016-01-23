@@ -27,7 +27,7 @@ require_once("header.php");
             <div class="row mid-margin-bottom">
                 <div class="col-md-12">
                     <div class="btn-group pull-right">
-                        <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=admin'); ?>" class="btn btn-primary">Admin</a>
+                        <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=admin-area'); ?>" class="btn btn-primary">Admin</a>
                         <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=doctor'); ?>" class="btn btn-primary">Doctor</a>
                         <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=lab_technician'); ?>" class="btn btn-primary">Lab. Technician</a>
                         <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?type=receptionist'); ?>" class="btn btn-primary">Receptionist</a>
