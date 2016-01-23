@@ -23,8 +23,8 @@ class ConsultationMapper extends Mapper
         $this->selectByDoctorStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=?");
         $this->selectByPatientStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE patient=?");
         $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE status=?");
-        $this->updateStmt = self::$PDO->prepare("UPDATE app_consultations SET doctor=?, patient=?, meeting_date=?, start_time=?, end_time=?, status=?  WHERE id=?");
-        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_consultations (doctor,patient,meeting_date,start_time,end_time,status) VALUES (?,?,?,?,?,?)");
+        $this->updateStmt = self::$PDO->prepare("UPDATE app_consultations SET doctor=?, patient=?, meeting_date=?, start_time=?, end_time=?, notes=?, diagnoses=?, treatment=?, status=?  WHERE id=?");
+        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_consultations (doctor,patient,meeting_date,start_time,end_time,notes,diagnoses,treatment,status) VALUES (?,?,?,?,?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_consultations WHERE id=?");
     }
 
@@ -70,6 +70,9 @@ class ConsultationMapper extends Mapper
         $object->setMeetingDate(DateTime::getDateTimeObjFromInt($array['meeting_date']));
         $object->setStartTime(DateTime::getDateTimeObjFromInt($array['start_time']));
         $object->setEndTime(DateTime::getDateTimeObjFromInt($array['end_time']));
+        $object->setNotes($array['notes']);
+        $object->setDiagnoses($array['diagnoses']);
+        $object->setTreatment($array['treatment']);
         $object->setStatus($array['status']);
 
         return $object;
@@ -83,6 +86,9 @@ class ConsultationMapper extends Mapper
             $object->getMeetingDate()->getDateTimeInt(),
             $object->getStartTime()->getDateTimeInt(),
             $object->getEndTime()->getDateTimeInt(),
+            $object->getNotes(),
+            $object->getDiagnoses(),
+            $object->getTreatment(),
             $object->getStatus()
         );
         $this->insertStmt->execute( $values );
@@ -98,6 +104,9 @@ class ConsultationMapper extends Mapper
             $object->getMeetingDate()->getDateTimeInt(),
             $object->getStartTime()->getDateTimeInt(),
             $object->getEndTime()->getDateTimeInt(),
+            $object->getNotes(),
+            $object->getDiagnoses(),
+            $object->getTreatment(),
             $object->getStatus(),
             $object->getId()
         );

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2016 at 07:14 PM
+-- Generation Time: Jan 23, 2016 at 08:14 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -33,6 +33,9 @@ CREATE TABLE `app_consultations` (
   `meeting_date` int(20) NOT NULL,
   `start_time` int(20) NOT NULL,
   `end_time` int(20) NOT NULL,
+  `notes` text,
+  `diagnoses` text,
+  `treatment` text,
   `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -40,9 +43,9 @@ CREATE TABLE `app_consultations` (
 -- Dumping data for table `app_consultations`
 --
 
-INSERT INTO `app_consultations` (`id`, `doctor`, `patient`, `meeting_date`, `start_time`, `end_time`, `status`) VALUES
-(2, 5, 13, 1453417200, 1453471920, 1453475520, 1),
-(3, 5, 13, 1453417200, 1453472820, 1453476420, 1);
+INSERT INTO `app_consultations` (`id`, `doctor`, `patient`, `meeting_date`, `start_time`, `end_time`, `notes`, `diagnoses`, `treatment`, `status`) VALUES
+(2, 5, 13, 1453417200, 1453471920, 1453475520, '', '', '', 2),
+(3, 5, 13, 1453417200, 1453472820, 1453476420, '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1059,7 +1062,11 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (2, '569f5f262931c8.72247079', 1, 'Admin', 1453285158, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453289019, 0),
 (3, '569f6e4493b446.35514231', 1, 'Admin', 1453289028, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453467329, 0),
 (4, '56a2271e4e17d8.74607779', 1, 'Admin', 1453467422, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453477176, 0),
-(5, '56a2512c1d6b00.39876575', 1, 'Admin', 1453478188, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453486447, 1);
+(5, '56a2512c1d6b00.39876575', 1, 'Admin', 1453478188, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453486648, 0),
+(6, '56a276cf839d73.62592753', 1, 'Admin', 1453487823, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453488642, 0),
+(7, '56a2e218583196.95183725', 5, 'Doctor', 1453515288, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453522338, 0),
+(8, '56a2fdabc6ab57.27640447', 1, 'Admin', 1453522347, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453522841, 0),
+(9, '56a2ffa178b929.37198388', 5, 'Doctor', 1453522849, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453532286, 1);
 
 -- --------------------------------------------------------
 
@@ -1117,7 +1124,7 @@ CREATE TABLE `site_users` (
 --
 
 INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) VALUES
-(1, 'admin@site.com', 'some-key', 'admin', 1),
+(1, 'admin@site.com', 'some-key', 'Admin', 1),
 (4, 'chukwudi.ezich@provost.com', 'some-key', 'Receptionist', 1),
 (5, 'michael.ndubuisi@site.com', 'mikiwhiteb', 'Doctor', 1);
 
@@ -1247,7 +1254,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --

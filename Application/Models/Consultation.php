@@ -20,6 +20,9 @@ class Consultation extends DomainObject implements I_StatefulObject
     private $meeting_date;
     private $start_time;
     private $end_time;
+    private $notes;
+    private $diagnoses;
+    private $treatment;
     private $status;
 
     public function __construct($id=null)
@@ -119,6 +122,60 @@ class Consultation extends DomainObject implements I_StatefulObject
     {
         $this->end_time = $end_time;
         $this->markDirty();
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * @param mixed $notes
+     * @return Consultation
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDiagnoses()
+    {
+        return $this->diagnoses;
+    }
+
+    /**
+     * @param mixed $diagnoses
+     * @return Consultation
+     */
+    public function setDiagnoses($diagnoses)
+    {
+        $this->diagnoses = $diagnoses;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTreatment()
+    {
+        return $this->treatment;
+    }
+
+    /**
+     * @param mixed $treatment
+     * @return Consultation
+     */
+    public function setTreatment($treatment)
+    {
+        $this->treatment = $treatment;
         return $this;
     }
 
