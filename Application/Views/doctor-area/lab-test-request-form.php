@@ -40,6 +40,9 @@ require_once("header.php");
                                 {
                                     ?>
                                     <option value="<?= $consultation->getId(); ?>" <?= selected($consultation->getId(), isset($fields['consultation']) ? $fields['consultation'] : null); ?>>
+                                        [ <?= $consultation->getMeetingDate()->getDateTimeStrF("m-d-y"); ?> ]
+                                        [ <?= $consultation->getStartTime()->getDateTimeStrF("g:i A"); ?> ->
+                                        <?= $consultation->getEndTime()->getDateTimeStrF("g:i A"); ?> ]
                                         <?= $consultation->getPatient()->getPersonalInfo()->getNames(); ?>
                                     </option>
                                     <?php

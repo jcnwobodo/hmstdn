@@ -19,11 +19,11 @@ class ConsultationMapper extends Mapper
     {
         parent::__construct();
         $this->selectStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE id=?");
-        $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_consultations");
-        $this->selectByDoctorStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=?");
-        $this->selectByPatientStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE patient=?");
-        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE status=?");
-        $this->selectByDoctorAndStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=? AND status=?");
+        $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_consultations ORDER BY start_time ASC");
+        $this->selectByDoctorStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=? ORDER BY start_time ASC");
+        $this->selectByPatientStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE patient=? ORDER BY start_time ASC");
+        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE status=? ORDER BY start_time ASC");
+        $this->selectByDoctorAndStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=? AND status=? ORDER BY start_time ASC");
         $this->updateStmt = self::$PDO->prepare("UPDATE app_consultations SET doctor=?, patient=?, meeting_date=?, start_time=?, end_time=?, notes=?, diagnoses=?, treatment=?, status=?  WHERE id=?");
         $this->insertStmt = self::$PDO->prepare("INSERT INTO app_consultations (doctor,patient,meeting_date,start_time,end_time,notes,diagnoses,treatment,status) VALUES (?,?,?,?,?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_consultations WHERE id=?");
