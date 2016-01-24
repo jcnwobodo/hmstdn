@@ -18,8 +18,8 @@ class DiseaseMapper extends Mapper
     {
         parent::__construct();
         $this->selectStmt = self::$PDO->prepare("SELECT * FROM app_diseases WHERE id=?");
-        $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_diseases");
-        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_diseases WHERE status=?");
+        $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_diseases ORDER BY name");
+        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_diseases WHERE status=? ORDER BY name");
         $this->updateStmt = self::$PDO->prepare("UPDATE app_diseases SET name=?, causative_organisms=?, signs_and_symptoms=?, status=? WHERE id=?");
         $this->insertStmt = self::$PDO->prepare("INSERT INTO app_diseases (name,causative_organisms,signs_and_symptoms,status) VALUES (?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_diseases WHERE id=?");
