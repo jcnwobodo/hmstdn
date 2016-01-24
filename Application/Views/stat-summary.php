@@ -21,6 +21,8 @@ include_once('header.php');
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
 
+        <h2 class="page-header no-margin full-margin-bottom"><span class="glyphicon glyphicon-book"></span> Researcher's Data-sheet</h2>
+
         <div class="height-50vh data-section">
             <div class="table-responsive clear-both">
                 <table class="table table-stripped table-bordered table-hover full-margin-top">

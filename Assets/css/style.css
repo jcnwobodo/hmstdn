@@ -19,8 +19,14 @@ body{
 }
 
 .data-section{
+    clear: both;
     border-top: 1px solid #666666;
 }
 .data-section:first-child{
-    border-top: none;
+    border-top: 0px solid transparent;
+}
+
+.data-sheet{
+    padding-top: 3em;
+    padding-bottom: 5em;
 }

@@ -47,6 +47,7 @@ $page_title = isset($data['page-title']) ? $data['page-title'] : site_info('name
                 <li <?= ($rc->isRequestUrl('contact') ? 'class="active"': ''); ?>><a href="<?php home_url('/contact/')?>"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li <?= ($rc->isRequestUrl('login') ? 'class="active"': ''); ?>><a href="<?php home_url('/login/')?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li <?= ($rc->isRequestUrl('register') ? 'class="active"': ''); ?>><a href="<?php home_url('/register/')?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
             </ul>
         </div><!--/.nav-collapse -->

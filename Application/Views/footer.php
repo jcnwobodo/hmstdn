@@ -10,7 +10,7 @@
 </div><!--/container-fluid-->
 
 <!-- Bottom navbar -->
-<nav class="navbar navbar-default navbar-inverse navbar-static-top footer-nav">
+<nav class="navbar navbar-default navbar-inverse navbar-static-top footer-nav <?= is_string($mode) ? $mode : ''; ?>">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-footer" aria-expanded="false" aria-controls="navbar-footer">

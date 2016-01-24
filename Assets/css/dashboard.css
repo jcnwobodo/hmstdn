@@ -59,6 +59,7 @@ body {
 
 .main {
     padding: 1em;
+    margin-bottom: 5em;
 }
 @media (min-width: 768px) {
     .main {

@@ -16,7 +16,7 @@ include_once('header.php');
     <div class="row">
     <div class="col-md-7">
         <p>
-            <img src="<?php home_url("/Assets/images/image-3.png") ?>" class="img-responsive"/>
+            <img src="<?php home_url("/Assets/images/image-3.jpg") ?>" class="img-responsive"/>
         </p>
         <span class="lead">Welcome to</span>
         <h3 class="page-header no-margin"><?php site_info('full-name'); ?></h3>

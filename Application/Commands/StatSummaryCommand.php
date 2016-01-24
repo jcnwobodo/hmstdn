@@ -36,11 +36,13 @@ class StatSummaryCommand extends Command
         {
             $location_names[$location->getId()] = $location->getLocationName();
         }
+        $locations->rewind();
 
         foreach($diseases as $disease)
         {
             $disease_names[$disease->getId()] = $disease->getName();
         }
+        $diseases->rewind();
 
         foreach($tests as $test)
         {
@@ -61,6 +63,8 @@ class StatSummaryCommand extends Command
         $data['disease-counter'] = $disease_counter;
         $data['location-names'] = $location_names;
         $data['disease-names'] = $disease_names;
+        $data['locations'] = $locations;
+        $data['diseases'] = $diseases;
         $data['page-title'] = "Statistical Abstracts";
         $requestContext->setResponseData($data);
         $requestContext->setView('stat-summary.php');
