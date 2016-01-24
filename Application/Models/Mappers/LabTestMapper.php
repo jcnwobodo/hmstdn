@@ -30,6 +30,7 @@ class LabTestMapper extends Mapper
         $this->selectByDiseaseStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE disease=?");
         $this->selectByDateRangeStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE test_date>=? AND test_date<=?");
         $this->selectByPatientLocationStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE patient_location=?");
+        $this->selectByResultStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE result=? AND status=1");
         $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE status=?");
         $this->deleteByConsultationStmt = self::$PDO->prepare("DELETE FROM app_lab_tests WHERE consultation=?");
     }
@@ -66,6 +67,13 @@ class LabTestMapper extends Mapper
     {
         $this->selectByPatientLocationStmt->execute( array($location_id) );
         $raw_data = $this->selectByPatientLocationStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
+    }
+
+    public function findByResult($result=1)
+    {
+        $this->selectByResultStmt->execute( array($result) );
+        $raw_data = $this->selectByResultStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
 

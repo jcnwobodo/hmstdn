@@ -17,3 +17,10 @@ body{
     border-bottom: none;
     margin-bottom: 0;
 }
+
+.data-section{
+    border-top: 1px solid #666666;
+}
+.data-section:first-child{
+    border-top: none;
+}
