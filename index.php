@@ -23,7 +23,6 @@ catch (Exceptions\CommandNotFoundException $exception)
 {
     $response  = $requestContext->getRequestUrl()."<br/>";
     $response .= $exception->getMessage()."<br/>";
-    //$response .= recursive_implode( "<br/>", $exception->getTrace() ) ;
     $data = array('page-title'=>'Page Not Found', 'error-message'=>$response);
     $requestContext->setResponseData($data);
     $requestContext->setView('404.php');

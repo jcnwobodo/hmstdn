@@ -557,6 +557,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                 $post->setAuthor($requestContext->getSession()->getSessionUser());
                 $post->setDateCreated(new DateTime(mktime($time['hour'],$time['minute'],0,$date['month'],$date['day'],$date['year']) ));
                 $post->setLastUpdate(new DateTime());
+                $post->setStatus($data['mode'] == 'create-page' ? Post::STATUS_DRAFT : $post->getStatus());
 
                 DomainObjectWatcher::instance()->performOperations();
                 $requestContext->setFlashData($data['mode'] == 'create-page' ? "Page created successfully" : "Page updated successfully");

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2016 at 05:06 PM
+-- Generation Time: Jan 24, 2016 at 07:12 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -66,7 +66,33 @@ CREATE TABLE `app_diseases` (
 --
 
 INSERT INTO `app_diseases` (`id`, `name`, `causative_organisms`, `signs_and_symptoms`, `status`) VALUES
-(1, 'Dracunculiasis', '<p>Dracunculus medinensis,\r</p><p>Echinococcus granulosus</p>', '<p>painful burning sensation, fever, nausea, and vomiting. allergi, rashes, nausea, diarrhea, dizziness, and localized edema.</p>', 1);
+(1, 'Dracunculiasis', '<p>Dracunculus medinensis,\r</p><p>Echinococcus granulosus</p>', '<p>painful burning sensation, fever, nausea, and vomiting. allergi, rashes, nausea, diarrhea, dizziness, and localized edema.</p>', 1),
+(2, 'Enterobiasis', '<p>Enterobius vermicularis</p>', '<p>pruritus ani and perineal pruritus, i.e., itching in and around the anus and around the perineum.\r</p><p>\r</p>', 1),
+(3, 'Echinococcosis', '<p>Echinococcus granulosus\r</p><p>And Echinococcus \r</p><p>multilocularis\r</p>', '<p>abdominal pain, weight loss, and turn yellow. Lung disease may cause pain in the chest, shortness of breath and coughing.\r</p><p>\r</p>', 1),
+(4, 'African trypanosomiasis', '<p>Trypanosoma brucei gambiense,\r</p><p>Trypanosoma brucei rhodesiense\r</p>', '<p>fever, headache, lymphadenopathy, nocturnal sleeping pattern, personality change, cognitive decline, and coma.</p>', 1),
+(5, 'Buruli ulcer', '<p>Mycobacterium ulcerans</p>', '<p>deformity, disability, and skin lesions.</p>', 1),
+(6, 'Chagas disease', '<p>Trypanosoma cruzi</p>', '<p> skin chancres, unilateral purplish orbital oedema, local lymphoadenopathies, and fever accompanied by a variety of other symptoms depending on infection site.</p>', 1),
+(7, 'Cysticercosis and taeniasis', '<p>Taenia solium , Taenia saginata Taenia asiatica</p>', '<p>weight loss, dizziness, abdominal pain, diarrhea, headaches, nausea, constipation, chronic indigestion, and loss of appetite.</p>', 1),
+(8, 'Dengue fever', '<p>Flavivirus</p>', '<p>high fever and flu-like symptoms</p>', 1),
+(9, 'Dracunculiasis', '<p>guinea-worm larvae</p>', '<p>Inches and painful blister</p>', 1),
+(10, 'Echinococcosis', '<p>E. granulosus, E. multilocularis, E. oligarthrus and E. vogeli</p>', '<p>abdominal pain, nausea and vomiting while cysts in the lungs cause chronic cough, chest pain, and shortness of breath.</p>', 1),
+(11, 'Leishmaniasis', '<p>Leishmania species (L. major, L. infantum, and L. braziliensis)</p>', '<p>ulcers of the skin, mouth, and nose, fever, low red blood cells, and enlarged spleen and liver.</p>', 1),
+(12, 'Leprosy', '<p>Mycobacterium</p>', '<p>Corneal ulcer, eye pain,fever, joit pain, neuropathy, rash,skin biopsy disabled or disfigured.</p>', 1),
+(13, 'Lymphatic filariasis', '<p>Wuchereria bancrofti, Brugia malayi, and Brugia timori</p>', '<p>lymphoedema of the limbs, genital disease, painful recurrent attacks, lymphatic damage and kidney damage.</p>', 1),
+(14, 'Onchocerciasis', '<p>Onchocerca volvulus</p>', '<p>blindness, skin rashes, lesions, intense itching and skin depigmentation.</p>', 1),
+(15, 'Rabies', '<p>Rhabdovirus</p>', '<p>fever, myalgia (muscle pains) and headache, which eventually progresses to brain inflammation, seizures, confusion, paralysis, coma and death.</p>', 1),
+(16, 'Schistosomiasis', '<p>Schistosoma mansoni\r</p><p>Schistosoma haematobium\r</p><p>Schistosoma japonicum</p>', '<p>abdominal pain, diarrhea, bloody stool, or blood in the urine., liver damage, kidney failure, portal hypertension, cervical lesions, bladder cancer and haematemesis,</p>', 1),
+(17, 'Soil-transmitted helminthiasis', '<p>ascariasis (roundworms), trichuriasis (whipworm), and strongyloidiasis.</p>', '<p>intestinal problems, lack of energy, and compromised physical and cognitive development.</p>', 1),
+(18, 'Trachoma', '<p>Chlamydia trachomatis</p>', '<p>partially blind, blindness</p>', 1),
+(19, 'Yaws', '<p>Treponemes</p>', '<p>skin lesions</p>', 1),
+(20, 'Yellow fever', '<p>Yellow fever virus(Flaviviridae)</p>', '<p>severe hepatitis and hemorrhagic fever</p>', 1),
+(21, 'Plague', '<p>Pasteurella pestis</p>', '<p>Fever, headache, and painfully swollen lymph nodes</p>', 1),
+(22, 'Leptospirosis', '<p>Leptospira</p>', '<p>headaches, muscle pains, and fevers, bleeding from the lungs or meningitis.</p>', 1),
+(23, 'Meningococcal meningitis', '<p>Neisseria meningitidis</p>', '<p>Stiff neck, high fever, headaches, and vomiting</p>', 1),
+(24, 'Lassa fever', '<p>Arenaviridae</p>', '<p>Slight fever, general malaise, weakness, headache, hemorrhaging (in gums, eyes, or nose, as examples), respiratory distress, repeated vomiting, facial swelling, pain in the chest, back, and abdomen, and shock.</p>', 1),
+(25, 'Malaria', '<p>Plasmodium species(Plasmodium falciparum, Plasmodium vivax, Plasmodium knowles, Plasmodium ovale and Plasmodium malariae.)</p>', '<p>flu-like symptoms that include high fever and chills headaches, and vomiting.</p>', 1),
+(26, 'Typhiod fever', '<p>Salmonella typhi bacteria Salmonella paratyphi.</p>', '<p>Poor appetite ,Headaches, Generalized aches and pains Fever as high as 104 degrees Farenheit Lethargy and Diarrhea</p>', 1),
+(27, 'Ebola', '<p>Ebola virus</p>', '<p>fever, chills, general malaise, fatigue, headache, vomiting, diarrhea, loss of appetite, nonpruritic maculopapular rash, massive gastrointestinal bleeding dehydration, hypotension,shock</p>', 1);
 
 -- --------------------------------------------------------
 
@@ -113,8 +139,8 @@ CREATE TABLE `app_lab_tests` (
 --
 
 INSERT INTO `app_lab_tests` (`id`, `consultation`, `operator`, `disease`, `request_date`, `test_date`, `patient_location`, `result`, `status`) VALUES
-(1, 2, 6, 1, 1453556725, 1453565015, NULL, 0, 1),
-(2, 2, 6, 1, 1453560656, 1453564892, 28, 1, 1);
+(1, 2, 6, 1, 1453556725, 1453565015, 15, 0, 1),
+(2, 2, 6, 1, 1453560656, 1453564892, 28, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1064,6 +1090,15 @@ CREATE TABLE `site_posts` (
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `site_posts`
+--
+
+INSERT INTO `site_posts` (`id`, `parent`, `post_type`, `guid`, `title`, `content`, `excerpt`, `featured_image`, `category`, `author`, `date_created`, `last_update`, `comment_count`, `status`) VALUES
+(1, NULL, 'page', 'about', 'About', '<p><p class="lead">Powered by</p>\r</p><p><h1>BareBones PHP Framework</h1> with <h2>GUI crafted out of Bootstrap</h2>\r</p><p>by <h3>J. C. Nwobodo</h3>\r</p><p><hr>\r</p><p><p class="lead">There is much to say about this project;</p>\r</p><p><ol>\r</p><p><li>It''s gonna save lives if it were a commercial project</li>\r</p><p><li>Unfortunately, it''s just another <strong>MSc Project</strong></li>\r</p><p></ol></p>', '<p><p class="lead">Powered by</p>\r</p><p><h1>BareBones PHP Framework</h1> with <h2>GUI crafted out of Bootstrap</h2>\r</p><p>by <h3>J. C. Nwobodo</h3>\r</p><p><hr>\r</p><p><p class="lead">There is much to say about this project;</p>\r</p><p><ol>\r</p><p><li>It''s gonna save lives if it were a commercial project</li>\r</p><p><li>Unfortunately, it''s just another <strong>MSc Project</strong></li>\r</p><p></ol></p>', NULL, NULL, 1, 1453609560, 1453614904, NULL, 1),
+(2, NULL, 'page', 'terms-of-use', 'Terms of Use', '<p><h1>Enjoy ! It''s Inexpensive</h1>\r</p><p><p class="lead">Developed for <strong>academic use only</strong> as an MSc Project for whom it may concern.</p></p>', '<p>To be discussed at a later time.\r</p><p>For now...\r</p><p>\r</p><p><h1>Enjoy !</h1></p>', NULL, NULL, 1, 1453613760, 1453615836, NULL, 1),
+(3, NULL, 'page', 'legal-notice', 'Legal Notice', '<p><p class="lead">This is a free country, isn''t it?</p>\r</p><p>\r</p><p><h2>Just Take Note of the Following</h2>\r</p><p><ol>\r</p><p><li>BareBones PHP Framework is Private Project of <strong>Phoenix Laboratories</strong></li>\r</p><p><li>Phoenix Laboratories is a Private, Unregistered Company of <strong>J. C. Nwobodo</strong></li>\r</p><p><li><strong>Bootstrap</strong> and all it''s components are registered trademarks of there respective owners</li>\r</p><p></ol>\r</p><p>\r</p><p><p class="lead">Therefore, Please Do not Misuse.</p>\r</p><p>\r</p><p><h3>Thanks !</h3></p>', '<p><p class="lead">This is a free country, isn''t it?</p>\r</p><p>\r</p><p><h2>Just Take Note of the Following</h2>\r</p><p><ol>\r</p><p><li>BareBones PHP Framework is Private Project of <strong>Phoenix Laboratories</strong></li>\r</p><p><li>Phoenix Laboratories is a Private, Unregistered Company of <strong>J. C. Nwobodo</strong></li>\r</p><p><li><strong>Bootstrap</strong> and all it''s components are registered trademarks of there respective owners</li>\r</p><p></ol>\r</p><p>\r</p><p><p class="lead">Therefore, Please Do not Misuse.</p>\r</p><p>\r</p><p><h3>Thanks !</h3></p>', NULL, NULL, 1, 1453614120, 1453615754, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -1101,7 +1136,12 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (15, '56a39bda551c77.20110894', 5, 'Doctor', 1453562842, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453563031, 0),
 (16, '56a39ca12b1ec6.98987198', 6, 'LabTechnician', 1453563041, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453565025, 0),
 (17, '56a3a46bc39586.33489925', 1, 'Admin', 1453565036, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453565073, 0),
-(18, '56a3a4999fa587.33588107', 5, 'Doctor', 1453565081, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453565095, 1);
+(18, '56a3a4999fa587.33588107', 5, 'Doctor', 1453565081, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453571816, 0),
+(19, '56a3beef2e8657.17778596', 1, 'Admin', 1453571823, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453607969, 0),
+(20, '56a44c5f25ac56.37572468', 6, 'LabTechnician', 1453608031, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453609103, 0),
+(21, '56a45098a44c87.44513704', 5, 'Doctor', 1453609112, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453609555, 0),
+(22, '56a4525d13b0c8.02579579', 1, 'Admin', 1453609565, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453615871, 0),
+(23, '56a46b186874d3.38610914', 5, 'Doctor', 1453615896, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453615896, 1);
 
 -- --------------------------------------------------------
 
@@ -1267,7 +1307,7 @@ ALTER TABLE `app_consultations`
 -- AUTO_INCREMENT for table `app_diseases`
 --
 ALTER TABLE `app_diseases`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `app_lab_tests`
 --
@@ -1297,12 +1337,12 @@ ALTER TABLE `site_locations`
 -- AUTO_INCREMENT for table `site_posts`
 --
 ALTER TABLE `site_posts`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --

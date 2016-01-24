@@ -40,18 +40,18 @@ require_once("header.php");
                     <div class="col-md-8">
                         <div class="form-group form-group-sm">
                             <label for="page-title"><span class="glyphicon glyphicon-leaf"></span> Title</label>
-                            <input name="page-title" id="page-title" type="text" class="form-control" value="<?= isset($fields['page-title']) ? $fields['page-title'] : ''; ?>" placeholder="Title of Page" spellcheck="true"/>
+                            <input name="page-title" id="page-title" type="text" class="form-control" value="<?= isset($fields['page-title']) ? $fields['page-title'] : ''; ?>" placeholder="Title of Page" spellcheck="true" required/>
                         </div>
                         <div class="form-group form-group-sm">
                             <label for="page-url"><span class="glyphicon glyphicon-link"></span> Page URL</label>
                             <div class="input-group">
-                                <span class="input-group-addon"><?php home_url('/')?></span>
-                                <input name="page-url" id="page-url" type="text" class="form-control" value="<?= isset($fields['page-url']) ? $fields['page-url'] : ''; ?>" placeholder="page-title" spellcheck="true"/>
+                                <span class="input-group-addon"><?= strtolower(home_url('/page/',0)); ?></span>
+                                <input name="page-url" id="page-url" type="text" class="form-control" value="<?= isset($fields['page-url']) ? $fields['page-url'] : ''; ?>" placeholder="page-title" spellcheck="true" required/>
                             </div>
                         </div>
                         <div class="form-group form-group-sm">
                             <label for="page-content"><span class="glyphicon glyphicon-pencil"></span> Content</label>
-                            <textarea name="page-content" id="page-content" class="form-control height-50vh"><?= isset($fields['page-content']) ? $fields['page-content'] : ''; ?></textarea>
+                            <textarea name="page-content" id="page-content" class="form-control height-50vh" required><?= isset($fields['page-content']) ? $fields['page-content'] : ''; ?></textarea>
                         </div>
                         <div class="form-group form-group-sm">
                             <label for="page-excerpt"><span class="glyphicon glyphicon-star-empty"></span> Excerpt</label>

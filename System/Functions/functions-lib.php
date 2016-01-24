@@ -47,3 +47,18 @@ function num_words($string)
     foreach($raw_words as $raw_word){if(strlen($raw_word)) $processed_words[] = $raw_word;}
     return sizeof($processed_words);
 }
+
+function subwords($string, $start, $length)
+{
+    $words = explode(' ', $string);
+    $return = array();
+    $limit = sizeof($words);
+    $start = $start <= $limit ? $start : 0;
+    $len = $length <= ($limit - $start) ? $length : ($limit - $start);
+
+    for($i = 0, $p = $start; $i < $len; ++$i, ++$p)
+    {
+        $return[] = $words[$p];
+    }
+    return implode(' ', $return);
+}

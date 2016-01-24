@@ -24,7 +24,7 @@ class PostMapper extends Mapper
         $this->selectByPamalinkStmt = self::$PDO->prepare("SELECT * FROM site_posts WHERE guid=?");
         $this->selectByCategoryStmt = self::$PDO->prepare("SELECT * FROM site_posts WHERE category=? AND status=? ORDER BY id DESC;");
         $this->selectByAuthorStmt = self::$PDO->prepare("SELECT * FROM site_posts WHERE author=? ORDER BY id DESC;");
-        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM site_posts WHERE status=? ORDER BY id DESC;");
+        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM site_posts WHERE status=? ORDER BY ? DESC;");
         $this->selectTypeByStatusStmt = self::$PDO->prepare("SELECT * FROM site_posts WHERE post_type=:post_type AND status=:post_status ORDER BY id DESC LIMIT :row_count OFFSET :offset;");
         $this->updateStmt = self::$PDO->prepare("UPDATE site_posts SET post_type=?, guid=?, title=?, content=?, excerpt=?, featured_image=?, category=?, author=?, date_created=?, last_update=?, comment_count=?, status=? WHERE id=?");
         $this->insertStmt = self::$PDO->prepare("INSERT INTO site_posts (post_type,guid,title,content,excerpt,featured_image,category,author,date_created,last_update,comment_count,status)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -48,14 +48,14 @@ class PostMapper extends Mapper
 
     public function findByCategory($category,$status=1)
     {
-        $this->selectByCategoryStmt->execute( array($category,$category) );
+        $this->selectByCategoryStmt->execute( array($category,$status) );
         $raw_data = $this->selectByCategoryStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
 
-    public function findByStatus($status)
+    public function findByStatus($status, $order='id')
     {
-        $this->selectByStatusStmt->execute( array($status) );
+        $this->selectByStatusStmt->execute( array($status, $order) );
         $raw_data = $this->selectByStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
