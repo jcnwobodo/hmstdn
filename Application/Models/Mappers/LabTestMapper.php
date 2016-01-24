@@ -130,7 +130,7 @@ class LabTestMapper extends Mapper
             $operator_id,
             $disease_id,
             $object->getRequestDate()->getDateTimeInt(),
-            $object->getTestDate()->getDateTimeInt(),
+            is_object($object->getTestDate()) ? $object->getTestDate()->getDateTimeInt() : NULL,
             $location_id,
             $object->getResult(),
             $object->getStatus()

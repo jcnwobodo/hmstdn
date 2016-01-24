@@ -9,14 +9,16 @@
 
 namespace Application\Commands;
 
-
+use Application\Models\Disease;
+use Application\Models\LabTest;
+use Application\Models\Location;
 use Application\Models\User;
 use System\Utilities\DateTime;
 use Application\Models\Consultation;
 use System\Request\RequestContext;
 use System\Models\DomainObjectWatcher;
 
-class DoctorAreaCommand extends EmployeeCommand
+class DoctorAreaCommand extends DoctorAndLabTechnicianCommand
 {
     public function execute(RequestContext $requestContext)
     {
@@ -38,6 +40,7 @@ class DoctorAreaCommand extends EmployeeCommand
     //Consultations management
     protected function ManageConsultations(RequestContext $requestContext)
     {
+        $doctor = $requestContext->getSession()->getSessionUser();
         $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'booked';
         $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
         $consultation_ids = $requestContext->fieldIsSet('consultation-ids') ? $requestContext->getField('consultation-ids') : array();
@@ -58,16 +61,16 @@ class DoctorAreaCommand extends EmployeeCommand
         switch($status)
         {
             case 'booked' : {
-                $consultations = Consultation::getMapper('Consultation')->findByStatus(Consultation::STATUS_BOOKED);
+                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_BOOKED);
             } break;
             case 'canceled' : {
-                $consultations = Consultation::getMapper('Consultation')->findByStatus(Consultation::STATUS_CANCELED);
+                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_CANCELED);
             } break;
             case 'completed' : {
-                $consultations = Consultation::getMapper('Consultation')->findByStatus(Consultation::STATUS_COMPLETED);
+                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_COMPLETED);
             } break;
             default : {
-                $consultations = Consultation::getMapper('Consultation')->findAll();
+                $consultations = Consultation::getMapper('Consultation')->findByDoctor($doctor->getId());
             }
         }
 
@@ -91,7 +94,7 @@ class DoctorAreaCommand extends EmployeeCommand
                     'notes' => $consultation->getNotes(),
                     'diagnoses' => $consultation->getDiagnoses(),
                     'treatment' => $consultation->getTreatment()
-                    );
+                );
                 if($requestContext->fieldIsSet('update'))
                 {
                     $notes = $requestContext->getField('notes');
@@ -131,5 +134,49 @@ class DoctorAreaCommand extends EmployeeCommand
             }
         }
         $requestContext->redirect(home_url('/doctor-area/manage-consultations/',0));
+    }
+
+    //LabTest Management
+    protected function RequestLabTest(RequestContext $requestContext)
+    {
+        $data = array();
+        $doctor = $requestContext->getSession()->getSessionUser();
+        $data['consultations'] = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_BOOKED);
+        $data['diseases'] = Disease::getMapper('Disease')->findByStatus(Disease::STATUS_APPROVED);
+        $data['locations'] = Location::getMapper('Location')->findTypeByStatus(Location::TYPE_STATE, Location::STATUS_APPROVED);
+
+        if($requestContext->fieldIsSet('request'))
+        {
+            $fields = $requestContext->getAllFields();
+
+            //process request
+            $consultation = Consultation::getMapper('Consultation')->find($fields['consultation']);
+            $disease = Disease::getMapper('Disease')->find($fields['disease']);
+            $request_date = new DateTime();
+            $patient_location = Location::getMapper('Location')->find($fields['location']);
+
+            if(is_object($consultation) and is_object($disease))
+            {
+                $test = new LabTest();
+                $test->setConsultation($consultation);
+                $test->setDisease($disease);
+                $test->setRequestDate($request_date);
+                $test->setPatientLocation($patient_location);
+                $test->setStatus(LabTest::STATUS_PENDING);
+
+                $requestContext->setFlashData("Lab. Test request placed successfully");
+                $data['status'] = 1;
+            }
+            else
+            {
+                $requestContext->setFlashData('Mandatory fields not set');
+                $data['status'] = 0;
+            }
+            DomainObjectWatcher::instance()->performOperations();
+        }
+
+        $data['page-title'] = "Request Lab. Test";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('doctor-area/lab-test-request-form.php');
     }
 }

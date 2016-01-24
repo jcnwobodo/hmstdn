@@ -44,6 +44,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setConsultation(Consultation $consultation)
     {
         $this->consultation = $consultation;
+        $this->markDirty();
         return $this;
     }
 
@@ -62,6 +63,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setOperator(LabTechnician $operator)
     {
         $this->operator = $operator;
+        $this->markDirty();
         return $this;
     }
 
@@ -80,6 +82,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setDisease(Disease $disease)
     {
         $this->disease = $disease;
+        $this->markDirty();
         return $this;
     }
 
@@ -98,6 +101,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setRequestDate(DateTime $request_date)
     {
         $this->request_date = $request_date;
+        $this->markDirty();
         return $this;
     }
 
@@ -116,6 +120,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setTestDate(DateTime $test_date)
     {
         $this->test_date = $test_date;
+        $this->markDirty();
         return $this;
     }
 
@@ -134,6 +139,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setPatientLocation(Location $patient_location)
     {
         $this->patient_location = $patient_location;
+        $this->markDirty();
         return $this;
     }
 
@@ -152,6 +158,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setResult($result)
     {
         $this->result = $result;
+        $this->markDirty();
         return $this;
     }
 
@@ -170,6 +177,7 @@ class LabTest extends DomainObject implements I_StatefulObject
     public function setStatus($status)
     {
         $this->status = $status;
+        $this->markDirty();
         return $this;
     }
 }

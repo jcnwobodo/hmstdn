@@ -10,7 +10,7 @@
 namespace Application\Models\Collections;
 
 
-class LabTestCollection
+class LabTestCollection extends Collection
 {
     public function targetClass()
     {

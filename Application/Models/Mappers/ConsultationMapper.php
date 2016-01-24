@@ -23,6 +23,7 @@ class ConsultationMapper extends Mapper
         $this->selectByDoctorStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=?");
         $this->selectByPatientStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE patient=?");
         $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE status=?");
+        $this->selectByDoctorAndStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=? AND status=?");
         $this->updateStmt = self::$PDO->prepare("UPDATE app_consultations SET doctor=?, patient=?, meeting_date=?, start_time=?, end_time=?, notes=?, diagnoses=?, treatment=?, status=?  WHERE id=?");
         $this->insertStmt = self::$PDO->prepare("INSERT INTO app_consultations (doctor,patient,meeting_date,start_time,end_time,notes,diagnoses,treatment,status) VALUES (?,?,?,?,?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_consultations WHERE id=?");
@@ -46,6 +47,13 @@ class ConsultationMapper extends Mapper
     {
         $this->selectByStatusStmt->execute( array($status) );
         $raw_data = $this->selectByStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
+    }
+
+    public function findByDoctorAndStatus($doctor_id, $status)
+    {
+        $this->selectByDoctorAndStatusStmt->execute( array($doctor_id, $status) );
+        $raw_data = $this->selectByDoctorAndStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
 

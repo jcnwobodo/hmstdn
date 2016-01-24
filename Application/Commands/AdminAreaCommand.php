@@ -762,7 +762,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
     //User Management
     protected function ManageUsers(RequestContext $requestContext)
     {
-        $types = array('admin-area', 'doctor', 'lab_technician', 'receptionist');
+        $types = array('admin', 'doctor', 'lab_technician', 'receptionist');
         $type = ($requestContext->fieldIsSet('type') and in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
         $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'active';
         $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
@@ -814,16 +814,17 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         }
         if(!is_null($action)) DomainObjectWatcher::instance()->performOperations();
 
+        $type_t = str_replace(' ', '', ucwords(str_replace('_', ' ', $type)));
         switch($status)
         {
             case 'active' : {
-                $users = Employee::getMapper('Employee')->findTypeByStatus($type, User::STATUS_ACTIVE);
+                $users = Employee::getMapper('Employee')->findTypeByStatus($type_t, User::STATUS_ACTIVE);
             } break;
             case 'inactive' : {
-                $users = Employee::getMapper('Employee')->findTypeByStatus($type, User::STATUS_INACTIVE);
+                $users = Employee::getMapper('Employee')->findTypeByStatus($type_t, User::STATUS_INACTIVE);
             } break;
             case 'deleted' : {
-                $users = Employee::getMapper('Employee')->findTypeByStatus($type, User::STATUS_DELETED);
+                $users = Employee::getMapper('Employee')->findTypeByStatus($type_t, User::STATUS_DELETED);
             } break;
             default : {
                 $users = Employee::getMapper('Employee')->findAll();

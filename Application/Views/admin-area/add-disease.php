@@ -24,7 +24,7 @@ require_once("header.php");
                 <span class="glyphicon glyphicon-plus"></span> Add Disease
             </h3>
 
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" action="<?php home_url("/".$rc->getRequestUrlParam(0)."/".$rc->getRequestUrlParam(1)."/#form1")?>" id="form1">
 
                 <div class="text-center mid-margin-bottom <?= $data['status'] ? 'text-success bg-success' : 'text-danger bg-danger';?>"><?= $rc->getFlashData(); ?></div>
 
@@ -45,7 +45,7 @@ require_once("header.php");
                             <label for="causes">Causative Organisms</label>
                         </div>
                         <div class="col-sm-9">
-                            <textarea name="causes" id="causes" class="form-control" required class="height-10vh"><?= isset($fields['causes']) ? $fields['causes'] : ''; ?></textarea>
+                            <textarea name="causes" id="causes" class="form-control" required class="height-10vh" style="height: 5em;"><?= isset($fields['causes']) ? $fields['causes'] : ''; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ require_once("header.php");
                             <label for="signs">Signs and Symptoms</label>
                         </div>
                         <div class="col-sm-9">
-                            <textarea name="signs" id="signs" class="form-control" required class="height-20vh"><?= isset($fields['signs']) ? $fields['signs'] : ''; ?></textarea>
+                            <textarea name="signs" id="signs" class="form-control" required class="height-20vh" style="height: 10em;"><?= isset($fields['signs']) ? $fields['signs'] : ''; ?></textarea>
                         </div>
                     </div>
                 </div>

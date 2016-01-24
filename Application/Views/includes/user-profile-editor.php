@@ -25,7 +25,7 @@
                         <input name="last-name" id="last-name" required type="text" maxlength="25" class="form-control" placeholder="Last name" value="<?= isset($fields['last-name']) ? $fields['last-name'] : ''; ?>"/>
                     </div>
                     <div class="col-sm-4">
-                        <input name="other-names" id="other-names" required type="text" maxlength="50" class="form-control" placeholder="Other names" value="<?= isset($fields['other-names']) ? $fields['other-names'] : ''; ?>"/>
+                        <input name="other-names" id="other-names" type="text" maxlength="50" class="form-control" placeholder="Other names" value="<?= isset($fields['other-names']) ? $fields['other-names'] : ''; ?>"/>
                     </div>
                 </div>
             </div>
