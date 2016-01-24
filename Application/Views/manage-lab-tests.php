@@ -94,10 +94,17 @@ require_once("Application/Views/admin-area/header.php");
                         switch($data['status'])
                         {
                             case 'pending' : {
-                                if($rc->getRequestUrlParam(0)=='lab-tech-area'){
+                                if($rc->getRequestUrlParam(0)=='lab-tech-area')
+                                {
                                     ?>
                                     <input name="action" type="submit" class="btn btn-success" value="Mark as Positive">
                                     <input name="action" type="submit" class="btn btn-warning" value="Mark as Negative">
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                    <input name="action" type="submit" class="btn btn-danger" value="Delete">
                                     <?php
                                 }
                             } break;

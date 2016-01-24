@@ -59,7 +59,7 @@ abstract class DoctorAndLabTechnicianCommand extends EmployeeCommand
                 foreach($test_ids as $test_id)
                 {
                     $test_obj = LabTest::getMapper('LabTest')->find($test_id);
-                    if(is_object($test_obj)) $test_obj->setStatus(LabTest::STATUS_APPROVED);
+                    if(is_object($test_obj)) $test_obj->setStatus(LabTest::STATUS_PENDING);
                 }
             } break;
             case 'delete permanently' : {
