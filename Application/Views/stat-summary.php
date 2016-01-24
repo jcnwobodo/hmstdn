@@ -114,7 +114,7 @@ include_once('header.php');
                 <table class="table table-stripped table-bordered table-hover full-margin-top">
                     <thead>
                     <tr>
-                        <td colspan="3" class="lead"><span class="glyphicon glyphicon-globe"></span>Top 10 Worst Hit Locations</td>
+                        <td colspan="3" class="lead"><span class="glyphicon glyphicon-globe"></span> Top 10 Worst Hit Locations</td>
                     </tr>
                     <tr>
                         <td width="4%">SN</td>

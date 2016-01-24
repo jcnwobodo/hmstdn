@@ -28,9 +28,31 @@ class ResearchCenterCommand extends SecureCommand
 
     protected function doExecute(RequestContext $requestContext)
     {
+        if($requestContext->fieldIsSet('filter') and $requestContext->fieldIsSet('filter-by') and $requestContext->getField('filter-by') != 'nil')
+        {
+            $fields = $requestContext->getAllFields();
+            $sd = $fields['start-date'];
+            $ed = $fields['end-date'];
+            $start_date = mktime(0,0,0,$sd['month'],$sd['day'],$sd['year']);
+            $end_date = mktime(0,0,0,$ed['month'],$ed['day'],$ed['year']);
+
+            switch($requestContext->getField('filter-by'))
+            {
+                case 'location' :{
+                    $location_id = $fields['location'];
+                    $tests = LabTest::getMapper('LabTest')->findByDateRangeAndLocation($start_date,$end_date,$location_id);
+                } break;
+                case 'disease' :{
+                    $disease_id = $fields['disease'];
+                    $tests = LabTest::getMapper('LabTest')->findByDateRangeAndDisease($start_date,$end_date,$disease_id);
+                }
+            }
+            $data = array('tests' => $tests);
+            $requestContext->setResponseData($data);
+        }
+
         $stat_summary_command = new StatSummaryCommand();
         $stat_summary_command->execute($requestContext);
-        $data = $requestContext->getResponseData();
 
         $requestContext->setView('research-center/data-sheet.php');
     }

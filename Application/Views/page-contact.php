@@ -15,7 +15,7 @@ include_once('header.php');
 ?>
     <form method="post" enctype="multipart/form-data" action="<?php home_url('/contact/send/'); ?>">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-1">
                 <h2 class="page-header no-margin full-margin-bottom"><span class="glyphicon glyphicon-envelope"></span> Get in touch with us</h2>
 
                 <?php if(isset($data['status'])){ ?><div class="text-center mid-margin-bottom lead <?= $data['status'] ? 'text-success bg-success' : 'text-danger bg-danger';?>"><?= $requestContext->getFlashData(); ?></div><?php } ?>
@@ -69,7 +69,7 @@ include_once('header.php');
                             <label for="sender-message"><span class="glyphicon glyphicon-pencil"></span> Message</label>
                         </div>
                         <div class="col-md-9">
-                            <textarea name="sender-message" id="sender-message" required class="form-control" placeholder="Your message ..."><?= isset($fields['sender-message'])?$fields['sender-message']:'';?></textarea>
+                            <textarea name="sender-message" id="sender-message" required class="form-control" placeholder="Your message ..." style="height: 13em;"><?= isset($fields['sender-message'])?$fields['sender-message']:'';?></textarea>
                         </div>
                     </div>
                 </div>

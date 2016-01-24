@@ -30,6 +30,8 @@ class LabTestMapper extends Mapper
         $this->selectByDiseaseStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE disease=?");
         $this->selectByDateRangeStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE test_date>=? AND test_date<=?");
         $this->selectByPatientLocationStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE patient_location=?");
+        $this->selectByDateRangeAndDiseaseStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE test_date>=:start AND test_date<=:end_d AND disease=:disease_id");
+        $this->selectByDateRangeAndLocationStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE test_date>=:start AND test_date<=:end_d AND patient_location=:location_id");
         $this->selectByResultStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE result=? AND status=1");
         $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE status=?");
         $this->deleteByConsultationStmt = self::$PDO->prepare("DELETE FROM app_lab_tests WHERE consultation=?");
@@ -67,6 +69,26 @@ class LabTestMapper extends Mapper
     {
         $this->selectByPatientLocationStmt->execute( array($location_id) );
         $raw_data = $this->selectByPatientLocationStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
+    }
+
+    public function findByDateRangeAndDisease($lower_limit, $upper_limit, $disease)
+    {
+        $this->selectByDateRangeAndDiseaseStmt->bindParam(':start', $lower_limit, \PDO::PARAM_INT);
+        $this->selectByDateRangeAndDiseaseStmt->bindParam(':end_d', $upper_limit, \PDO::PARAM_INT);
+        $this->selectByDateRangeAndDiseaseStmt->bindParam(':disease_id', $disease, \PDO::PARAM_INT);
+        $this->selectByDateRangeAndDiseaseStmt->execute();
+        $raw_data = $this->selectByDateRangeAndDiseaseStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
+    }
+
+    public function findByDateRangeAndLocation($lower_limit, $upper_limit, $location)
+    {
+        $this->selectByDateRangeAndLocationStmt->bindParam(':start', $lower_limit, \PDO::PARAM_INT);
+        $this->selectByDateRangeAndLocationStmt->bindParam(':end_d', $upper_limit, \PDO::PARAM_INT);
+        $this->selectByDateRangeAndLocationStmt->bindParam(':location_id', $location, \PDO::PARAM_INT);
+        $this->selectByDateRangeAndLocationStmt->execute();
+        $raw_data = $this->selectByDateRangeAndLocationStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
 

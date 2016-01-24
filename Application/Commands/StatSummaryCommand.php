@@ -22,7 +22,15 @@ class StatSummaryCommand extends Command
         $locations = Location::getMapper('Location')->findTypeByStatus(Location::TYPE_STATE, Location::STATUS_APPROVED);
         $diseases = Disease::getMapper('Disease')->findByStatus(Disease::STATUS_APPROVED);
 
-        $tests = LabTest::getMapper("LabTest")->findByResult(1);
+        $ini_data = $requestContext->getResponseData();
+        if(is_array($ini_data) and isset($ini_data['tests']))
+        {
+            $tests = $ini_data['tests'];
+        }
+        else
+        {
+            $tests = LabTest::getMapper("LabTest")->findByResult(1);
+        }
 
 
         $state_disease_counter = array();

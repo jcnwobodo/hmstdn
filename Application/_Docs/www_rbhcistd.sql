@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2016 at 04:23 PM
+-- Generation Time: Jan 24, 2016 at 09:15 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -172,7 +172,8 @@ INSERT INTO `app_lab_tests` (`id`, `consultation`, `operator`, `disease`, `reque
 (18, 16, 6, 25, 1453619415, 1453638344, 31, 1, 1),
 (19, 16, 6, 25, 1453619420, 1453638344, 8, 1, 1),
 (20, 16, 6, 10, 1453619482, 1453638344, 8, 1, 1),
-(21, 16, 6, 27, 1453619491, 1453638344, 8, 1, 1);
+(21, 16, 6, 27, 1453619491, 1453638344, 8, 1, 1),
+(22, 2, NULL, 4, 1453658425, NULL, 28, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -1182,7 +1183,11 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (28, '56a4dfa65017b4.96029176', 7, 'Researcher', 1453645738, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453647420, 0),
 (29, '56a4e643b871b5.11242188', 5, 'Doctor', 1453647427, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453647803, 0),
 (30, '56a4e7ce198be8.95646347', 1, 'Admin', 1453647822, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453647837, 0),
-(31, '56a4e7e3eb22c6.84565012', 7, 'Researcher', 1453647843, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453648850, 1);
+(31, '56a4e7e3eb22c6.84565012', 7, 'Researcher', 1453647843, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453658252, 0),
+(32, '56a5109b79d849.69248315', 1, 'Admin', 1453658267, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453658331, 0),
+(33, '56a510efdfeea3.66914621', 5, 'Doctor', 1453658351, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453658471, 0),
+(34, '56a5116e0ac836.93204444', 6, 'LabTechnician', 1453658478, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453658499, 0),
+(35, '56a511a2738065.96209842', 7, 'Researcher', 1453658530, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453666139, 0);
 
 -- --------------------------------------------------------
 
@@ -1355,7 +1360,7 @@ ALTER TABLE `app_diseases`
 -- AUTO_INCREMENT for table `app_lab_tests`
 --
 ALTER TABLE `app_lab_tests`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `app_patients`
 --
@@ -1385,7 +1390,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --
