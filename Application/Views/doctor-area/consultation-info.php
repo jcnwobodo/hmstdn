@@ -58,7 +58,9 @@ require_once("header.php");
                         <label for="patient"><span class="glyphicon glyphicon-user"></span> Patient</label>
                     </div>
                     <div class="col-sm-2">
-                        <img src="<?php home_url('/'.$consultation->getPatient()->getPersonalInfo()->getProfilePhoto()->getFullPath()); ?>" class="img-thumbnail img-responsive"/>
+                        <img src="<?php
+						$photo = $consultation->getPatient()->getPersonalInfo()->getProfilePhoto();
+						if(is_object($photo)) {home_url('/'.$photo->getFullPath());} ?>" class="img-thumbnail img-responsive"/>
                     </div>
                     <div class="col-sm-7">
                         <input id="card-number" type="text" class="form-control" value="#<?= $consultation->getPatient()->getCardNumber(); ?>" disabled/>

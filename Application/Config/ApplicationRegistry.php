@@ -4,7 +4,7 @@ namespace Application\Config;
 class ApplicationRegistry
 {
     static private $instance;
-    static private $dsn = "mysql:dbname=www_rbhcistd;host=localhost";
+    static private $dsn = "mysql:dbname=www_hmstdn;host=localhost";
     static private $db_user = "root";
     static private $db_user_password = "";
 

@@ -13,9 +13,11 @@ namespace Application\Commands;
 use Application\Models\User;
 use Application\Models\Patient;
 use Application\Models\Doctor;
+use Application\Models\PersonalInfo;
 use Application\Models\Consultation;
-use System\Utilities\DateTime;
 use System\Request\RequestContext;
+use System\Utilities\DateTime;
+use System\Utilities\UploadHandler;
 use System\Models\DomainObjectWatcher;
 
 abstract class AdminAndReceptionistCommand extends EmployeeCommand
@@ -141,18 +143,18 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                 and strlen($genotype)
                 and strlen($first_name)
                 and strlen($last_name)
-                and in_array(strtolower($gender),PersonalInfo::$gender_enum)
-                and $date_is_correct
-                and strlen($nationality)
-                and strlen($state_of_origin)
-                and strlen($lga_of_origin)
-                and strlen($res_country)
-                and strlen($res_state)
-                and strlen($res_city)
-                and strlen($res_street)
-                and strlen($contact_email)
-                and (strlen($contact_phone)==11)
-                and !is_null($passport)
+                //and in_array(strtolower($gender),PersonalInfo::$gender_enum)
+                //and $date_is_correct
+                //and strlen($nationality)
+                //and strlen($state_of_origin)
+                //and strlen($lga_of_origin)
+                //and strlen($res_country)
+                //and strlen($res_state)
+                //and strlen($res_city)
+                //and strlen($res_street)
+                //and strlen($contact_email)
+                //and (strlen($contact_phone)==11)
+                //and !is_null($passport)
             )
             {
                 $date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
@@ -165,6 +167,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                 $uploader->setMaxUploadSize(0.2);
                 $uploader->doUpload();
 
+				
                 if($uploader->getUploadStatus())
                 {
                     $photo = new Upload();
@@ -181,19 +184,21 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                     $data['status'] = false;
                     $requestContext->setFlashData("Error Uploading Photo - ".$uploader->getStatusMessage());
                 }
+				
 
-                if($photo_handled)
+                if(1)//$photo_handled)
                 {
                     $patient = new Patient();
                     $patient->setCardNumber($card_number);
                     $patient->setBloodGroup($blood_group);
                     $patient->setGenotype($genotype);
-                    $patient->setStatus($patient::STATUS_ACTIVE);
+                    $patient->setStatus(Patient::STATUS_ACTIVE);
                     $patient->mapper()->insert($patient);
 
+					
                     $profile = new PersonalInfo();
                     $profile->setId('p'.$patient->getId());
-                    $profile->setProfilePhoto($photo);
+                    if($photo_handled) $profile->setProfilePhoto($photo);
                     $profile->setFirstName($first_name);
                     $profile->setLastName($last_name);
                     $profile->setOtherNames($other_names);
@@ -210,6 +215,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                     $profile->setPhone($contact_phone);
 
                     $patient->setPersonalInfo($profile);
+					
 
                     $requestContext->setFlashData("Patient profile has been created successfully.");
                     $data['status'] = true;
@@ -221,7 +227,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 
                 //Try returning more helpful error messages
                 if(strlen($card_number) != 6 or !is_numeric($card_number)) $requestContext->setFlashData("Card-Number must be a 6-digit number");
-                if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
+                //if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
                 if(!$card_number_is_unique) $requestContext->setFlashData("Card number must be unique");
             }
         }

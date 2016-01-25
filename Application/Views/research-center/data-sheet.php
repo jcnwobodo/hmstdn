@@ -88,7 +88,7 @@ include_once('header.php');
             ?>
 
             <?php
-            if($filtered_by!='disease')
+            if($filtered_by!='disease') //Filtering by Location, Both or Nil
             {
                 ?>
                 <div class="height-50vh data-section full-margin-bottom">
@@ -96,11 +96,15 @@ include_once('header.php');
                     <table class="table table-stripped table-bordered table-hover full-margin-top">
                         <thead>
                         <tr>
-                            <td colspan="3" class="lead"><span class="glyphicon glyphicon-alert"></span>
+                            <td colspan="6" class="lead"><span class="glyphicon glyphicon-alert"></span>
                                 <?php
                                 if($filtered_by=='location')
                                 {
                                     ?>Prevailing Diseases in <?= $location_names[$fields['location']];
+                                }
+                                elseif($filtered_by=='both')
+                                {
+                                    ?><?= $disease_names[$fields['disease']]; ?> Incidences in <?= $location_names[$fields['location']];
                                 }
                                 else
                                 {
@@ -112,9 +116,10 @@ include_once('header.php');
                         </tr>
                         <tr>
                             <td width="4%">SN</td>
+							<?php if($filtered_by == 'both'){?><td>Location</td><?php } ?>
                             <td>Disease Name</td>
                             <td width="15%" class="text-nowrap">Number of Incidences</td>
-                            <td width="15%">Proportion (%)</td>
+                            <?php if($filtered_by != 'both'){?><td width="15%">Proportion (%)</td><?php } ?>
                         </tr>
                         </thead>
                         <tbody>
@@ -126,19 +131,22 @@ include_once('header.php');
                             ?>
                             <tr>
                                 <td><?= ++$sn; ?></td>
+                                <?php if($filtered_by == 'both'){?><td class="text-nowrap"><?= $location_names[$fields['location']]; ?></td><?php } ?>
                                 <td class="text-nowrap"><?= $disease_names[$disease_id]; ?></td>
                                 <td><?= $disease_count; ?></td>
-                                <td><?= round( ($disease_count/$total * 100), 4); ?></td>
+                                <?php if($filtered_by != 'both'){?><td><?= round( ($disease_count/$total * 100), 4); ?></td><?php } ?>
                             </tr>
                             <?php
                             if($filtered_by=='nil'){ if($sn >=10) break;}
                         }
                         ?>
+						<?php if($filtered_by != 'both'){?>
                         <tr>
                             <td colspan="2" class="text-right">Total: </td>
                             <td><strong> <?= $total; ?></strong></td>
                             <td><strong> 100.0000%</strong></td>
                         </tr>
+						<?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -148,7 +156,7 @@ include_once('header.php');
             ?>
 
             <?php
-            if($filtered_by!='location') //Filtered by Disease or Nil
+            if($filtered_by!='location' and $filtered_by!='both') //Filtered by Disease or Nil
             {
                 ?>
                 <div class="height-50vh data-section">

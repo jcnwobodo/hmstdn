@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2016 at 09:15 PM
+-- Generation Time: Jan 26, 2016 at 12:10 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `www_rbhcistd`
+-- Database: `www_hmstdn`
 --
 
 -- --------------------------------------------------------
@@ -1129,9 +1129,9 @@ CREATE TABLE `site_posts` (
 --
 
 INSERT INTO `site_posts` (`id`, `parent`, `post_type`, `guid`, `title`, `content`, `excerpt`, `featured_image`, `category`, `author`, `date_created`, `last_update`, `comment_count`, `status`) VALUES
-(1, NULL, 'page', 'about', 'About', '<p><p class="lead">Powered by</p>\r</p><p><h1>BareBones PHP Framework</h1> with <h2>GUI crafted out of Bootstrap</h2>\r</p><p>by <h3>J. C. Nwobodo</h3>\r</p><p><hr>\r</p><p><p class="lead">There is much to say about this project;</p>\r</p><p><ol>\r</p><p><li>It''s gonna save lives if it were a commercial project</li>\r</p><p><li>Unfortunately, it''s just another <strong>MSc Project</strong></li>\r</p><p></ol></p>', '<p><p class="lead">Powered by</p>\r</p><p><h1>BareBones PHP Framework</h1> with <h2>GUI crafted out of Bootstrap</h2>\r</p><p>by <h3>J. C. Nwobodo</h3>\r</p><p><hr>\r</p><p><p class="lead">There is much to say about this project;</p>\r</p><p><ol>\r</p><p><li>It''s gonna save lives if it were a commercial project</li>\r</p><p><li>Unfortunately, it''s just another <strong>MSc Project</strong></li>\r</p><p></ol></p>', NULL, NULL, 1, 1453609560, 1453614904, NULL, 1),
+(1, NULL, 'page', 'about', 'About HMSTDN', '<p><p class="lead">Powered by\r</p><p><h1>BareBones PHP Framework</h1> with <h2>GUI crafted out of Bootstrap</h2>\r</p><p>by <h3>J. C. Nwobodo</h3>\r</p><p><hr>\r</p><p><p class="lead">There is much to say about this project;\r</p><p><ol>\r</p><p><li>It''s gonna save lives if it were a commercial project</li>\r</p><p><li>Unfortunately, it''s just another <strong>MSc Project</strong></li>\r</p><p></ol></p>', '<p><p class="lead">Powered by\r</p><p><h1>BareBones PHP Framework</h1> with <h2>GUI crafted out of Bootstrap</h2>\r</p><p>by <h3>J. C. Nwobodo</h3></p>', NULL, NULL, 1, 1453609560, 1453762149, NULL, 1),
 (2, NULL, 'page', 'terms-of-use', 'Terms of Use', '<p><h1>Enjoy ! It''s Inexpensive</h1>\r</p><p><p class="lead">Developed for <strong>academic use only</strong> as an MSc Project for whom it may concern.</p></p>', '<p>To be discussed at a later time.\r</p><p>For now...\r</p><p>\r</p><p><h1>Enjoy !</h1></p>', NULL, NULL, 1, 1453613760, 1453615836, NULL, 1),
-(3, NULL, 'page', 'legal-notice', 'Legal Notice', '<p><p class="lead">This is a free country, isn''t it?</p>\r</p><p>\r</p><p><h2>Just Take Note of the Following</h2>\r</p><p><ol>\r</p><p><li>BareBones PHP Framework is Private Project of <strong>Phoenix Laboratories</strong></li>\r</p><p><li>Phoenix Laboratories is a Private, Unregistered Company of <strong>J. C. Nwobodo</strong></li>\r</p><p><li><strong>Bootstrap</strong> and all it''s components are registered trademarks of there respective owners</li>\r</p><p></ol>\r</p><p>\r</p><p><p class="lead">Therefore, Please Do not Misuse.</p>\r</p><p>\r</p><p><h3>Thanks !</h3></p>', '<p><p class="lead">This is a free country, isn''t it?</p>\r</p><p>\r</p><p><h2>Just Take Note of the Following</h2>\r</p><p><ol>\r</p><p><li>BareBones PHP Framework is Private Project of <strong>Phoenix Laboratories</strong></li>\r</p><p><li>Phoenix Laboratories is a Private, Unregistered Company of <strong>J. C. Nwobodo</strong></li>\r</p><p><li><strong>Bootstrap</strong> and all it''s components are registered trademarks of there respective owners</li>\r</p><p></ol>\r</p><p>\r</p><p><p class="lead">Therefore, Please Do not Misuse.</p>\r</p><p>\r</p><p><h3>Thanks !</h3></p>', NULL, NULL, 1, 1453614120, 1453615754, NULL, 1);
+(3, NULL, 'page', 'legal-notice', 'Legal Notice', '<p><p class="lead">This is a free country, isn''t it?</p>\r</p><p>\r</p><p><h2>Just Take Note of the Following</h2>\r</p><p><ol>\r</p><p><li>BareBones PHP Framework is Private Project of <strong>Phoenix Laboratories</strong></li>\r</p><p><li>Phoenix Laboratories is a Private, Unregistered Company of <strong>J. C. Nwobodo</strong></li>\r</p><p><li><strong>Bootstrap</strong> and all it''s components are registered trademarks of there respective owners</li>\r</p><p></ol>\r</p><p>\r</p><p><p class="lead">Therefore, Please Do not Misuse.</p>\r</p><p>\r</p><p><h3>Thanks !</h3></p>', '<p><p class="lead">This is a free country, isn''t it?</p></p>', NULL, NULL, 1, 1453614120, 1453762478, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1187,7 +1187,12 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (32, '56a5109b79d849.69248315', 1, 'Admin', 1453658267, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453658331, 0),
 (33, '56a510efdfeea3.66914621', 5, 'Doctor', 1453658351, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453658471, 0),
 (34, '56a5116e0ac836.93204444', 6, 'LabTechnician', 1453658478, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453658499, 0),
-(35, '56a511a2738065.96209842', 7, 'Researcher', 1453658530, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453666139, 0);
+(35, '56a511a2738065.96209842', 7, 'Researcher', 1453658530, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453666139, 0),
+(36, '56a533b2e42f18.78788972', 1, 'Admin', 1453667251, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453667701, 0),
+(37, '56a5373c9e92c4.26401543', 6, 'LabTechnician', 1453668156, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453668163, 0),
+(38, '56a5374b29e657.15283887', 7, 'Researcher', 1453668171, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453670060, 0),
+(39, '56a6a3094f7d30.92281223', 7, 'Researcher', 1453761290, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453761496, 0),
+(40, '56a6a3f84b3dd1.71997639', 1, 'Admin', 1453761528, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453762905, 1);
 
 -- --------------------------------------------------------
 
@@ -1390,7 +1395,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --

@@ -32,6 +32,7 @@ class LabTestMapper extends Mapper
         $this->selectByPatientLocationStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE patient_location=?");
         $this->selectByDateRangeAndDiseaseStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE test_date>=:start AND test_date<=:end_d AND disease=:disease_id");
         $this->selectByDateRangeAndLocationStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE test_date>=:start AND test_date<=:end_d AND patient_location=:location_id");
+        $this->selectByDateRangeLocationAndDiseaseStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE test_date>=:start AND test_date<=:end_d AND patient_location=:location_id AND disease=:disease_id");
         $this->selectByResultStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE result=? AND status=1");
         $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_lab_tests WHERE status=?");
         $this->deleteByConsultationStmt = self::$PDO->prepare("DELETE FROM app_lab_tests WHERE consultation=?");
@@ -89,6 +90,17 @@ class LabTestMapper extends Mapper
         $this->selectByDateRangeAndLocationStmt->bindParam(':location_id', $location, \PDO::PARAM_INT);
         $this->selectByDateRangeAndLocationStmt->execute();
         $raw_data = $this->selectByDateRangeAndLocationStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
+    }
+
+    public function findByDateRangeLocationAndDisease($lower_limit, $upper_limit, $location, $disease)
+    {
+        $this->selectByDateRangeLocationAndDiseaseStmt->bindParam(':start', $lower_limit, \PDO::PARAM_INT);
+        $this->selectByDateRangeLocationAndDiseaseStmt->bindParam(':end_d', $upper_limit, \PDO::PARAM_INT);
+        $this->selectByDateRangeLocationAndDiseaseStmt->bindParam(':location_id', $location, \PDO::PARAM_INT);
+        $this->selectByDateRangeLocationAndDiseaseStmt->bindParam(':disease_id', $disease, \PDO::PARAM_INT);
+        $this->selectByDateRangeLocationAndDiseaseStmt->execute();
+        $raw_data = $this->selectByDateRangeLocationAndDiseaseStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
 

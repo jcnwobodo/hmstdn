@@ -1,16 +1,13 @@
 <?php
 /**
- * Phoenix Laboratories NG.
- * Author: J. C. Nwobodo (jc.nwobodo@gmail.com)
- * Project: BareBones PHP Framework
- * Date:    10/23/2015
- * Time:    3:15 PM
+ *
  */
 
 $site_info = array(
-    'name'                  => "RBHCISTD",
-    'full-name'           => "Research-Based Heath Care Information System for Tropical Diseases",
-    'contact_email'         => "jc.nwobodo@gmail.com",
+    'name'                  => "HMSTDN",
+    'full-name'           	=> "Health Management System for Tropical Diseases in Nigeria",
+    'contact_email'         => "blessing.ogbuokiri@unn.edu.ng",
+	'designed-by'			=> "SALIHU SULE ISA (PG/MSC/13/65728)",
     'charset'               => "UTF-8",
     'session-cookie-domain' => "127.0.0.1",
     'session-cookie-name'   => "BB_SESSION_ID",
@@ -20,6 +17,6 @@ $site_info = array(
     'youtube_channel'       => "https://www.youtube.com/channel/...",
     'google_plus'           => "https://plus.google.com/.../",
     'development_mode'      => true,
-    'site_url'              => "http://127.0.0.1/www/MScProjects/RBHCISTD",
-    'deployment-path'       => '/www/MScProjects/RBHCISTD'
+    'site_url'              => "http://127.0.0.1/www/MScProjects/HMSTDN",
+    'deployment-path'       => 'www/MScProjects/HMSTDN'
 );

@@ -879,18 +879,18 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
             if(
                 strlen($first_name)
                 and strlen($last_name)
-                and in_array(strtolower($gender),PersonalInfo::$gender_enum)
-                and $date_is_correct
-                and strlen($nationality)
-                and strlen($state_of_origin)
-                and strlen($lga_of_origin)
-                and strlen($res_country)
-                and strlen($res_state)
-                and strlen($res_city)
-                and strlen($res_street)
-                and strlen($contact_email)
-                and (strlen($contact_phone)==11)
-                and !is_null($passport)
+                //and in_array(strtolower($gender),PersonalInfo::$gender_enum)
+                //and $date_is_correct
+                //and strlen($nationality)
+                //and strlen($state_of_origin)
+                //and strlen($lga_of_origin)
+                //and strlen($res_country)
+                //and strlen($res_state)
+                //and strlen($res_city)
+                //and strlen($res_street)
+                //and strlen($contact_email)
+                //and (strlen($contact_phone)==11)
+                //and !is_null($passport)
                 and strlen($employee_id)
                 and strlen($department)
                 and strlen($specialization)
@@ -899,7 +899,9 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
             {
                 $date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
 
-                //Handle photo upload
+                if(!is_null($passport))
+				{
+				//Handle photo upload
                 $photo_handled = false;
                 $uploader = new UploadHandler('passport-photo', uniqid('passport_'));
                 $uploader->setAllowedExtensions(array('jpg'));
@@ -923,8 +925,9 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                     $data['status'] = false;
                     $requestContext->setFlashData("Error Uploading Photo - ".$uploader->getStatusMessage());
                 }
-
-                if($photo_handled)
+				}
+				
+                if(1)//$photo_handled)
                 {
                     $user_class = str_replace(' ', '', ucwords(str_replace('_', ' ', $type)) );
                     $class = "\\Application\\Models\\".$user_class;
@@ -932,12 +935,12 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                     $user->setUsername(strtolower($employee_id));
                     $user->setPassword($password1);
                     $user->setUserType($user_class);
-                    $user->setStatus($user::STATUS_ACTIVE);
+                    $user->setStatus(User::STATUS_ACTIVE);
                     $user->mapper()->insert($user);
 
                     $profile = new PersonalInfo();
                     $profile->setId($user->getId());
-                    $profile->setProfilePhoto($photo);
+                    if($photo_handled) $profile->setProfilePhoto($photo);
                     $profile->setFirstName($first_name);
                     $profile->setLastName($last_name);
                     $profile->setOtherNames($other_names);

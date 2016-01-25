@@ -39,11 +39,12 @@ require_once("Application/Views/admin-area/header.php");
                         <table class="table table-stripped table-bordered table-hover full-margin-top">
                             <thead>
                             <tr>
-                                <td colspan="7" class="lead"><span class="glyphicon glyphicon-tint"></span> <?= ucwords($data['status']); ?> Lab. Tests</td>
+                                <td colspan="8" class="lead"><span class="glyphicon glyphicon-tint"></span> <?= ucwords($data['status']); ?> Lab. Tests</td>
                             </tr>
                             <tr>
                                 <td width="4%">SN</td>
                                 <td><span class="glyphicon glyphicon-user"></span> Doctor</td>
+                                <td><span class="glyphicon glyphicon-user"></span> Patient</td>
                                 <?php if($data['status']=='completed'){ ?>
                                     <td><span class="glyphicon glyphicon-user"></span> Operator</td>
                                 <?php } ?>
@@ -66,6 +67,11 @@ require_once("Application/Views/admin-area/header.php");
                                     <td>
                                         <label for="<?= "ln".$sn; ?>">
                                             <?= $test->getConsultation()->getDoctor()->getPersonalInfo()->getShortName(); ?>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label for="<?= "ln".$sn; ?>">
+                                            <?= $test->getConsultation()->getPatient()->getPersonalInfo()->getNames(); ?>
                                         </label>
                                     </td>
                                     <?php if($data['status']=='completed'){ ?>

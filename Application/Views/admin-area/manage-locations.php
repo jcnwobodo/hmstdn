@@ -49,15 +49,14 @@ require_once("header.php");
                     <table class="table table-stripped table-bordered table-hover full-margin-top">
                         <thead>
                         <tr>
-                            <td colspan="6" class="lead"><?= ucwords($data['status']); ?> Catchment <?= ucwords($data['type']); ?>s</td>
+                            <td colspan="5" class="lead"><?= ucwords($data['status']); ?> Catchment <?= ucwords($data['type']); ?>s</td>
                         </tr>
                         <tr>
-                            <td>SN</td>
+                            <td width="5%">SN</td>
                             <td>Location Name</td>
                             <?php if($data['type']=='district'){ ?><td>LGA</td><?php } ?>
                             <?php if($data['type']!='state'){ ?><td>State</td><?php } ?>
-                            <td>Coordinates (Lat. , Long.)</td>
-                            <td>&hellip;</td>
+                            <td width="5%">&hellip;</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -71,7 +70,6 @@ require_once("header.php");
                                 <td><?= $location->getLocationName(); ?></td>
                                 <?php if($data['type']=='district'){ ?><td><?= $location->getParent()->getLocationName(); ?></td><?php } ?>
                                 <?php if($data['type']!='state'){ ?><td><?= $data['type']=='lga' ? $location->getParent()->getLocationName() : $location->getParent()->getParent()->getLocationName(); ?></td><?php } ?>
-                                <td><?= $location->getLatitude().' , '.$location->getLongitude(); ?></td>
                                 <td><input type="checkbox" name="location-ids[]" value="<?= $location->getId(); ?>"></td>
                             </tr>
                             <?php

@@ -83,7 +83,7 @@
                 <label for="nationality">Nationality</label>
             </div>
             <div class="col-sm-9">
-                <input name="nationality" id="nationality" required type="text" maxlength="50" class="form-control" placeholder="Nationality" value="<?= isset($fields['nationality']) ? $fields['nationality'] : ''; ?>"/>
+                <input name="nationality" id="nationality" type="text" maxlength="50" class="form-control" placeholder="Nationality" value="<?= isset($fields['nationality']) ? $fields['nationality'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@
                 <label for="state-of-origin">State of Origin</label>
             </div>
             <div class="col-sm-9">
-                <input name="state-of-origin" id="state-of-origin" required type="text" maxlength="50" class="form-control" placeholder="State of origin" value="<?= isset($fields['state-of-origin']) ? $fields['state-of-origin'] : ''; ?>"/>
+                <input name="state-of-origin" id="state-of-origin" type="text" maxlength="50" class="form-control" placeholder="State of origin" value="<?= isset($fields['state-of-origin']) ? $fields['state-of-origin'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -105,7 +105,7 @@
                 <label for="lga-of-origin">Local Govt. of Origin</label>
             </div>
             <div class="col-sm-9">
-                <input name="lga-of-origin" id="lga-of-origin" required type="text" maxlength="50" class="form-control" placeholder="Local Government Area" value="<?= isset($fields['lga-of-origin']) ? $fields['lga-of-origin'] : ''; ?>"/>
+                <input name="lga-of-origin" id="lga-of-origin" type="text" maxlength="50" class="form-control" placeholder="Local Government Area" value="<?= isset($fields['lga-of-origin']) ? $fields['lga-of-origin'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                 <label for="passport-photo">Recent Passport Photograph</label>
             </div>
             <div class="col-sm-9">
-                <input name="passport-photo" id="passport-photo" required type="file" class="form-control"/>
+                <input name="passport-photo" id="passport-photo" type="file" class="form-control"/>
                 <p class="help-block">Passport must be in jpg format and not more than 200kb</p>
             </div>
         </div>
@@ -133,7 +133,7 @@
                 <label for="residence-country">Country of Residence</label>
             </div>
             <div class="col-sm-9">
-                <input name="residence-country" id="residence-country" required type="text" maxlength="50" class="form-control" placeholder="Country of residence e.g Nigeria" value="<?= isset($fields['residence-country']) ? $fields['residence-country'] : ''; ?>"/>
+                <input name="residence-country" id="residence-country" type="text" maxlength="50" class="form-control" placeholder="Country of residence e.g Nigeria" value="<?= isset($fields['residence-country']) ? $fields['residence-country'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -144,7 +144,7 @@
                 <label for="residence-state">State of Residence</label>
             </div>
             <div class="col-sm-9">
-                <input name="residence-state" id="residence-state" required type="text" maxlength="50" class="form-control" placeholder="State of Residence e.g Enugu" value="<?= isset($fields['residence-state']) ? $fields['residence-state'] : ''; ?>"/>
+                <input name="residence-state" id="residence-state" type="text" maxlength="50" class="form-control" placeholder="State of Residence e.g Enugu" value="<?= isset($fields['residence-state']) ? $fields['residence-state'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -155,7 +155,7 @@
                 <label for="residence-city">City/Town of Residence</label>
             </div>
             <div class="col-sm-9">
-                <input name="residence-city" id="residence-city" required type="text" maxlength="50" class="form-control" placeholder="City or Town of Residence e.g Nsukka" value="<?= isset($fields['residence-city']) ? $fields['residence-city'] : ''; ?>"/>
+                <input name="residence-city" id="residence-city" type="text" maxlength="50" class="form-control" placeholder="City or Town of Residence e.g Nsukka" value="<?= isset($fields['residence-city']) ? $fields['residence-city'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -166,7 +166,7 @@
                 <label for="residence-street">Street/House Address</label>
             </div>
             <div class="col-sm-9">
-                <input name="residence-street" id="residence-street" required type="text" maxlength="100" class="form-control" placeholder="Street Address e.g No. 88 Aku Road, Nsukka" value="<?= isset($fields['residence-street']) ? $fields['residence-street'] : ''; ?>"/>
+                <input name="residence-street" id="residence-street"  type="text" maxlength="100" class="form-control" placeholder="Street Address e.g No. 88 Aku Road, Nsukka" value="<?= isset($fields['residence-street']) ? $fields['residence-street'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -177,7 +177,7 @@
                 <label for="contact-email">Contact E-mail</label>
             </div>
             <div class="col-sm-9">
-                <input name="contact-email" id="contact-email" required type="email" maxlength="100" class="form-control" placeholder="mail_address@domain.com" value="<?= isset($fields['contact-email']) ? $fields['contact-email'] : ''; ?>"/>
+                <input name="contact-email" id="contact-email" type="email" maxlength="100" class="form-control" placeholder="mail_address@domain.com" value="<?= isset($fields['contact-email']) ? $fields['contact-email'] : ''; ?>"/>
             </div>
         </div>
     </div>
@@ -188,7 +188,7 @@
                 <label for="contact-phone">Mobile Number</label>
             </div>
             <div class="col-sm-9">
-                <input name="contact-phone" id="contact-phone" required type="tel" maxlength="11" class="form-control" placeholder="08012345678" value="<?= isset($fields['contact-phone']) ? $fields['contact-phone'] : ''; ?>"/>
+                <input name="contact-phone" id="contact-phone" type="tel" maxlength="11" class="form-control" placeholder="08012345678" value="<?= isset($fields['contact-phone']) ? $fields['contact-phone'] : ''; ?>"/>
             </div>
         </div>
     </div>

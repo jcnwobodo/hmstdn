@@ -46,6 +46,11 @@ class ResearchCenterCommand extends SecureCommand
                     $disease_id = $fields['disease'];
                     $tests = LabTest::getMapper('LabTest')->findByDateRangeAndDisease($start_date,$end_date,$disease_id);
                 }
+                case 'both' :{
+                    $location_id = $fields['location'];
+                    $disease_id = $fields['disease'];
+                    $tests = LabTest::getMapper('LabTest')->findByDateRangeLocationAndDisease($start_date,$end_date,$location_id,$disease_id);
+                }
             }
             $data = array('tests' => $tests);
             $requestContext->setResponseData($data);

@@ -80,7 +80,8 @@ class UserMapper extends Mapper
         $object->setUserType($array['user_type']);
         $object->setStatus($array['status']);
         $personal_info = Models\PersonalInfo::getMapper('PersonalInfo')->find($array['id']);
-        if(! is_null($personal_info)) $object->setPersonalInfo($personal_info);
+        //if(! is_null($personal_info))
+		 $object->setPersonalInfo($personal_info);
 
         return $object;
     }

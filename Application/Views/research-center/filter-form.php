@@ -23,6 +23,7 @@ $fields = $requestContext->getAllFields();
                     <option value="nil">nil</option>
                     <option value="location" <?= selected('location', isset($fields['filter-by']) ? $fields['filter-by'] : null); ?>> Location</option>
                     <option value="disease" <?= selected('disease', isset($fields['filter-by']) ? $fields['filter-by'] : null); ?>> Disease</option>
+                    <option value="both" <?= selected('both', isset($fields['filter-by']) ? $fields['filter-by'] : null); ?>> Use Both</option>
                 </select>
             </div>
         </div>
