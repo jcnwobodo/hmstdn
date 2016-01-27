@@ -74,6 +74,81 @@ class StatSummaryCommand extends Command
         $data['locations'] = $locations;
         $data['diseases'] = $diseases;
         $data['page-title'] = "Statistical Abstracts";
+        $data['summary-limit'] = 10;
+
+        //Prepare Chart Data in Json
+        //chart 1; diseases
+        $chart_data_1 =     '{
+        "chart": {
+            "caption": "",
+            "subCaption": "",
+            "xAxisName": "Disease",
+            "yAxisName": "Number of Incidences",
+            "numberPrefix": "",
+            "paletteColors": "#0075c2",
+            "bgColor": "#ffffff",
+            "borderAlpha": "20",
+            "canvasBorderAlpha": "0",
+            "usePlotGradientColor": "0",
+            "plotBorderAlpha": "10",
+            "placeValuesInside": "1",
+            "rotatevalues": "0",
+            "valueFontColor": "#ffffff",
+            "showXAxisLine": "1",
+            "xAxisLineColor": "#999999",
+            "divlineColor": "#999999",
+            "divLineIsDashed": "1",
+            "showAlternateHGridColor": "1",
+            "subcaptionFontSize": "14",
+            "subcaptionFontBold": "0"
+        },
+        "data": [';
+        $n=1;
+        $elements = array();
+        foreach($disease_counter as $disease_id => $disease_count)
+        {
+            $elements[] = '{"label": "'.$disease_names[$disease_id].'", "value": "'.$disease_count.'"}';
+            if($n++ >= $data['summary-limit']) break;
+        }
+        $chart_data_1 .= implode(',', $elements).']}';
+
+        //chart 2; locations
+        $chart_data_2 =     '{
+        "chart": {
+            "caption": "",
+            "subCaption": "",
+            "xAxisName": "Location",
+            "yAxisName": "Total Number of Incidences",
+            "numberPrefix": "",
+            "paletteColors": "#0075c2",
+            "bgColor": "#ffffff",
+            "borderAlpha": "20",
+            "canvasBorderAlpha": "0",
+            "usePlotGradientColor": "0",
+            "plotBorderAlpha": "10",
+            "placeValuesInside": "1",
+            "rotatevalues": "0",
+            "valueFontColor": "#ffffff",
+            "showXAxisLine": "1",
+            "xAxisLineColor": "#999999",
+            "divlineColor": "#999999",
+            "divLineIsDashed": "1",
+            "showAlternateHGridColor": "1",
+            "subcaptionFontSize": "14",
+            "subcaptionFontBold": "0"
+        },
+        "data": [';
+        $n=1;
+        $elements = array();
+        foreach($state_counter as $state_id => $state_count)
+        {
+            $elements[] = '{"label": "'.$location_names[$state_id].'", "value": "'.$state_count.'"}';
+            if($n++ >= $data['summary-limit']) break;
+        }
+        $chart_data_2 .= implode(',', $elements).']}';
+
+        $data['chart-data-1'] = $chart_data_1;
+        $data['chart-data-2'] = $chart_data_2;
         $requestContext->setResponseData($data);
         $requestContext->setView('stat-summary.php');
     }
