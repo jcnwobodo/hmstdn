@@ -79,7 +79,7 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
                 <table class="table table-stripped table-bordered table-hover full-margin-top">
                     <thead>
                     <tr>
-                        <td colspan="3" class="lead"><span class="glyphicon glyphicon-globe"></span> Top 10 Worst Hit Locations</td>
+                        <td colspan="3" class="lead"><span class="glyphicon glyphicon-globe"></span> Top <?php $data['summary-limit']; ?> Worst Hit Locations</td>
                     </tr>
                     <tr>
                         <td colspan="3" class="mid-padding-all"><div id="chart-2"></div></td>
