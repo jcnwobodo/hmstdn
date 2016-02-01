@@ -15,6 +15,7 @@ $group2 = array('add-user', 'manage-users');
 $group3 = array('add-post', 'manage-posts', 'update-post', 'manage-categories', 'add-category', 'manage-comments');
 $group4 = array('add-page', 'manage-pages', 'update-page');
 $group5 = array('add-consultation', 'manage-consultations', 'update-consultation');
+$group6 = array('add-clinic', 'manage-clinics', 'update-clinic');
 $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-location');
 ?>
 <div class="col-sm-3 col-md-2 sidebar">
@@ -70,6 +71,24 @@ $group7 = array('manage-diseases', 'add-disease', 'manage-locations', 'add-locat
                     <ul class="btn-group btn-group-vertical list-unstyled">
                         <li><a href="<?php home_url('/admin-area/add-consultation/'); ?>" class="btn"><span class="glyphicon glyphicon-plus-sign"></span> Add Consultation</a></li>
                         <li><a href="<?php home_url('/admin-area/manage-consultations/'); ?>" class="btn"><span class="glyphicon glyphicon-tasks"></span> Manage Consultations</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-6">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-6" aria-expanded="false" aria-controls="collapse-6" class="btn-link">
+                        <span class="glyphicon glyphicon-briefcase"></span> Health Centers
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-6" class="panel-collapse collapse <?= in_array($method, $group6)? 'in': ''; ?>" role="tabpanel" aria-labelledby="heading-6">
+                <div class="panel-body no-padding">
+                    <ul class="btn-group btn-group-vertical list-unstyled">
+                        <li><a href="<?php home_url('/admin-area/add-clinic/'); ?>" class="btn"><span class="glyphicon glyphicon-plus-sign"></span> Add Clinic</a></li>
+                        <li><a href="<?php home_url('/admin-area/manage-clinics/'); ?>" class="btn"><span class="glyphicon glyphicon-tasks"></span> Manage Clinics</a></li>
                     </ul>
                 </div>
             </div>

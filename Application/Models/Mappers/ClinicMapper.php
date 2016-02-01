@@ -73,7 +73,7 @@ class ClinicMapper extends Mapper
         $values = array(
             $object->getClinicId(),
             $object->getName(),
-            $object->getLocationState(),
+            $object->getLocationState()->getId(),
             $object->getLocationStreet(),
             $object->getContactEmail(),
             $object->getContactPhone(),
@@ -89,7 +89,7 @@ class ClinicMapper extends Mapper
         $values = array(
             $object->getClinicId(),
             $object->getName(),
-            $object->getLocationState(),
+            $object->getLocationState()->getId(),
             $object->getLocationStreet(),
             $object->getContactEmail(),
             $object->getContactPhone(),

@@ -19,6 +19,7 @@ use Application\Models\User;
 use Application\Models\Comment;
 use Application\Models\Location;
 use Application\Models\Upload;
+use Application\Models\Clinic;
 use System\Models\DomainObjectWatcher;
 use System\Request\RequestContext;
 use System\Utilities\DateTime;
@@ -1070,4 +1071,162 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $requestContext->setView('admin-area/add-disease.php');
     }
 
+    //Clinics management
+    protected function ManageClinics(RequestContext $requestContext)
+    {
+        $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'approved';
+        $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
+        $clinic_ids = $requestContext->fieldIsSet('clinic-ids') ? $requestContext->getField('clinic-ids') : array();
+
+        switch(strtolower($action))
+        {
+            case 'delete' : {
+                foreach($clinic_ids as $clinic_id)
+                {
+                    $clinic_obj = Clinic::getMapper('Clinic')->find($clinic_id);
+                    if(is_object($clinic_obj)) $clinic_obj->setStatus(Clinic::STATUS_CANCELED);
+                }
+            } break;
+            case 'restore' : {
+                foreach($clinic_ids as $clinic_id)
+                {
+                    $clinic_obj = Clinic::getMapper('Clinic')->find($clinic_id);
+                    if(is_object($clinic_obj)) $clinic_obj->setStatus(Clinic::STATUS_APPROVED);
+                }
+            } break;
+            case 'delete permanently' : {
+                foreach($clinic_ids as $clinic_id)
+                {
+                    $clinic_obj = Clinic::getMapper('Clinic')->find($clinic_id);
+                    if(is_object($clinic_obj)) $clinic_obj->markDelete();
+                }
+            } break;
+            default : {}
+        }
+        DomainObjectWatcher::instance()->performOperations();
+
+        switch($status)
+        {
+            case 'approved' : {
+                $clinics = Clinic::getMapper('Clinic')->findByStatus(Clinic::STATUS_APPROVED);
+            } break;
+            case 'deleted' : {
+                $clinics = Clinic::getMapper('Clinic')->findByStatus(Clinic::STATUS_DELETED);
+            } break;
+            default : {
+                $clinics = Clinic::getMapper('Clinic')->findAll();
+            }
+        }
+
+        $data = array();
+        $data['status'] = $status;
+        $data['clinics'] = $clinics;
+        $data['page-title'] = ucwords($status)." Clinics";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin-area/manage-clinics.php');
+    }
+
+    protected function AddClinic(RequestContext $requestContext)
+    {
+        $data = array();
+
+        $data['mode'] = 'add-clinic';
+        $data['location-states'] = Location::getMapper('Location')->findTypeByStatus(Location::TYPE_STATE, Location::STATUS_APPROVED);
+        $data['page-title'] = "Add Clinic";
+
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin-area/clinic-editor.php');
+
+        if($requestContext->fieldIsSet($data['mode']))
+        {
+            $this->processClinicEditor($requestContext);
+        }
+    }
+
+    protected function UpdateClinic(RequestContext $requestContext)
+    {
+        $data = array();
+
+        $data['mode'] = 'update-clinic';
+        $data['page-title'] = "Update Clinic";
+        $data['location-states'] = Location::getMapper('Location')->findTypeByStatus(Location::TYPE_STATE, Location::STATUS_APPROVED);
+
+        $clinic = $requestContext->fieldIsSet('cid') ? Clinic::getMapper('Clinic')->find($requestContext->getField('cid')) : null;
+        $fields = array();
+        if(is_object($clinic))
+        {
+            $fields['clinic-name'] = $clinic->getName();
+            $fields['clinic-id'] = $clinic->getClinicId();
+            $fields['location-state'] = $clinic->getLocationState()->getId();
+            $fields['location-street'] = $clinic->getLocationStreet();
+            $fields['contact-email'] = $clinic->getContactEmail();
+            $fields['contact-phone'] = $clinic->getContactPhone();
+
+            $data['cid'] = $fields['cid'] = $clinic->getId();
+        }
+        else{
+            $requestContext->redirect(home_url("/".$requestContext->getRequestUrlParam(0)."/manage-clinics/",0));
+        }
+        $data['fields'] = $fields;
+
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin-area/clinic-editor.php');
+
+        if($requestContext->fieldIsSet($data['mode']))
+        {
+            $this->processClinicEditor($requestContext);
+        }
+
+    }
+
+    private function processClinicEditor(RequestContext $requestContext)
+    {
+        $data = $requestContext->getResponseData();
+        $fields = $requestContext->getAllFields();
+
+        $clinic_name = $fields['clinic-name'];
+        $clinic_id = $fields['clinic-id'];
+        $location_state = Location::getMapper("Location")->find($fields['location-state']);
+        $location_street = $fields['location-street'];
+        $contact_email = strtolower($fields['contact-email']);
+        $contact_phone = $fields['contact-phone'];
+
+        $possible_clinic = Clinic::getMapper('Clinic')->findByClinicId($clinic_id);
+        if(
+            strlen($clinic_name)
+            and strlen($clinic_id)
+            and is_object($location_state)
+            and strlen($location_street)
+            and strlen($contact_phone) == 11
+            and !(is_object($possible_clinic) and $data['mode']=='add-clinic')
+        )
+        {
+            $clinic = $data['mode'] == 'add-clinic' ? new Clinic() : Clinic::getMapper('Clinic')->find($data['cid']);
+            if(is_object($clinic))
+            {
+                $clinic->setName($clinic_name);
+                $clinic->setClinicId($clinic_id);
+                $clinic->setLocationState($location_state);
+                $clinic->setLocationStreet($location_street);
+                $clinic->setContactEmail($contact_email);
+                $clinic->setContactPhone($contact_phone);
+                if($clinic->getId() == -1) $clinic->setStatus(Clinic::STATUS_APPROVED);
+
+                DomainObjectWatcher::instance()->performOperations();
+                $requestContext->setFlashData($data['mode'] == 'add-clinic' ? "Clinic added successfully" : "Clinic details updated successfully");
+
+                $data['status'] = 1;
+                $data['cid'] = $clinic->getId();
+                $data['mode'] = 'update-clinic';
+                $data['fields'] = &$fields;
+            }
+        }
+        else
+        {
+            $requestContext->setFlashData('Mandatory field(s) not set or invalid input detected');
+            if((is_object($possible_clinic) and $data['mode']=='add-clinic')) $requestContext->setFlashData("Clinic ID must be unique");
+            $data['status'] = 0;
+        }
+        $requestContext->setResponseData($data);
+    }
 }
