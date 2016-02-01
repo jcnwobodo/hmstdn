@@ -844,7 +844,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
     protected function AddUser(RequestContext $requestContext)
     {
         $data = array();
-        $types = array('admin-area', 'doctor', 'lab_technician', 'receptionist');
+        $types = array('admin', 'doctor', 'lab_technician', 'receptionist');
         $type = ( $requestContext->fieldIsSet('type') && in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
         $data['type'] = $type;
 

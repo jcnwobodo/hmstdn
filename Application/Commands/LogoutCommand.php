@@ -8,8 +8,6 @@ class LogoutCommand extends Command
 {
     protected function doExecute(RequestContext $requestContext)
     {
-        $requestContext->setView('page-login.php');
-
         if(! is_null($requestContext->getSession()))
         {
             $manager = AccessManager::instance();
@@ -17,5 +15,6 @@ class LogoutCommand extends Command
             $redirect = $requestContext->fieldIsSet('redirect') ? $requestContext->getField('redirect') : home_url('/login/', false);
             $requestContext->redirect($redirect);
         }
+        $requestContext->setView('index.php');
     }
 }
