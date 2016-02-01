@@ -12,12 +12,32 @@ namespace Application\Models;
 
 class EmploymentData extends DomainObject
 {
+    private $clinic;
     private $department;
     private $specialization;
 
     public function __construct($id=null)
     {
         parent::__construct($id);
+    }
+
+    /**
+     * @return Clinic
+     */
+    public function getClinic()
+    {
+        return $this->clinic;
+    }
+
+    /**
+     * @param Clinic $clinic
+     * @return EmploymentData
+     */
+    public function setClinic(Clinic $clinic)
+    {
+        $this->clinic = $clinic;
+        $this->markDirty();
+        return $this;
     }
 
     /**

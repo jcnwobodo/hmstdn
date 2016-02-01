@@ -19,9 +19,10 @@ class EmploymentDataMapper extends Mapper
         parent::__construct();
         $this->selectStmt = self::$PDO->prepare("SELECT * FROM app_employment_data WHERE id=?");
         $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_employment_data");
-        $this->updateStmt = self::$PDO->prepare("UPDATE app_employment_data SET department=?, specialization=? WHERE id=?");
-        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_employment_data (id, department, specialization)VALUES(?,?,?)");
+        $this->updateStmt = self::$PDO->prepare("UPDATE app_employment_data SET clinic=?, department=?, specialization=? WHERE id=?");
+        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_employment_data (id, clinic, department, specialization)VALUES(?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_employment_data WHERE id=?");
+        $this->deleteByClinicStmt = self::$PDO->prepare("DELETE FROM app_employment_data WHERE clinic=?");
     }
 
     protected function targetClass()
@@ -68,6 +69,12 @@ class EmploymentDataMapper extends Mapper
     {
         $values = array( $object->getId() );
         $this->deleteStmt->execute( $values );
+    }
+
+    public function deleteByClinic(Models\Clinic $clinic)
+    {
+        $values = array( $clinic->getId() );
+        $this->deleteByClinicStmt->execute( $values );
     }
 
     protected function selectStmt()
