@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2016 at 11:17 AM
+-- Generation Time: Feb 01, 2016 at 11:55 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -19,6 +19,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `www_hmstdn`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_clinics`
+--
+
+CREATE TABLE `app_clinics` (
+  `id` int(16) NOT NULL,
+  `clinic_id` varchar(10) NOT NULL,
+  `name` int(16) NOT NULL,
+  `location_state` int(11) NOT NULL,
+  `location_street` varchar(200) NOT NULL,
+  `contact_email` varchar(50) DEFAULT NULL,
+  `contact_phone` varchar(11) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1204,7 +1221,8 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (45, '56af009948c4a2.28236151', 7, 'Researcher', 1454309529, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454310607, 0),
 (46, '56af0584790824.08728078', 7, 'Researcher', 1454310788, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454310871, 0),
 (47, '56af19ef7940f4.08574094', 1, 'Admin', 1454316015, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454321069, 0),
-(48, '56af2e07543db1.91649060', 5, 'Doctor', 1454321159, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454321836, 0);
+(48, '56af2e07543db1.91649060', 5, 'Doctor', 1454321159, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454321836, 0),
+(49, '56af3191481731.60618274', 1, 'Admin', 1454322065, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454322087, 1);
 
 -- --------------------------------------------------------
 
@@ -1275,6 +1293,12 @@ INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) V
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `app_clinics`
+--
+ALTER TABLE `app_clinics`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `app_consultations`
@@ -1367,6 +1391,11 @@ ALTER TABLE `site_users`
 --
 
 --
+-- AUTO_INCREMENT for table `app_clinics`
+--
+ALTER TABLE `app_clinics`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `app_consultations`
 --
 ALTER TABLE `app_consultations`
@@ -1410,7 +1439,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --
