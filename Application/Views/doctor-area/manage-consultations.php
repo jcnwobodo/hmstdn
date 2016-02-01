@@ -47,7 +47,7 @@ require_once("header.php");
                                 <td><span class="glyphicon glyphicon-user"> Patient</td>
                                 <td>Card Number #</td>
                                 <td><span class="glyphicon glyphicon-tasks"></td>
-                                <?php if($data['status']=='booked'){ ?><td width="5%"><span class="glyphicon glyphicon-check"></span></td><?php } ?>
+                                <?php if($data['status']=='booked'){ ?><td width="5%"><input id="check_button" type="checkbox" onChange="checker('consultation-ids[]', 'check_button');" title="Select All"/></td><?php } ?>
                             </tr>
                             </thead>
                             <tbody>

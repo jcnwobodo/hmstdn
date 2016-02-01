@@ -44,7 +44,7 @@ require_once("header.php");
                                 <td width="4%">SN</td>
                                 <td><span class="glyphicon glyphicon-list"></span> Page Details</td>
                                 <td width="20%"><span class="glyphicon glyphicon-calendar"></span> Date</td>
-                                <td width="5%"><span class="glyphicon glyphicon-check"></span></td>
+                                <td width="5%"><input id="check_button" type="checkbox" onChange="checker('page-ids[]', 'check_button');" title="Select All"/></span></td>
                             </tr>
                             </thead>
                             <tbody>

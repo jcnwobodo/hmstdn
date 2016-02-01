@@ -52,7 +52,7 @@ require_once("header.php");
                                 <td width="4%">SN</td>
                                 <td>Caption</td>
                                 <td>GUID</td>
-                                <td width="5%">&hellip;</td>
+                                <td width="5%"><input id="check_button" type="checkbox" onChange="checker('category-ids[]', 'check_button');"/></td>
                             </tr>
                             </thead>
                             <tbody>

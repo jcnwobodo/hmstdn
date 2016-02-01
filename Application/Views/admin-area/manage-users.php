@@ -50,15 +50,16 @@ require_once("header.php");
                         <table class="table table-stripped table-bordered table-hover full-margin-top">
                             <thead>
                             <tr>
-                                <td colspan="6" class="lead"><?= ucwords($data['status']); ?> Staff Members (<?= ucwords($data['type']); ?>s)</td>
+                                <td colspan="7" class="lead"><?= ucwords($data['status']); ?> Staff Members (<?= ucwords($data['type']); ?>s)</td>
                             </tr>
                             <tr>
                                 <td>SN</td>
                                 <td>Staff Name</td>
                                 <td>Employee ID</td>
+                                <td>Clinic ID</td>
                                 <td>Department</td>
                                 <td>Specialization</td>
-                                <td><span class="glyphicon glyphicon-check"></span></td>
+                                <td><input id="check_button" type="checkbox" onChange="checker('user-ids[]', 'check_button');" title="Select All"/></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -73,6 +74,7 @@ require_once("header.php");
                                     <td><?= ++$sn; ?></td>
                                     <td><?= $p->getNames(); ?></td>
                                     <td><?= $user->getUsername(); ?></td>
+                                    <td><?= $e->getClinic()->getClinicId(); ?></td>
                                     <td><?= $e->getDepartment(); ?></td>
                                     <td><?= $e->getSpecialization(); ?></td>
                                     <td><input type="checkbox" name="user-ids[]" value="<?= $user->getId(); ?>"></td>

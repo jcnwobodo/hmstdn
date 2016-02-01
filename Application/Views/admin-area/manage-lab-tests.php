@@ -2,9 +2,9 @@
 /**
  * Phoenix Laboratories NG.
  * Author: J. C. Nwobodo (jc.nwobodo@gmail.com)
- * Project: RBHCISTD
- * Date:    1/23/2016
- * Time:    4:29 PM
+ * Project: HMSTDN
+ * Date:    2/1/2016
+ * Time:    7:42 PM
  **/
 
 $rc = \System\Request\RequestContext::instance();
@@ -26,7 +26,7 @@ require_once("Application/Views/admin-area/header.php");
                 <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=completed'); ?>" class="btn btn-success">Completed</a>
                 <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=pending'); ?>" class="btn btn-warning">Pending</a>
                 <?php if($rc->getRequestUrlParam(0)!='lab-tech-area'){ ?>
-                <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=deleted'); ?>" class="btn btn-danger">Deleted</a>
+                    <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/'.$rc->getRequestUrlParam(1).'/?status=deleted'); ?>" class="btn btn-danger">Deleted</a>
                 <?php } ?>
             </div>
 
@@ -34,7 +34,7 @@ require_once("Application/Views/admin-area/header.php");
             if(is_object($data['tests']) and $data['tests']->size())
             {
                 ?>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="table-responsive clear-both">
                         <table class="table table-stripped table-bordered table-hover full-margin-top">
                             <thead>
@@ -99,20 +99,11 @@ require_once("Application/Views/admin-area/header.php");
                         <?php
                         switch($data['status'])
                         {
+                            case 'completed' :
                             case 'pending' : {
-                                if($rc->getRequestUrlParam(0)=='lab-tech-area')
-                                {
-                                    ?>
-                                    <input name="action" type="submit" class="btn btn-success" value="Mark as Positive">
-                                    <input name="action" type="submit" class="btn btn-warning" value="Mark as Negative">
-                                    <?php
-                                }
-                                else
-                                {
-                                    ?>
-                                    <input name="action" type="submit" class="btn btn-danger" value="Delete">
-                                    <?php
-                                }
+                                ?>
+                                <input name="action" type="submit" class="btn btn-danger" value="Delete">
+                                <?php
                             } break;
                             case 'deleted' : {
                                 ?>

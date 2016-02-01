@@ -50,9 +50,9 @@ class ConsultationMapper extends Mapper
         return $this->getCollection( $raw_data );
     }
 
-    public function findByDoctorAndStatus(Models\Doctor $doctor_id, $status)
+    public function findByDoctorAndStatus(Models\Doctor $doctor, $status)
     {
-        $this->selectByDoctorAndStatusStmt->execute( array($doctor_id, $status) );
+        $this->selectByDoctorAndStatusStmt->execute( array($doctor->getId(), $status) );
         $raw_data = $this->selectByDoctorAndStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }

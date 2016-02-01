@@ -46,7 +46,7 @@ require_once("header.php");
                                 <td>Location</td>
                                 <td>Phone</td>
                                 <td width="5%"><span class="glyphicon glyphicon-edit"></span></td>
-                                <td width="5%"><span class="glyphicon glyphicon-check"></span></td>
+                                <td width="5%"><input id="check_button" type="checkbox" onChange="checker('clinic-ids[]', 'check_button');" title="Select All"/></td>
                             </tr>
                             </thead>
                             <tbody>

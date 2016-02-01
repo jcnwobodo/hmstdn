@@ -62,16 +62,16 @@ class DoctorAreaCommand extends DoctorAndLabTechnicianCommand
         switch($status)
         {
             case 'booked' : {
-                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_BOOKED);
+                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor, Consultation::STATUS_BOOKED);
             } break;
             case 'canceled' : {
-                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_CANCELED);
+                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor, Consultation::STATUS_CANCELED);
             } break;
             case 'completed' : {
-                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_COMPLETED);
+                $consultations = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor, Consultation::STATUS_COMPLETED);
             } break;
             default : {
-                $consultations = Consultation::getMapper('Consultation')->findByDoctor($doctor->getId());
+                $consultations = Consultation::getMapper('Consultation')->findByDoctor($doctor);
             }
         }
 
@@ -143,7 +143,7 @@ class DoctorAreaCommand extends DoctorAndLabTechnicianCommand
     {
         $data = array();
         $doctor = $requestContext->getSession()->getSessionUser();
-        $data['consultations'] = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor->getId(), Consultation::STATUS_BOOKED);
+        $data['consultations'] = Consultation::getMapper('Consultation')->findByDoctorAndStatus($doctor, Consultation::STATUS_BOOKED);
         $data['diseases'] = Disease::getMapper('Disease')->findByStatus(Disease::STATUS_APPROVED);
         $data['locations'] = Location::getMapper('Location')->findTypeByStatus(Location::TYPE_STATE, Location::STATUS_APPROVED);
 

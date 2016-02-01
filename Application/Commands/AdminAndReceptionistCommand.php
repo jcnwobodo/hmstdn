@@ -144,6 +144,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 
             $date_is_correct = checkdate($dob['month'], $dob['day'], $dob['year']);
             $card_number_is_unique = is_null(Patient::getMapper('Patient')->findByCardNumber($card_number));
+            $phone_number_is_unique = is_null(PersonalInfo::getMapper('PersonalInfo')->findByPhone($contact_phone));
             /*Ensure that mandatory data is supplied, then create a report object*/
             if(
                 is_numeric($card_number) and strlen($card_number)==6 and $card_number_is_unique
@@ -161,7 +162,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                 //and strlen($res_city)
                 and strlen($res_street)
                 //and strlen($contact_email)
-                and (strlen($contact_phone)==11)
+                and (strlen($contact_phone)==11) and $phone_number_is_unique
                 //and !is_null($passport)
             )
             {
@@ -382,6 +383,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
         $data = $requestContext->getResponseData();
         $fields = $requestContext->getAllFields();
 
+        $clinic = Clinic::getMapper('Clinic')->find($fields['clinic']);
         $doctor = Doctor::getMapper("Doctor")->find($fields['doctor']);
         $patient = Patient::getMapper("Patient")->find($fields['patient']);
         $meeting_date = $fields['meeting-date'];
@@ -407,6 +409,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
             $consultation = $data['mode'] == 'add-consultation' ? new Consultation() : Consultation::getMapper('Consultation')->find($data['consultation-id']);
             if(is_object($consultation))
             {
+                $consultation->setClinic($clinic);
                 $consultation->setDoctor($doctor);
                 $consultation->setPatient($patient);
                 $consultation->setMeetingDate($meeting_dateTime);

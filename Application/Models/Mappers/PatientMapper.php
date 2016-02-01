@@ -18,9 +18,9 @@ class PatientMapper extends Mapper
     {
         parent::__construct();
         $this->selectStmt = self::$PDO->prepare("SELECT * FROM app_patients WHERE id=?");
-        $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_patients");
+        $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_patients ORDER BY card_number");
         $this->selectByCardNumberStmt = self::$PDO->prepare("SELECT * FROM app_patients WHERE card_number=?");
-        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_patients WHERE status=?");
+        $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_patients WHERE status=? ORDER BY card_number");
         $this->updateStmt = self::$PDO->prepare("UPDATE app_patients set card_number=?,blood_group=?,genotype=?,personal_info=?,status=? WHERE id=?");
         $this->insertStmt = self::$PDO->prepare("INSERT INTO app_patients (card_number,blood_group,genotype,personal_info,status)VALUES(?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_patients WHERE id=?");

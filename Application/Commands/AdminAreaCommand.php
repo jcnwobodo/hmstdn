@@ -18,6 +18,7 @@ use Application\Models\Post;
 use Application\Models\User;
 use Application\Models\Comment;
 use Application\Models\Location;
+use Application\Models\LabTest;
 use Application\Models\Upload;
 use Application\Models\Clinic;
 use System\Models\DomainObjectWatcher;
@@ -888,7 +889,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                 //and strlen($res_state)
                 //and strlen($res_city)
                 //and strlen($res_street)
-                and strlen($contact_email)
+                //and strlen($contact_email)
                 and (strlen($contact_phone)==11)
                 //and !is_null($passport)
                 and is_object($clinic)
@@ -1232,5 +1233,64 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
             $data['status'] = 0;
         }
         $requestContext->setResponseData($data);
+    }
+
+    //LabTest Management
+    protected function ManageTestRecords(RequestContext $requestContext)
+    {
+        $status = $requestContext->fieldIsSet('status') ? $requestContext->getField('status') : 'pending';
+        $action = $requestContext->fieldIsSet('action') ? $requestContext->getField('action') : null;
+        $test_ids = $requestContext->fieldIsSet('test-ids') ? $requestContext->getField('test-ids') : array();
+
+        switch(strtolower($action))
+        {
+            case 'delete' : {
+                foreach($test_ids as $test_id)
+                {
+                    $test_obj = LabTest::getMapper('LabTest')->find($test_id);
+                    if(is_object($test_obj)) $test_obj->setStatus(LabTest::STATUS_DELETED);
+                }
+            } break;
+            case 'restore' : {
+                foreach($test_ids as $test_id)
+                {
+                    $test_obj = LabTest::getMapper('LabTest')->find($test_id);
+                    if(is_object($test_obj))
+                        $test_obj->setStatus( ( $test_obj->getResult()!=NULL) ? LabTest::STATUS_COMPLETED : LabTest::STATUS_PENDING );
+                }
+            } break;
+            case 'delete permanently' : {
+                foreach($test_ids as $test_id)
+                {
+                    $test_obj = LabTest::getMapper('LabTest')->find($test_id);
+                    if(is_object($test_obj)) $test_obj->markDelete();
+                }
+            } break;
+            default : {}
+        }
+        DomainObjectWatcher::instance()->performOperations();
+
+        switch($status)
+        {
+            case 'completed' : {
+                $tests = LabTest::getMapper('LabTest')->findByStatus(LabTest::STATUS_APPROVED);
+            } break;
+            case 'pending' : {
+                $tests = LabTest::getMapper('LabTest')->findByStatus(LabTest::STATUS_PENDING);
+            } break;
+            case 'deleted' : {
+                $tests = LabTest::getMapper('LabTest')->findByStatus(LabTest::STATUS_DELETED);
+            } break;
+            default : {
+                $tests = LabTest::getMapper('LabTest')->findAll();
+            }
+        }
+
+        $data = array();
+        $data['status'] = $status;
+        $data['tests'] = $tests;
+        $data['page-title'] = ucwords($status)." Lab. Tests";
+        $requestContext->setResponseData($data);
+        $requestContext->setView('admin-area/manage-lab-tests.php');
     }
 }

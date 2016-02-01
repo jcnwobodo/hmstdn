@@ -43,7 +43,7 @@ require_once("header.php");
                                 <td>Name</td>
                                 <td>Causative Organisms</td>
                                 <td>Signs and Symptoms</td>
-                                <td width="5%">&hellip;</td>
+                                <td width="5%"><input id="check_button" type="checkbox" onChange="checker('disease-ids[]', 'check_button');" title="Select All"/></td>
                             </tr>
                             </thead>
                             <tbody>

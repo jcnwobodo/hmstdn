@@ -49,7 +49,7 @@ require_once("header.php");
                                 <td>Patient's Name</td>
                                 <td>Card Number #</td>
                                 <td width="5%"><span class="glyphicon glyphicon-edit"></span></td>
-                                <td width="5%"><span class="glyphicon glyphicon-check"></span></td>
+                                <td width="5%"><input id="check_button" type="checkbox" onChange="checker('consultation-ids[]', 'check_button');" title="Select All"/></span></td>
                             </tr>
                             </thead>
                             <tbody>

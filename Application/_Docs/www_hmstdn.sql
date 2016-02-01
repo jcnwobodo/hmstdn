@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2016 at 02:28 PM
+-- Generation Time: Feb 01, 2016 at 10:53 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -54,6 +54,7 @@ INSERT INTO `app_clinics` (`id`, `clinic_id`, `name`, `location_state`, `locatio
 
 CREATE TABLE `app_consultations` (
   `id` int(16) NOT NULL,
+  `clinic` int(16) NOT NULL,
   `doctor` int(16) DEFAULT NULL,
   `patient` int(16) DEFAULT NULL,
   `meeting_date` int(20) NOT NULL,
@@ -69,22 +70,11 @@ CREATE TABLE `app_consultations` (
 -- Dumping data for table `app_consultations`
 --
 
-INSERT INTO `app_consultations` (`id`, `doctor`, `patient`, `meeting_date`, `start_time`, `end_time`, `notes`, `diagnoses`, `treatment`, `status`) VALUES
-(2, 5, 13, 1453417200, 1453471920, 1453475520, 'some observations worth taking note of during conversation with patient', 'predictions based on observations', '', 2),
-(3, 5, 13, 1453417200, 1453472820, 1453476420, '', '', '', 1),
-(4, 5, 13, 1453590000, 1453656060, 1453659660, NULL, NULL, NULL, 2),
-(5, 5, 14, 1453590000, 1453616700, 1453620300, NULL, NULL, NULL, 2),
-(6, 5, 14, 1453590000, 1453620360, 1453623960, NULL, NULL, NULL, 2),
-(7, 5, 13, 1453590000, 1453623960, 1453627560, NULL, NULL, NULL, 2),
-(8, 5, 13, 1453590000, 1453627560, 1453631160, NULL, NULL, NULL, 2),
-(9, 5, 13, 1453590000, 1453631160, 1453634760, NULL, NULL, NULL, 2),
-(10, 5, 14, 1453590000, 1453634820, 1453638420, NULL, NULL, NULL, 2),
-(11, 5, 13, 1453590000, 1453638420, 1453642020, NULL, NULL, NULL, 2),
-(12, 5, 13, 1453590000, 1453642080, 1453645680, NULL, NULL, NULL, 2),
-(13, 5, 13, 1453590000, 1453645680, 1453649280, NULL, NULL, NULL, 2),
-(14, 5, 13, 1453590000, 1453649280, 1453652880, NULL, NULL, NULL, 2),
-(15, 5, 13, 1453590000, 1453656540, 1453660140, NULL, NULL, NULL, 0),
-(16, 5, 13, 1453590000, 1453653000, 1453656600, NULL, NULL, NULL, 2);
+INSERT INTO `app_consultations` (`id`, `clinic`, `doctor`, `patient`, `meeting_date`, `start_time`, `end_time`, `notes`, `diagnoses`, `treatment`, `status`) VALUES
+(17, 1, 19, 15, 1454367600, 1454396400, 1454400000, NULL, NULL, NULL, 2),
+(18, 1, 5, 20, 1454367600, 1454400000, 1454403600, NULL, NULL, NULL, 2),
+(19, 3, 20, 21, 1454540400, 1454572800, 1454576400, NULL, NULL, NULL, 2),
+(20, 1, 19, 18, 1454367600, 1454410800, 1454414400, NULL, NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -154,7 +144,10 @@ INSERT INTO `app_employment_data` (`id`, `clinic`, `department`, `specialization
 (1, 1, 'IT', 'Security'),
 (4, 1, 'Customer Service', 'Receptionist'),
 (5, 1, 'Dentistry', 'Dental Surgery'),
-(6, 1, 'Lab. Sciences', 'Last Scientist');
+(6, 1, 'Lab. Sciences', 'Last Scientist'),
+(18, 1, 'Reception', 'Receptionist'),
+(19, 1, 'Pediatrics', 'Pediatrician'),
+(20, 3, 'Dental Care', 'Dentist');
 
 -- --------------------------------------------------------
 
@@ -179,28 +172,7 @@ CREATE TABLE `app_lab_tests` (
 --
 
 INSERT INTO `app_lab_tests` (`id`, `consultation`, `operator`, `disease`, `request_date`, `test_date`, `patient_location`, `result`, `status`) VALUES
-(1, 2, 6, 1, 1453556725, 1453565015, 15, 0, 1),
-(2, 2, 6, 1, 1453560656, 1453638344, 28, 1, 1),
-(3, 2, 6, 27, 1453619250, 1453638344, 24, 1, 1),
-(4, 6, 6, 2, 1453619281, 1453638344, 36, 1, 1),
-(5, 6, 6, 9, 1453619290, 1453638344, 15, 1, 1),
-(6, 6, 6, 12, 1453619303, 1453638344, 2, 1, 1),
-(7, 13, 6, 14, 1453619318, 1453638344, 21, 1, 1),
-(8, 16, 6, 25, 1453619354, 1453638351, 6, 1, 1),
-(9, 16, 6, 25, 1453619359, 1453638351, 3, 1, 1),
-(10, 16, 6, 25, 1453619364, 1453638344, 7, 1, 1),
-(11, 16, 6, 25, 1453619369, 1453638344, 26, 1, 1),
-(12, 16, 6, 25, 1453619373, 1453638344, 12, 1, 1),
-(13, 16, 6, 25, 1453619379, 1453638344, 31, 1, 1),
-(14, 16, 6, 25, 1453619385, 1453638344, 3, 1, 1),
-(15, 16, 6, 25, 1453619392, 1453638344, 11, 1, 1),
-(16, 16, 6, 25, 1453619402, 1453638344, 10, 1, 1),
-(17, 16, 6, 25, 1453619408, 1453638344, 22, 1, 1),
-(18, 16, 6, 25, 1453619415, 1453638344, 31, 1, 1),
-(19, 16, 6, 25, 1453619420, 1453638344, 8, 1, 1),
-(20, 16, 6, 10, 1453619482, 1453638344, 8, 1, 1),
-(21, 16, 6, 27, 1453619491, 1453638344, 8, 1, 1),
-(22, 2, NULL, 4, 1453658425, NULL, 28, NULL, 2);
+(1, 20, 6, 26, 1454358646, 1454359058, 22, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -222,7 +194,10 @@ CREATE TABLE `app_patients` (
 --
 
 INSERT INTO `app_patients` (`id`, `card_number`, `blood_group`, `genotype`, `personal_info`, `status`) VALUES
-(14, '000015', 'O+', 'AA', 'p14', 1);
+(15, '000001', 'O+', 'AA', 'p15', 1),
+(18, '000003', 'O-', 'AS', 'p18', 1),
+(20, '000002', 'O+', 'AS', 'p20', 1),
+(21, '000004', 'AB', 'AA', 'p21', 1);
 
 -- --------------------------------------------------------
 
@@ -1124,11 +1099,17 @@ INSERT INTO `site_personal_info` (`id`, `photo`, `first_name`, `last_name`, `oth
 ('1', NULL, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 500000000, 'NIGERIAN', 'ENUGU', 'AKANU-EAST', 'NIGERIA', 'ENUGU', 'ENUGU', 'NWOSU TERRACE', 'jc.nwobodo@gmail.com', '08133621591', NULL),
 ('11', NULL, 'James', 'Eze', '', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'james.eze@gmail.com', NULL, NULL),
 ('12', NULL, 'Okereke', 'Fidelis', '', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'okereke.fidelis@gmail.com', NULL, NULL),
+('18', NULL, 'Madam', 'Receptionist', 'One', 'F', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'receptionist1@site.com', '08031231233', NULL),
+('19', NULL, 'Odinakachukwu', 'Okeke', '', 'F', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'odinakachukwu@gmail.com', '08031231239', NULL),
+('20', NULL, 'Fidelis', 'Ikworentus', '', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '08031231240', NULL),
 ('4', 3, 'Nice', 'Victor', 'John', 'F', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'Isolo', 'ROAD T HOUSE 1', 'chukwudi@gmail.com', '08124345567', NULL),
 ('5', 17, 'Michael', 'Ndubuisi', 'Chukwuemeka', 'M', 191286000, 'Nigerian', 'Enugu', 'Udi', 'Nigeria', 'Enugu', 'Nsukka', 'Alvan-Ikoku Hostel, Rm 128, UNN', 'ndu11michael@gmail.com', '08131206054', NULL),
 ('6', 18, 'Ogochukwu', 'Nnamega', '', 'F', 759279600, 'Nigerian', 'Enugu', 'Nkanu-East', 'Nigeria', 'Enugu', 'Enugu', 'UNEC, Enugu', 'jc.nwobodo2@gmail.com', '08176309077', NULL),
 ('7', 19, 'Blessing', 'Ogbuokili', '', 'M', 191286000, 'Nigerian', 'Anambra', 'Nnewi soutth', 'Nigeria', 'Enugu', 'Nsukka', 'UNN, Nsukka', 'blessing.ogbuokoli@unn.edu.ng', '08069656025', NULL),
-('p14', NULL, 'Ngozi', 'Okongwu', '', 'F', 411174000, NULL, NULL, NULL, NULL, 'Anambra', NULL, 'Alvan Ikoku Hostel, University of Nigeria, Nsukka', '', '08031234567', NULL);
+('p15', NULL, 'Young', 'Moses', '', 'M', 636505200, NULL, NULL, NULL, NULL, 'Enugu', NULL, 'P & T Quarters, Ogui Enugu', 'young.moses@gmail.com', '08031231234', NULL),
+('p18', NULL, 'Barrack', 'Obama', '', 'M', -299034000, NULL, NULL, NULL, NULL, 'Abuja (Federal Capital Territory)', NULL, 'Some Random House in Garrki, Abuja', '', '08031231235', NULL),
+('p20', NULL, 'Bernard', 'Shaw', 'Lawlence', 'M', -1188003600, NULL, NULL, NULL, NULL, 'Anambra', NULL, '46 Zik Avenue, Fegge Onitsha', '', '08031231236', NULL),
+('p21', NULL, 'Flora', 'Shaw', '', 'F', -1277254800, NULL, NULL, NULL, NULL, 'Kogi', NULL, 'Kogi-Abuja Boundry, Lokoja', '', '08031231237', NULL);
 
 -- --------------------------------------------------------
 
@@ -1236,7 +1217,12 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (52, '56af49201ef0a3.36750458', 6, 'LabTechnician', 1454328096, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454328146, 0),
 (53, '56af495b0bbbd1.27801533', 5, 'Doctor', 1454328155, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454328564, 0),
 (54, '56af4afb07c3d1.91993138', 7, 'Researcher', 1454328571, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454328842, 0),
-(55, '56af4c10be8aa2.21688153', 1, 'Admin', 1454328848, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454333304, 1);
+(55, '56af4c10be8aa2.21688153', 1, 'Admin', 1454328848, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454356842, 0),
+(56, '56afbd68650ef8.45447698', 1, 'Admin', 1454357864, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454358301, 0),
+(57, '56afbf5876d011.89981403', 19, 'Doctor', 1454358360, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454358969, 0),
+(58, '56afc1c52f4e40.77235415', 6, 'LabTechnician', 1454358981, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454359084, 0),
+(59, '56afc233388376.83832494', 19, 'Doctor', 1454359091, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454360030, 0),
+(60, '56afc5e7df3a53.11388787', 1, 'Admin', 1454360039, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454363328, 1);
 
 -- --------------------------------------------------------
 
@@ -1301,7 +1287,10 @@ INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) V
 (6, 'ogochukwu.nnamega@site.com', 'some-key', 'LabTechnician', 1),
 (7, 'blessing.ogbuokoli@unn.edu.ng', 'some-key', 'Researcher', 1),
 (11, 'james.eze@gmail.com', 'some-key', 'Researcher', 1),
-(12, 'okereke.fidelis@gmail.com', 'some-key', 'Researcher', 1);
+(12, 'okereke.fidelis@gmail.com', 'some-key', 'Researcher', 1),
+(18, 'receptionist1@site.com', 'some-key', 'Receptionist', 1),
+(19, 'odinakachukwu@gmail.com', 'some-key', 'Doctor', 1),
+(20, 'fidel@site.com', 'some-key', 'Doctor', 1);
 
 --
 -- Indexes for dumped tables
@@ -1369,7 +1358,6 @@ ALTER TABLE `site_locations`
 ALTER TABLE `site_personal_info`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `phone` (`phone`),
-  ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `photo_id` (`photo`);
 
 --
@@ -1412,7 +1400,7 @@ ALTER TABLE `app_clinics`
 -- AUTO_INCREMENT for table `app_consultations`
 --
 ALTER TABLE `app_consultations`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `app_diseases`
 --
@@ -1422,12 +1410,12 @@ ALTER TABLE `app_diseases`
 -- AUTO_INCREMENT for table `app_lab_tests`
 --
 ALTER TABLE `app_lab_tests`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `app_patients`
 --
 ALTER TABLE `app_patients`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `site_categories`
 --
@@ -1452,7 +1440,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --
@@ -1462,7 +1450,7 @@ ALTER TABLE `site_uploads`
 -- AUTO_INCREMENT for table `site_users`
 --
 ALTER TABLE `site_users`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

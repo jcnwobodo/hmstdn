@@ -133,7 +133,7 @@ require_once("header.php");
                                 $p = $patient->getPersonalInfo();
                                 ?>
                                 <option value="<?= $patient->getId(); ?>" <?= selected($patient->getId(), isset($fields['patient']) ? $fields['patient'] : null); ?>>
-                                    <?= $p->getNames()." (".$patient->getCardNumber().")"; ?>
+                                    <?= "[".$patient->getCardNumber()."] ".$p->getNames(); ?>
                                 </option>
                                 <?php
                             }

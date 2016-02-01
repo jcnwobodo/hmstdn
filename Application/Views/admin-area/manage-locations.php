@@ -56,7 +56,7 @@ require_once("header.php");
                             <td>Location Name</td>
                             <?php if($data['type']=='district'){ ?><td>LGA</td><?php } ?>
                             <?php if($data['type']!='state'){ ?><td>State</td><?php } ?>
-                            <td width="5%">&hellip;</td>
+                            <td width="5%"><input id="check_button" type="checkbox" onChange="checker('location-ids[]', 'check_button');" title="Select All"/></td>
                         </tr>
                         </thead>
                         <tbody>

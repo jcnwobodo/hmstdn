@@ -39,7 +39,7 @@ require_once("header.php");
                         <tr>
                             <td>SN</td>
                             <td>Comment Details</td>
-                            <td>&hellip;</td>
+                            <td><input id="check_button" type="checkbox" onChange="checker('comment-ids[]', 'check_button');" title="Select All"/></td>
                         </tr>
                         </thead>
                         <tbody>

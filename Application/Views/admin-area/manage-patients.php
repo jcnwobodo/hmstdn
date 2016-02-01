@@ -42,14 +42,15 @@ require_once("header.php");
                         <table class="table table-stripped table-bordered table-hover full-margin-top">
                             <thead>
                             <tr>
-                                <td colspan="5" class="lead"><?= ucwords($data['status']); ?> Patients</td>
+                                <td colspan="6" class="lead"><?= ucwords($data['status']); ?> Patients</td>
                             </tr>
                             <tr>
-                                <td>SN</td>
-                                <td>Card Number #</td>
+                                <td width="5%">SN</td>
+                                <td width="15%" class="text-nowrap">Card Number #</td>
                                 <td>Names</td>
-                                <td>Gender</td>
-                                <td><span class="glyphicon glyphicon-check"></span></td>
+                                <td width="10%">Gender</td>
+                                <td width="8%">Age</td>
+                                <td width="5%"><input id="check_button" type="checkbox" onChange="checker('patient-ids[]', 'check_button');" title="Select All"/></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,10 +62,11 @@ require_once("header.php");
                                 ?>
                                 <tr>
                                     <td><?= ++$sn; ?></td>
-                                    <td><?= $patient->getCardNumber(); ?></td>
-                                    <td><?= $p->getNames(); ?></td>
+                                    <td><label for="i<?= $sn; ?>"><?= $patient->getCardNumber(); ?></label></td>
+                                    <td><label for="i<?= $sn; ?>"><?= $p->getNames(); ?></label></td>
                                     <td><?= $p->getGender(); ?></td>
-                                    <td><input type="checkbox" name="patient-ids[]" value="<?= $patient->getId(); ?>"></td>
+                                    <td><?= getYearsDifference($p->getDateofBirth()->getDateTimeInt()); ?></td>
+                                    <td><input type="checkbox" name="patient-ids[]" id="i<?= $sn; ?>" value="<?= $patient->getId(); ?>"></td>
                                 </tr>
                                 <?php
                             }

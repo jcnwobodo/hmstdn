@@ -38,5 +38,6 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="<?php home_url('/Assets/js/jquery.min.js'); ?>"></script>
 <script src="<?php home_url('/Assets/js/bootstrap.min.js'); ?>"></script>
+<script src="<?php home_url('/Assets/js/barebones.js'); ?>"></script>
 </body>
 </html>

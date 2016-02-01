@@ -22,6 +22,7 @@ class PersonalInfoMapper extends Mapper
         $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM site_personal_info");
         $this->selectByGenderStmt = self::$PDO->prepare("SELECT * FROM site_personal_info WHERE gender=?");
         $this->selectByEmailStmt = self::$PDO->prepare("SELECT * FROM site_personal_info WHERE email=?");
+        $this->selectByPhoneStmt = self::$PDO->prepare("SELECT * FROM site_personal_info WHERE phone=?");
         $this->updateStmt = self::$PDO->prepare("UPDATE site_personal_info set photo=?,first_name=?, last_name=?, other_names=?, gender=?, date_of_birth=?, nationality=?, state_of_origin=?, lga=?, residence_country=?, residence_state=?, residence_city=?, residence_street=?, email=?, phone=?, biography=? WHERE id=?");
         $this->insertStmt = self::$PDO->prepare("INSERT INTO site_personal_info (id,photo,first_name,last_name,other_names,gender,date_of_birth,nationality,state_of_origin,lga,residence_country,residence_state,residence_city,residence_street,email,phone,biography)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM site_personal_info WHERE id=?");
@@ -37,6 +38,11 @@ class PersonalInfoMapper extends Mapper
     public function findByEmail($email)
     {
         return $this->findHelper($email, $this->selectByEmailStmt, 'email');
+    }
+
+    public function findByPhone($email)
+    {
+        return $this->findHelper($email, $this->selectByPhoneStmt, 'phone');
     }
 
     protected function targetClass()
