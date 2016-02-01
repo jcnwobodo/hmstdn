@@ -10,6 +10,7 @@
 namespace Application\Commands;
 
 
+use Application\Models\Clinic;
 use Application\Models\User;
 use Application\Models\Patient;
 use Application\Models\Doctor;
@@ -74,7 +75,6 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                     $patient_obj = Patient::getMapper('Patient')->find($patient_id);
                     if(is_object($patient_obj))
                     {
-                        $patient_obj->getPersonalInfo()->markDelete();
                         $patient_obj->markDelete();
                     }
                 }
@@ -317,6 +317,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 
         $data['mode'] = 'add-consultation';
         $data['page-title'] = "Add Consultation";
+        $data['clinics'] = Clinic::getMapper('Clinic')->findByStatus(Clinic::STATUS_APPROVED);
         $data['doctors'] = Doctor::getMapper('Doctor')->findTypeByStatus(Doctor::UT_DOCTOR, Doctor::STATUS_ACTIVE);
         $data['patients'] = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_ACTIVE);
 
@@ -335,6 +336,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 
         $data['mode'] = 'update-consultation';
         $data['page-title'] = "Update Consultation";
+        $data['clinics'] = Clinic::getMapper('Clinic')->findByStatus(Clinic::STATUS_APPROVED);
         $data['doctors'] = Doctor::getMapper('Doctor')->findTypeByStatus(Doctor::UT_DOCTOR, Doctor::STATUS_ACTIVE);
         $data['patients'] = Patient::getMapper('Patient')->findByStatus(Patient::STATUS_ACTIVE);
 
@@ -342,6 +344,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
         $fields = array();
         if(is_object($consultation))
         {
+            $fields['clinic'] = $consultation->getClinic()->getId();
             $fields['doctor'] = $consultation->getDoctor()->getId();
             $fields['patient'] = $consultation->getPatient()->getId();
 

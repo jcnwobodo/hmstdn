@@ -24,21 +24,21 @@ class ConsultationMapper extends Mapper
         $this->selectByPatientStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE patient=? ORDER BY start_time ASC");
         $this->selectByStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE status=? ORDER BY start_time ASC");
         $this->selectByDoctorAndStatusStmt = self::$PDO->prepare("SELECT * FROM app_consultations WHERE doctor=? AND status=? ORDER BY start_time ASC");
-        $this->updateStmt = self::$PDO->prepare("UPDATE app_consultations SET doctor=?, patient=?, meeting_date=?, start_time=?, end_time=?, notes=?, diagnoses=?, treatment=?, status=?  WHERE id=?");
-        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_consultations (doctor,patient,meeting_date,start_time,end_time,notes,diagnoses,treatment,status) VALUES (?,?,?,?,?,?,?,?,?)");
+        $this->updateStmt = self::$PDO->prepare("UPDATE app_consultations SET clinic=?, doctor=?, patient=?, meeting_date=?, start_time=?, end_time=?, notes=?, diagnoses=?, treatment=?, status=?  WHERE id=?");
+        $this->insertStmt = self::$PDO->prepare("INSERT INTO app_consultations (clinic,doctor,patient,meeting_date,start_time,end_time,notes,diagnoses,treatment,status) VALUES (?,?,?,?,?,?,?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_consultations WHERE id=?");
     }
 
-    public function findByDoctor($doctor_id)
+    public function findByDoctor(Models\Doctor $doctor_id)
     {
         $this->selectByDoctorStmt->execute( array($doctor_id) );
         $raw_data = $this->selectByDoctorStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
 
-    public function findByPatient($patient_id)
+    public function findByPatient(Models\Patient $patient)
     {
-        $this->selectByPatientStmt->execute( array($patient_id) );
+        $this->selectByPatientStmt->execute( array($patient->getId()) );
         $raw_data = $this->selectByPatientStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
     }
@@ -50,11 +50,26 @@ class ConsultationMapper extends Mapper
         return $this->getCollection( $raw_data );
     }
 
-    public function findByDoctorAndStatus($doctor_id, $status)
+    public function findByDoctorAndStatus(Models\Doctor $doctor_id, $status)
     {
         $this->selectByDoctorAndStatusStmt->execute( array($doctor_id, $status) );
         $raw_data = $this->selectByDoctorAndStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
         return $this->getCollection( $raw_data );
+    }
+
+    public function deleteByPatient(Models\Patient $object )
+    {
+        //find all consultations associated with named patient delete them one at a time
+        //this ensures that lab-tests associated with patient's consultation
+
+        $consultations = $this->findByPatient($object);
+        if(is_object($consultations) and $consultations->size())
+        {
+            foreach($consultations as $consultation)
+            {
+                $consultation->markDelete();
+            }
+        }
     }
 
     protected function targetClass()
@@ -71,6 +86,8 @@ class ConsultationMapper extends Mapper
     {
         $class = $this->targetClass();
         $object = new $class($array['id']);
+        $clinic = Models\Clinic::getMapper('Clinic')->find($array['clinic']);
+        $object->setClinic($clinic);
         $doctor = Models\Doctor::getMapper('Doctor')->find($array['doctor']);
         if(is_object($doctor)) $object->setDoctor($doctor);
         $patient = Models\Patient::getMapper('Patient')->find($array['patient']);
@@ -89,6 +106,7 @@ class ConsultationMapper extends Mapper
     protected function doInsert(Models\DomainObject $object )
     {
         $values = array(
+            is_object($object->getClinic()) ? $object->getClinic()->getId() : NULL,
             is_object($object->getDoctor()) ? $object->getDoctor()->getId() : NULL,
             is_object($object->getPatient()) ? $object->getPatient()->getId() : NULL,
             $object->getMeetingDate()->getDateTimeInt(),
@@ -107,6 +125,7 @@ class ConsultationMapper extends Mapper
     protected function doUpdate(Models\DomainObject $object )
     {
         $values = array(
+            is_object($object->getClinic()) ? $object->getClinic()->getId() : NULL,
             is_object($object->getDoctor()) ? $object->getDoctor()->getId() : NULL,
             is_object($object->getPatient()) ? $object->getPatient()->getId() : NULL,
             $object->getMeetingDate()->getDateTimeInt(),
@@ -123,6 +142,8 @@ class ConsultationMapper extends Mapper
 
     protected function doDelete(Models\DomainObject $object )
     {
+        //clear lab-tests associated with this consultation
+        Models\LabTest::getMapper('LabTest')->deleteByConsultation($object);
         $values = array( $object->getId() );
         $this->deleteStmt->execute( $values );
     }

@@ -39,6 +39,8 @@ class EmploymentDataMapper extends Mapper
     {
         $class = $this->targetClass();
         $object = new $class($array['id']);
+        $clinic = Models\Clinic::getMapper('Clinic')->find($array['clinic']);
+        $object->setClinic($clinic);
         $object->setDepartment($array['department']);
         $object->setSpecialization($array['specialization']);
 

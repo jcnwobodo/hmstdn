@@ -118,9 +118,9 @@ class LabTestMapper extends Mapper
         return $this->getCollection( $raw_data );
     }
 
-    public function deleteByConsultation($consultation_id)
+    public function deleteByConsultation(Models\Consultation $consultation)
     {
-        $values = array( $consultation_id );
+        $values = array( $consultation->getId() );
         $this->deleteByConsultationStmt->execute( $values );
     }
 

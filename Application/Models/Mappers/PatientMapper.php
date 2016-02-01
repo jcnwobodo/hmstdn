@@ -91,8 +91,9 @@ class PatientMapper extends Mapper
 
     protected function doDelete(Models\DomainObject $object )
     {
-        $values = array( $object->getId() );
         $object->getPersonalInfo()->markDelete();
+        Models\Consultation::getMapper('Consultation')->deleteByPatient($object);
+        $values = array( $object->getId() );
         $this->deleteStmt->execute( $values );
     }
 

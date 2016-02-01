@@ -38,12 +38,13 @@ require_once("header.php");
                         <table class="table table-stripped table-bordered table-hover full-margin-top">
                             <thead>
                             <tr>
-                                <td colspan="8" class="lead"><span class="glyphicon glyphicon-hourglass"></span> <?= ucwords($data['status']); ?> Consultations</td>
+                                <td colspan="9" class="lead"><span class="glyphicon glyphicon-hourglass"></span> <?= ucwords($data['status']); ?> Consultations</td>
                             </tr>
                             <tr>
                                 <td width="4%">SN</td>
                                 <td><span class="glyphicon glyphicon-calendar"></span> Date</td>
                                 <td><span class="glyphicon glyphicon-time"></span> Time</td>
+                                <td>Clinic ID</td>
                                 <td>Doctor</td>
                                 <td>Patient's Name</td>
                                 <td>Card Number #</td>
@@ -64,6 +65,7 @@ require_once("header.php");
                                         <?= $consultation->getStartTime()->getDateTimeStrF("g:i:s A"); ?> -
                                         <?= $consultation->getEndTime()->getDateTimeStrF("g:i:s A"); ?>
                                     </td>
+                                    <td><?= $consultation->getClinic()->getClinicId(); ?></td>
                                     <td><?= $consultation->getDoctor()->getPersonalInfo()->getShortName(); ?></td>
                                     <td><?= $consultation->getPatient()->getPersonalInfo()->getNames(); ?></td>
                                     <td><?= $consultation->getPatient()->getCardNumber(); ?></td>

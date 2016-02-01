@@ -15,6 +15,7 @@ use System\Utilities\DateTime;
 
 class Consultation extends DomainObject implements I_StatefulObject
 {
+    private $clinic;
     private $doctor;
     private $patient;
     private $meeting_date;
@@ -28,6 +29,24 @@ class Consultation extends DomainObject implements I_StatefulObject
     public function __construct($id=null)
     {
         parent::__construct($id);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClinic()
+    {
+        return $this->clinic;
+    }
+
+    /**
+     * @param mixed $clinic
+     * @return Consultation
+     */
+    public function setClinic(Clinic $clinic)
+    {
+        $this->clinic = $clinic;
+        return $this;
     }
 
     /**
