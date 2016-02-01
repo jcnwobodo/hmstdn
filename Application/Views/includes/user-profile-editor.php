@@ -64,12 +64,15 @@
             <div class="col-sm-9">
                 <div class="row">
                     <div class="col-xs-5">
+                        <span class="help-block">Month</span>
                         <?= drop_month('date-of-birth[month]', isset($fields['date-of-birth']['month']) ? $fields['date-of-birth']['month'] : null ); ?>
                     </div>
                     <div class="col-xs-3">
+                        <span class="help-block">Day</span>
                         <?= drop_month_days('date-of-birth[day]', isset($fields['date-of-birth']['day']) ? $fields['date-of-birth']['day'] : null ); ?>
                     </div>
                     <div class="col-xs-4">
+                        <span class="help-block">Year</span>
                         <?= drop_years('date-of-birth[year]', isset($fields['date-of-birth']['year']) ? $fields['date-of-birth']['year'] : null , date('Y')-18, date('Y')-40 ); ?>
                     </div>
                 </div>

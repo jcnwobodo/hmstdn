@@ -124,6 +124,7 @@ class PersonalInfoMapper extends Mapper
 
     protected function doDelete(Models\DomainObject $object )
     {
+        if(is_object($object->getProfilePhoto())) $object->getProfilePhoto()->markDelete();
         $values = array( $object->getId() );
         $this->deleteStmt->execute( $values );
     }

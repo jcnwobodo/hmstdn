@@ -97,12 +97,15 @@ require_once("header.php");
                     <div class="col-sm-9">
                         <div class="row">
                             <div class="col-xs-5">
+                                <span class="help-block">Month</span>
                                 <?= drop_month('meeting-date[month]', isset($fields['meeting-date']['month']) ? $fields['meeting-date']['month'] : null ); ?>
                             </div>
                             <div class="col-xs-3 no-padding">
+                                <span class="help-block">Day</span>
                                 <?= drop_month_days('meeting-date[day]', isset($fields['meeting-date']['day']) ? $fields['meeting-date']['day'] : null ); ?>
                             </div>
                             <div class="col-xs-4">
+                                <span class="help-block">Year</span>
                                 <?= drop_years('meeting-date[year]', isset($fields['meeting-date']['year']) ? $fields['meeting-date']['year'] : null ); ?>
                             </div>
                         </div>
@@ -119,12 +122,15 @@ require_once("header.php");
                     <div class="col-sm-9">
                         <div class="row">
                             <div class="col-xs-4">
+                                <span class="help-block">Hour</span>
                                 <?= drop_hours('start-time[hour]', isset($fields['start-time']['hour']) ? $fields['start-time']['hour'] : null); ?>
                             </div>
                             <div class="col-xs-4">
+                                <span class="help-block">Minute</span>
                                 <?= drop_minutes('start-time[minute]', isset($fields['start-time']['minute']) ? $fields['start-time']['minute'] : null); ?>
                             </div>
                             <div class="col-xs-4">
+                                <span class="help-block">AM/PM</span>
                                 <?= drop_AmPM('start-time[am_pm]',  isset($fields['start-time']['am_pm']) ? $fields['start-time']['am_pm'] : date('A')); ?>
                             </div>
                         </div>

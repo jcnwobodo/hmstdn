@@ -30,3 +30,7 @@ body{
     padding-top: 3em;
     padding-bottom: 5em;
 }
+
+input[required], select[required]{
+    border-left: 2px solid red;
+}

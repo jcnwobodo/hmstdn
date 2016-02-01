@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2016 at 12:10 AM
+-- Generation Time: Feb 01, 2016 at 11:17 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -195,7 +195,8 @@ CREATE TABLE `app_patients` (
 --
 
 INSERT INTO `app_patients` (`id`, `card_number`, `blood_group`, `genotype`, `personal_info`, `status`) VALUES
-(13, '000013', 'O+', 'AA', 'p13', 1);
+(13, '000013', 'O+', 'AA', 'p13', 1),
+(14, '000015', 'O+', 'AA', 'p14', 1);
 
 -- --------------------------------------------------------
 
@@ -1074,18 +1075,18 @@ CREATE TABLE `site_personal_info` (
   `photo` int(16) DEFAULT NULL COMMENT 'uploads.id',
   `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `other_names` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` char(1) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_of_birth` int(32) NOT NULL,
-  `nationality` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_countries.id',
-  `state_of_origin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_states.id',
-  `lga` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_lga.id',
-  `residence_country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_countries.id',
-  `residence_state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maps_states.id',
-  `residence_city` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `residence_street` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `other_names` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` char(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_of_birth` int(32) DEFAULT NULL,
+  `nationality` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'maps_countries.id',
+  `state_of_origin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'maps_states.id',
+  `lga` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'maps_lga.id',
+  `residence_country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'maps_countries.id',
+  `residence_state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'maps_states.id',
+  `residence_city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `residence_street` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `biography` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1095,11 +1096,14 @@ CREATE TABLE `site_personal_info` (
 
 INSERT INTO `site_personal_info` (`id`, `photo`, `first_name`, `last_name`, `other_names`, `gender`, `date_of_birth`, `nationality`, `state_of_origin`, `lga`, `residence_country`, `residence_state`, `residence_city`, `residence_street`, `email`, `phone`, `biography`) VALUES
 ('1', NULL, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 500000000, 'NIGERIAN', 'ENUGU', 'AKANU-EAST', 'NIGERIA', 'ENUGU', 'ENUGU', 'NWOSU TERRACE', 'jc.nwobodo@gmail.com', '08133621591', NULL),
+('11', NULL, 'James', 'Eze', '', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'james.eze@gmail.com', NULL, NULL),
+('12', NULL, 'Okereke', 'Fidelis', '', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'okereke.fidelis@gmail.com', NULL, NULL),
 ('4', 3, 'Nice', 'Victor', 'John', 'F', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'Isolo', 'ROAD T HOUSE 1', 'chukwudi@gmail.com', '08124345567', NULL),
 ('5', 17, 'Michael', 'Ndubuisi', 'Chukwuemeka', 'M', 191286000, 'Nigerian', 'Enugu', 'Udi', 'Nigeria', 'Enugu', 'Nsukka', 'Alvan-Ikoku Hostel, Rm 128, UNN', 'ndu11michael@gmail.com', '08131206054', NULL),
 ('6', 18, 'Ogochukwu', 'Nnamega', '', 'F', 759279600, 'Nigerian', 'Enugu', 'Nkanu-East', 'Nigeria', 'Enugu', 'Enugu', 'UNEC, Enugu', 'jc.nwobodo2@gmail.com', '08176309077', NULL),
 ('7', 19, 'Blessing', 'Ogbuokili', '', 'M', 191286000, 'Nigerian', 'Anambra', 'Nnewi soutth', 'Nigeria', 'Enugu', 'Nsukka', 'UNN, Nsukka', 'blessing.ogbuokoli@unn.edu.ng', '08069656025', NULL),
-('p13', 16, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'TEXAS', 'ROAD T HOUSE 1', 'aniekwevictor3@hotmail2.com', '08124345570', NULL);
+('p13', 16, 'Chukwuemeka', 'Nwobodo', 'Joseph', 'M', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'TEXAS', 'ROAD T HOUSE 1', 'aniekwevictor3@hotmail2.com', '08124345570', NULL),
+('p14', NULL, 'Ngozi', 'Okongwu', '', 'F', 411174000, NULL, NULL, NULL, NULL, 'Anambra', NULL, 'Alvan Ikoku Hostel, University of Nigeria, Nsukka', '', '08031234567', NULL);
 
 -- --------------------------------------------------------
 
@@ -1192,7 +1196,15 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (37, '56a5373c9e92c4.26401543', 6, 'LabTechnician', 1453668156, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453668163, 0),
 (38, '56a5374b29e657.15283887', 7, 'Researcher', 1453668171, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453670060, 0),
 (39, '56a6a3094f7d30.92281223', 7, 'Researcher', 1453761290, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453761496, 0),
-(40, '56a6a3f84b3dd1.71997639', 1, 'Admin', 1453761528, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453762905, 1);
+(40, '56a6a3f84b3dd1.71997639', 1, 'Admin', 1453761528, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', '127.0.0.1', 1453762905, 1),
+(41, '56a8b65deec021.22930204', 7, 'Researcher', 1453897310, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36', '127.0.0.1', 1453907072, 0),
+(42, '56a8dc948a1727.12206478', 1, 'Admin', 1453907092, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36', '127.0.0.1', 1453908141, 0),
+(43, '56a8e0b4635a46.91367079', 7, 'Researcher', 1453908148, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36', '127.0.0.1', 1453964980, 0),
+(44, '56aabade4ab956.48528340', 7, 'Researcher', 1454029534, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36', '127.0.0.1', 1454029535, 1),
+(45, '56af009948c4a2.28236151', 7, 'Researcher', 1454309529, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454310607, 0),
+(46, '56af0584790824.08728078', 7, 'Researcher', 1454310788, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454310871, 0),
+(47, '56af19ef7940f4.08574094', 1, 'Admin', 1454316015, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454321069, 0),
+(48, '56af2e07543db1.91649060', 5, 'Doctor', 1454321159, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454321836, 0);
 
 -- --------------------------------------------------------
 
@@ -1254,9 +1266,11 @@ CREATE TABLE `site_users` (
 INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) VALUES
 (1, 'admin@site.com', 'some-key', 'Admin', 1),
 (4, 'chukwudi.ezich@provost.com', 'some-key', 'Receptionist', 1),
-(5, 'michael.ndubuisi@site.com', 'mikiwhiteb', 'Doctor', 1),
+(5, 'michael.ndubuisi@site.com', 'some-key', 'Doctor', 1),
 (6, 'ogochukwu.nnamega@site.com', 'some-key', 'LabTechnician', 1),
-(7, 'blessing.ogbuokoli@unn.edu.ng', 'some-key', 'Researcher', 1);
+(7, 'blessing.ogbuokoli@unn.edu.ng', 'some-key', 'Researcher', 1),
+(11, 'james.eze@gmail.com', 'some-key', 'Researcher', 1),
+(12, 'okereke.fidelis@gmail.com', 'some-key', 'Researcher', 1);
 
 --
 -- Indexes for dumped tables
@@ -1345,7 +1359,8 @@ ALTER TABLE `site_uploads`
 -- Indexes for table `site_users`
 --
 ALTER TABLE `site_users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1370,7 +1385,7 @@ ALTER TABLE `app_lab_tests`
 -- AUTO_INCREMENT for table `app_patients`
 --
 ALTER TABLE `app_patients`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `site_categories`
 --
@@ -1395,7 +1410,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --
@@ -1405,7 +1420,7 @@ ALTER TABLE `site_uploads`
 -- AUTO_INCREMENT for table `site_users`
 --
 ALTER TABLE `site_users`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

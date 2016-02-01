@@ -30,7 +30,7 @@ include_once('header.php');
         <form action="<?php home_url('/login/'); ?>" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>Login</legend>
-
+                <p class="help-block lead">Please Login to use the system.</p>
                 <?php
                 if($requestContext->fieldIsSet('login'))
                 {
@@ -79,9 +79,8 @@ include_once('header.php');
 
             <br/><br/>
             <fieldset>
-                <legend>Take your research to the next level <span class="glyphicon glyphicon-forward"></span></legend>
-                Join our researchers network to get more insights on recent tropical diseases, causes, treatments and
-                much more just for <strong>FREE</strong>
+                <legend>Don't have an account? Register Now <span class="glyphicon glyphicon-exclamation-sign"></span></legend>
+                Register today as a researcher to get more insights on tropical diseases in Nigeria for <strong>FREE</strong>
                 <p class="text-right">
                     <a href="<?php home_url('/register'); ?>" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Register Now !</a>
                 </p>

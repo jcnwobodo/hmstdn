@@ -36,14 +36,16 @@ require_once("header.php");
                         <table class="table table-stripped table-bordered table-hover full-margin-top">
                             <thead>
                             <tr>
-                                <td colspan="7" class="lead"><span class="glyphicon glyphicon-hourglass"></span> <?= ucwords($data['status']); ?> Consultations</td>
+                                <td colspan="7" class="lead">
+                                    <span class="glyphicon glyphicon-hourglass"></span>
+                                    <?= ucwords($data['status']); ?> Consultations: | Doctor: <?= $data['current-user']; ?></td>
                             </tr>
                             <tr>
                                 <td width="4%">SN</td>
                                 <td><span class="glyphicon glyphicon-calendar"></span> Date</td>
                                 <td><span class="glyphicon glyphicon-time"></span> Time</td>
+                                <td><span class="glyphicon glyphicon-user"> Patient</td>
                                 <td>Card Number #</td>
-                                <td><span class="glyphicon glyphicon-user">Patient</td>
                                 <td><span class="glyphicon glyphicon-tasks"></td>
                                 <?php if($data['status']=='booked'){ ?><td width="5%"><span class="glyphicon glyphicon-check"></span></td><?php } ?>
                             </tr>
@@ -61,8 +63,8 @@ require_once("header.php");
                                         <?= $consultation->getStartTime()->getDateTimeStrF("g:i:s A"); ?> -
                                         <?= $consultation->getEndTime()->getDateTimeStrF("g:i:s A"); ?>
                                     </td>
-                                    <td><?= $consultation->getPatient()->getCardNumber(); ?></td>
                                     <td><?= $consultation->getPatient()->getPersonalInfo()->getNames(); ?></td>
+                                    <td><?= $consultation->getPatient()->getCardNumber(); ?></td>
                                     <td>
                                         <a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/consultation-info/?cid='.$consultation->getId()); ?>" title="More Info">
                                             <span class="glyphicon glyphicon-zoom-in"></span>

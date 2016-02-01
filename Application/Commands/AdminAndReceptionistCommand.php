@@ -15,6 +15,7 @@ use Application\Models\Patient;
 use Application\Models\Doctor;
 use Application\Models\PersonalInfo;
 use Application\Models\Consultation;
+use Application\Models\Location;
 use System\Request\RequestContext;
 use System\Utilities\DateTime;
 use System\Utilities\UploadHandler;
@@ -109,6 +110,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
     protected function AddPatient(RequestContext $requestContext)
     {
         $data = array();
+        $data['location-states'] = Location::getMapper('Location')->findTypeByStatus(Location::TYPE_STATE, Location::STATUS_APPROVED);
 
         if($requestContext->fieldIsSet("add"))
         {
@@ -123,16 +125,22 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
             $other_names = $fields['other-names'];
             $gender = $fields['gender'];
             $dob = $fields['date-of-birth'];
+            /*
             $nationality = $fields['nationality'];
             $state_of_origin = $fields['state-of-origin'];
             $lga_of_origin = $fields['lga-of-origin'];
             $res_country = $fields['residence-country'];
+            */
             $res_state = $fields['residence-state'];
+            /*
             $res_city = $fields['residence-city'];
+            */
             $res_street = $fields['residence-street'];
             $contact_email = $fields['contact-email'];
             $contact_phone = $fields['contact-phone'];
+            /*
             $passport = !empty($_FILES['passport-photo']) ? $requestContext->getFile('passport-photo') : null;
+            */
 
             $date_is_correct = checkdate($dob['month'], $dob['day'], $dob['year']);
             $card_number_is_unique = is_null(Patient::getMapper('Patient')->findByCardNumber($card_number));
@@ -143,22 +151,23 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                 and strlen($genotype)
                 and strlen($first_name)
                 and strlen($last_name)
-                //and in_array(strtolower($gender),PersonalInfo::$gender_enum)
-                //and $date_is_correct
+                and in_array(strtolower($gender),PersonalInfo::$gender_enum)
+                and $date_is_correct
                 //and strlen($nationality)
                 //and strlen($state_of_origin)
                 //and strlen($lga_of_origin)
                 //and strlen($res_country)
-                //and strlen($res_state)
+                and strlen($res_state)
                 //and strlen($res_city)
-                //and strlen($res_street)
+                and strlen($res_street)
                 //and strlen($contact_email)
-                //and (strlen($contact_phone)==11)
+                and (strlen($contact_phone)==11)
                 //and !is_null($passport)
             )
             {
                 $date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
 
+                /*
                 //Handle photo upload
                 $photo_handled = false;
                 $uploader = new UploadHandler('passport-photo', uniqid('passport_'));
@@ -184,6 +193,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
                     $data['status'] = false;
                     $requestContext->setFlashData("Error Uploading Photo - ".$uploader->getStatusMessage());
                 }
+                */
 				
 
                 if(1)//$photo_handled)
@@ -198,18 +208,24 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 					
                     $profile = new PersonalInfo();
                     $profile->setId('p'.$patient->getId());
+                    /*
                     if($photo_handled) $profile->setProfilePhoto($photo);
+                    */
                     $profile->setFirstName($first_name);
                     $profile->setLastName($last_name);
                     $profile->setOtherNames($other_names);
                     $profile->setGender($gender);
                     $profile->setDateOfBirth($date_of_birth);
+                    /*
                     $profile->setNationality($nationality);
                     $profile->setStateOfOrigin($state_of_origin);
                     $profile->setLga($lga_of_origin);
                     $profile->setResidenceCountry($res_country);
+                    */
                     $profile->setResidenceState($res_state);
+                    /*
                     $profile->setResidenceCity($res_city);
+                    */
                     $profile->setResidenceStreet($res_street);
                     $profile->setEmail(strtolower($contact_email));
                     $profile->setPhone($contact_phone);
@@ -227,7 +243,7 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 
                 //Try returning more helpful error messages
                 if(strlen($card_number) != 6 or !is_numeric($card_number)) $requestContext->setFlashData("Card-Number must be a 6-digit number");
-                //if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
+                if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
                 if(!$card_number_is_unique) $requestContext->setFlashData("Card number must be unique");
             }
         }

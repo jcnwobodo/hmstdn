@@ -36,14 +36,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
     protected function doExecute(RequestContext $requestContext)
     {
-        $approved_comments = Comment::getMapper('Comment')->findByStatus(Comment::STATUS_APPROVED);
-        $pending_comments = Comment::getMapper('Comment')->findByStatus(Comment::STATUS_PENDING);
-        $deleted_comments = Comment::getMapper('Comment')->findByStatus(Comment::STATUS_DELETED);
-
         $data = array();
-        $data['num_approved_comments'] = $approved_comments ? $approved_comments->size() : 0;
-        $data['num_pending_comments'] = $pending_comments ? $pending_comments->size() : 0;
-        $data['num_deleted_comments'] = $deleted_comments ? $deleted_comments->size() : 0;
 
         $data['page-title'] = "Admin Dashboard";
         $requestContext->setResponseData($data);
@@ -857,6 +850,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
             $last_name = $fields['last-name'];
             $other_names = $fields['other-names'];
             $gender = $fields['gender'];
+            /*
             $dob = $fields['date-of-birth'];
             $nationality = $fields['nationality'];
             $state_of_origin = $fields['state-of-origin'];
@@ -865,21 +859,24 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
             $res_state = $fields['residence-state'];
             $res_city = $fields['residence-city'];
             $res_street = $fields['residence-street'];
+            */
             $contact_email = $fields['contact-email'];
             $contact_phone = $fields['contact-phone'];
+            /*
             $passport = !empty($_FILES['passport-photo']) ? $requestContext->getFile('passport-photo') : null;
+            */
             $employee_id = $fields['employee-id'];
             $department = $fields['department'];
             $specialization = $fields['specialization'];
             $password1 = $fields['password1'];
             $password2 = $fields['password2'];
 
-            $date_is_correct = checkdate($dob['month'], $dob['day'], $dob['year']);
+            //$date_is_correct = checkdate($dob['month'], $dob['day'], $dob['year']);
             /*Ensure that mandatory data is supplied, then create a report object*/
             if(
                 strlen($first_name)
                 and strlen($last_name)
-                //and in_array(strtolower($gender),PersonalInfo::$gender_enum)
+                and in_array(strtolower($gender),PersonalInfo::$gender_enum)
                 //and $date_is_correct
                 //and strlen($nationality)
                 //and strlen($state_of_origin)
@@ -888,8 +885,8 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                 //and strlen($res_state)
                 //and strlen($res_city)
                 //and strlen($res_street)
-                //and strlen($contact_email)
-                //and (strlen($contact_phone)==11)
+                and strlen($contact_email)
+                and (strlen($contact_phone)==11)
                 //and !is_null($passport)
                 and strlen($employee_id)
                 and strlen($department)
@@ -897,36 +894,38 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                 and strlen($password1) and $password1 === $password2
             )
             {
-                $date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
+                //$date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
 
+                /*
                 if(!is_null($passport))
 				{
-				//Handle photo upload
-                $photo_handled = false;
-                $uploader = new UploadHandler('passport-photo', uniqid('passport_'));
-                $uploader->setAllowedExtensions(array('jpg'));
-                $uploader->setUploadDirectory("Uploads/passports");
-                $uploader->setMaxUploadSize(0.2);
-                $uploader->doUpload();
+                    //Handle photo upload
+                    $photo_handled = false;
+                    $uploader = new UploadHandler('passport-photo', uniqid('passport_'));
+                    $uploader->setAllowedExtensions(array('jpg'));
+                    $uploader->setUploadDirectory("Uploads/passports");
+                    $uploader->setMaxUploadSize(0.2);
+                    $uploader->doUpload();
 
-                if($uploader->getUploadStatus())
-                {
-                    $photo = new Upload();
-                    //$photo->setAuthor($profile);
-                    $photo->setUploadTime(new DateTime());
-                    $photo->setLocation($uploader->getUploadDirectory());
-                    $photo->setFileName($uploader->getOutputFileName().".".$uploader->getFileExtension());
-                    $photo->setFileSize($uploader->getFileSize());
+                    if($uploader->getUploadStatus())
+                    {
+                        $photo = new Upload();
+                        //$photo->setAuthor($profile);
+                        $photo->setUploadTime(new DateTime());
+                        $photo->setLocation($uploader->getUploadDirectory());
+                        $photo->setFileName($uploader->getOutputFileName().".".$uploader->getFileExtension());
+                        $photo->setFileSize($uploader->getFileSize());
 
-                    $photo_handled = true;
-                }
-                else
-                {
-                    $data['status'] = false;
-                    $requestContext->setFlashData("Error Uploading Photo - ".$uploader->getStatusMessage());
-                }
+                        $photo_handled = true;
+                    }
+                    else
+                    {
+                        $data['status'] = false;
+                        $requestContext->setFlashData("Error Uploading Photo - ".$uploader->getStatusMessage());
+                    }
 				}
-				
+                */
+
                 if(1)//$photo_handled)
                 {
                     $user_class = str_replace(' ', '', ucwords(str_replace('_', ' ', $type)) );
@@ -940,11 +939,14 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
                     $profile = new PersonalInfo();
                     $profile->setId($user->getId());
+                    /*
                     if($photo_handled) $profile->setProfilePhoto($photo);
+                    */
                     $profile->setFirstName($first_name);
                     $profile->setLastName($last_name);
                     $profile->setOtherNames($other_names);
                     $profile->setGender($gender);
+                    /*
                     $profile->setDateOfBirth($date_of_birth);
                     $profile->setNationality($nationality);
                     $profile->setStateOfOrigin($state_of_origin);
@@ -953,6 +955,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                     $profile->setResidenceState($res_state);
                     $profile->setResidenceCity($res_city);
                     $profile->setResidenceStreet($res_street);
+                    */
                     $profile->setEmail(strtolower($contact_email));
                     $profile->setPhone($contact_phone);
 
@@ -971,7 +974,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
                 //Try returning more helpful error messages
                 if($password1 !== $password2) $requestContext->setFlashData("Password confirmation does not match");
-                if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
+                //if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
             }
         }
 

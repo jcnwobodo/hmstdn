@@ -52,6 +52,7 @@ class RegisterCommand extends Command
             $last_name = $fields['last-name'];
             $other_names = $fields['other-names'];
             $gender = $fields['gender'];
+            /*
             $dob = $fields['date-of-birth'];
             $nationality = $fields['nationality'];
             $state_of_origin = $fields['state-of-origin'];
@@ -63,16 +64,20 @@ class RegisterCommand extends Command
             $contact_email = $fields['contact-email'];
             $contact_phone = $fields['contact-phone'];
             $passport = !empty($_FILES['passport-photo']) ? $requestContext->getFile('passport-photo') : null;
-            $researcher_id = $fields['researcher-id'];
+            */
+            $researcher_id = strtolower($fields['researcher-id']);
             $password1 = $fields['password1'];
             $password2 = $fields['password2'];
 
-            $date_is_correct = checkdate($dob['month'], $dob['day'], $dob['year']);
+            $possible_user = Researcher::getMapper('Researcher')->findByUsername($researcher_id);
+            //$date_is_correct = checkdate($dob['month'], $dob['day'], $dob['year']);
             /*Ensure that mandatory data is supplied, then create a report object*/
             if(
-                strlen($first_name)
+                is_null($possible_user)
+                and strlen($first_name)
                 and strlen($last_name)
                 and in_array(strtolower($gender),PersonalInfo::$gender_enum)
+                /*
                 and $date_is_correct
                 and strlen($nationality)
                 and strlen($state_of_origin)
@@ -84,13 +89,15 @@ class RegisterCommand extends Command
                 and strlen($contact_email)
                 and (strlen($contact_phone)==11)
                 and !is_null($passport)
+                */
                 and strlen($researcher_id)
                 and strlen($password1) and $password1 === $password2
             )
             {
-                $date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
+                //$date_of_birth = new DateTime(mktime(0,0,0,$dob['month'],$dob['day'],$dob['year']));
 
                 //Handle photo upload
+                /*
                 $photo_handled = false;
                 $uploader = new UploadHandler('passport-photo', uniqid('passport_'));
                 $uploader->setAllowedExtensions(array('jpg'));
@@ -114,8 +121,9 @@ class RegisterCommand extends Command
                     $data['status'] = false;
                     $requestContext->setFlashData("Error Uploading Photo - ".$uploader->getStatusMessage());
                 }
+                */
 
-                if($photo_handled)
+                if(1)//$photo_handled)
                 {
                     $user = new Researcher();
                     $user->setUsername(strtolower($researcher_id));
@@ -126,11 +134,12 @@ class RegisterCommand extends Command
 
                     $profile = new PersonalInfo();
                     $profile->setId($user->getId());
-                    $profile->setProfilePhoto($photo);
+                    //$profile->setProfilePhoto($photo);
                     $profile->setFirstName($first_name);
                     $profile->setLastName($last_name);
                     $profile->setOtherNames($other_names);
                     $profile->setGender($gender);
+                    /*
                     $profile->setDateOfBirth($date_of_birth);
                     $profile->setNationality($nationality);
                     $profile->setStateOfOrigin($state_of_origin);
@@ -139,10 +148,13 @@ class RegisterCommand extends Command
                     $profile->setResidenceState($res_state);
                     $profile->setResidenceCity($res_city);
                     $profile->setResidenceStreet($res_street);
-                    $profile->setEmail(strtolower($contact_email));
+                    */
+                    $profile->setEmail(strtolower($researcher_id));
+                    /*
                     $profile->setPhone($contact_phone);
+                    */
 
-                    $requestContext->setFlashData("Researcher registration completed successfully.");
+                    $requestContext->setFlashData("Researcher account created successfully. Please login to continue");
                     $data['status'] = true;
                 }
             }
@@ -152,7 +164,8 @@ class RegisterCommand extends Command
 
                 //Try returning more helpful error messages
                 if($password1 !== $password2) $requestContext->setFlashData("Password confirmation does not match");
-                if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
+                if(is_object($possible_user)) $requestContext->setFlashData("The Login email {$researcher_id} is unavailable.");
+                //if(!$date_is_correct) $requestContext->setFlashData("Please supply a valid date for date of birth");
             }
         }
 

@@ -15,7 +15,9 @@ require_once("header.php");
         require_once("sidebar.php");
         ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</h1>
+            <h1 class="page-header"><span class="glyphicon glyphicon-home"></span> Welcome to the Consultation Room</h1>
+            <h3><span class="glyphicon glyphicon-user"></span> Doctor <?= $data['current-user'];?></h3>
+            <hr/>
 
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">

@@ -44,9 +44,9 @@ require_once("header.php");
                                 <td width="4%">SN</td>
                                 <td><span class="glyphicon glyphicon-calendar"></span> Date</td>
                                 <td><span class="glyphicon glyphicon-time"></span> Time</td>
-                                <td>Card Number #</td>
-                                <td>Patient's Name</td>
                                 <td>Doctor</td>
+                                <td>Patient's Name</td>
+                                <td>Card Number #</td>
                                 <td width="5%"><span class="glyphicon glyphicon-check"></span></td>
                             </tr>
                             </thead>
@@ -63,9 +63,9 @@ require_once("header.php");
                                         <?= $consultation->getStartTime()->getDateTimeStrF("g:i:s A"); ?> -
                                         <?= $consultation->getEndTime()->getDateTimeStrF("g:i:s A"); ?>
                                     </td>
-                                    <td><?= $consultation->getPatient()->getCardNumber(); ?></td>
-                                    <td><?= $consultation->getPatient()->getPersonalInfo()->getNames(); ?></td>
                                     <td><?= $consultation->getDoctor()->getPersonalInfo()->getShortName(); ?></td>
+                                    <td><?= $consultation->getPatient()->getPersonalInfo()->getNames(); ?></td>
+                                    <td><?= $consultation->getPatient()->getCardNumber(); ?></td>
                                     <td><input type="checkbox" name="consultation-ids[]" value="<?= $consultation->getId(); ?>"></td>
                                 </tr>
                                 <?php

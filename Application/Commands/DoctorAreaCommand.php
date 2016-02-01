@@ -32,6 +32,7 @@ class DoctorAreaCommand extends DoctorAndLabTechnicianCommand
     {
         $data = array();
 
+        $data['current-user'] = $requestContext->getSession()->getSessionUser()->getPersonalInfo()->getNames();
         $data['page-title'] = "Doctor Dashboard";
         $requestContext->setResponseData($data);
         $requestContext->setView('doctor-area/dashboard.php');
@@ -78,6 +79,7 @@ class DoctorAreaCommand extends DoctorAndLabTechnicianCommand
         $data['status'] = $status;
         $data['consultations'] = $consultations;
         $data['page-title'] = ucwords($status)." Consultations";
+        $data['current-user'] = $doctor->getPersonalInfo()->getNames();
         $requestContext->setResponseData($data);
         $requestContext->setView('doctor-area/manage-consultations.php');
     }
