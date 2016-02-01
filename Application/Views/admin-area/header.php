@@ -49,7 +49,10 @@ $page_title = isset($data['page-title']) ? $data['page-title'] : site_info('name
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li <?= $s = ($requestContext->isRequestUrl($requestContext->getSession()->getSessionUser()->defaultCommand()) ? 'class="active"': ''); ?>><a href="<?php home_url('/'.$requestContext->getRequestUrlParam(0).'/');?>"><span class="glyphicon glyphicon-dashboard"></span> DASHBOARD</a></li>
+                <?php
+                $session_user = $requestContext->getSession()->getSessionUser();
+                ?>
+                <li <?= $s = ($requestContext->isRequestUrl($session_user->defaultCommand()) ? 'class="active"': ''); ?>><a href="<?php home_url('/'.$requestContext->getRequestUrlParam(0).'/');?>"><span class="glyphicon glyphicon-dashboard"></span> <?php echo strtoupper($session_user->defaultCommand()); ?></a></li>
                 <li <?= $s = ($requestContext->isRequestUrl('account-setting') ? 'class="active"': ''); ?>><a href="<?php home_url('/account-settings/');?>"><span class="glyphicon glyphicon-user"></span> MY ACCOUNT</a></li>
                 <li <?= $s = ($requestContext->isRequestUrl('logout') ? 'class="active"': ''); ?>><a href="<?php home_url('/logout/');?>"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
             </ul>

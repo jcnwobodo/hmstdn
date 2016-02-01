@@ -11,6 +11,40 @@ $requestContext = $rc = \System\Request\RequestContext::instance();
 $data = $requestContext->getResponseData();
 $fields = $requestContext->getAllFields();
 ?>
+<script type="text/javascript">
+    function switchFields()
+    {
+        var select_field = document.getElementById('filter-by');
+        var options = select_field.childNodes;
+        var selected = 'nil';
+        for(var node_index = 0; node_index < options.length; ++node_index)
+        {
+            var option = options[node_index];
+            if(option.selected){ selected = option.value; }
+        }
+
+        if(selected == 'location')
+        {
+            document.getElementById('location-selector').setAttribute("style", "display:block !important;");
+            document.getElementById('disease-selector').setAttribute("style", "display:none !important;");
+        }
+        if(selected == 'disease')
+        {
+            document.getElementById('disease-selector').setAttribute("style", "display:block !important;");
+            document.getElementById('location-selector').setAttribute("style", "display:none !important;");
+        }
+        if(selected == 'both')
+        {
+            document.getElementById('location-selector').setAttribute("style", "display:block !important;");
+            document.getElementById('disease-selector').setAttribute("style", "display:block !important;");
+        }
+        if(selected == 'nil')
+        {
+            document.getElementById('location-selector').setAttribute("style", "display:none !important;");
+            document.getElementById('disease-selector').setAttribute("style", "display:none !important;");
+        }
+    }
+</script>
 <form method="post" enctype="multipart/form-data" class="full-margin-bottom">
 
     <div class="form-group form-group-sm">
@@ -19,7 +53,7 @@ $fields = $requestContext->getAllFields();
                 <label for="filter-by"><span class="glyphicon glyphicon-filter"></span> Filter Results By</label>
             </div>
             <div class="col-sm-9">
-                <select name="filter-by" id="filter-by" class="form-control">
+                <select name="filter-by" id="filter-by" class="form-control" onchange="switchFields()">
                     <option value="nil">nil</option>
                     <option value="location" <?= selected('location', isset($fields['filter-by']) ? $fields['filter-by'] : null); ?>> Location</option>
                     <option value="disease" <?= selected('disease', isset($fields['filter-by']) ? $fields['filter-by'] : null); ?>> Disease</option>
@@ -29,7 +63,7 @@ $fields = $requestContext->getAllFields();
         </div>
     </div>
 
-    <div class="form-group form-group-sm">
+    <div class="form-group form-group-sm" id="location-selector" style="display: none;">
         <div class="row">
             <div class="col-sm-3">
                 <label for="location"><span class="glyphicon glyphicon-globe"></span> Patient's Location</label>
@@ -51,7 +85,7 @@ $fields = $requestContext->getAllFields();
         </div>
     </div>
 
-    <div class="form-group form-group-sm">
+    <div class="form-group form-group-sm" id="disease-selector" style="display: none;">
         <div class="row">
             <div class="col-sm-3">
                 <label for="disease"><span class="glyphicon glyphicon-alert"></span> Disease</label>
