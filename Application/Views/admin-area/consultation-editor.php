@@ -98,15 +98,15 @@ require_once("header.php");
                         <div class="row">
                             <div class="col-xs-5">
                                 <span class="help-block">Month</span>
-                                <?= drop_month('meeting-date[month]', isset($fields['meeting-date']['month']) ? $fields['meeting-date']['month'] : null ); ?>
+                                <?= drop_month('meeting-date[month]', isset($fields['meeting-date']['month']) ? $fields['meeting-date']['month'] : null, 'class="form-control" required'); ?>
                             </div>
                             <div class="col-xs-3 no-padding">
                                 <span class="help-block">Day</span>
-                                <?= drop_month_days('meeting-date[day]', isset($fields['meeting-date']['day']) ? $fields['meeting-date']['day'] : null ); ?>
+                                <?= drop_month_days('meeting-date[day]', isset($fields['meeting-date']['day']) ? $fields['meeting-date']['day'] : null, 'class="form-control" required'); ?>
                             </div>
                             <div class="col-xs-4">
                                 <span class="help-block">Year</span>
-                                <?= drop_years('meeting-date[year]', isset($fields['meeting-date']['year']) ? $fields['meeting-date']['year'] : null ); ?>
+                                <?= drop_years('meeting-date[year]', isset($fields['meeting-date']['year']) ? $fields['meeting-date']['year'] : null, 'class="form-control" required'); ?>
                             </div>
                         </div>
                     </div>
@@ -123,15 +123,15 @@ require_once("header.php");
                         <div class="row">
                             <div class="col-xs-4">
                                 <span class="help-block">Hour</span>
-                                <?= drop_hours('start-time[hour]', isset($fields['start-time']['hour']) ? $fields['start-time']['hour'] : null); ?>
+                                <?= drop_hours('start-time[hour]', isset($fields['start-time']['hour']) ? $fields['start-time']['hour'] : null, 'class="form-control" required'); ?>
                             </div>
                             <div class="col-xs-4">
                                 <span class="help-block">Minute</span>
-                                <?= drop_minutes('start-time[minute]', isset($fields['start-time']['minute']) ? $fields['start-time']['minute'] : null); ?>
+                                <?= drop_minutes('start-time[minute]', isset($fields['start-time']['minute']) ? $fields['start-time']['minute'] : null, 'class="form-control" required'); ?>
                             </div>
                             <div class="col-xs-4">
                                 <span class="help-block">AM/PM</span>
-                                <?= drop_AmPM('start-time[am_pm]',  isset($fields['start-time']['am_pm']) ? $fields['start-time']['am_pm'] : date('A')); ?>
+                                <?= drop_AmPM('start-time[am_pm]',  isset($fields['start-time']['am_pm']) ? $fields['start-time']['am_pm'] : null, 'class="form-control" required'); ?>
                             </div>
                         </div>
                     </div>
@@ -147,13 +147,13 @@ require_once("header.php");
                     <div class="col-sm-9">
                         <div class="row">
                             <div class="col-xs-4">
-                                <?= drop_hours('end-time[hour]', isset($fields['end-time']['hour']) ? $fields['end-time']['hour'] : null); ?>
+                                <?= drop_hours('end-time[hour]', isset($fields['end-time']['hour']) ? $fields['end-time']['hour'] : null, 'class="form-control" required'); ?>
                             </div>
                             <div class="col-xs-4">
-                                <?= drop_minutes('end-time[minute]', isset($fields['end-time']['minute']) ? $fields['end-time']['minute'] : null); ?>
+                                <?= drop_minutes('end-time[minute]', isset($fields['end-time']['minute']) ? $fields['end-time']['minute'] : null, 'class="form-control" required'); ?>
                             </div>
                             <div class="col-xs-4">
-                                <?= drop_AmPM('end-time[am_pm]',  isset($fields['end-time']['am_pm']) ? $fields['end-time']['am_pm'] : date('A')); ?>
+                                <?= drop_AmPM('end-time[am_pm]',  isset($fields['end-time']['am_pm']) ? $fields['end-time']['am_pm'] : null, 'class="form-control" required'); ?>
                             </div>
                         </div>
                     </div>

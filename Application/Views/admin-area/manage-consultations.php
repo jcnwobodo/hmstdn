@@ -38,7 +38,7 @@ require_once("header.php");
                         <table class="table table-stripped table-bordered table-hover full-margin-top">
                             <thead>
                             <tr>
-                                <td colspan="7" class="lead"><span class="glyphicon glyphicon-hourglass"></span> <?= ucwords($data['status']); ?> Consultations</td>
+                                <td colspan="8" class="lead"><span class="glyphicon glyphicon-hourglass"></span> <?= ucwords($data['status']); ?> Consultations</td>
                             </tr>
                             <tr>
                                 <td width="4%">SN</td>
@@ -47,6 +47,7 @@ require_once("header.php");
                                 <td>Doctor</td>
                                 <td>Patient's Name</td>
                                 <td>Card Number #</td>
+                                <td width="5%"><span class="glyphicon glyphicon-edit"></span></td>
                                 <td width="5%"><span class="glyphicon glyphicon-check"></span></td>
                             </tr>
                             </thead>
@@ -66,6 +67,7 @@ require_once("header.php");
                                     <td><?= $consultation->getDoctor()->getPersonalInfo()->getShortName(); ?></td>
                                     <td><?= $consultation->getPatient()->getPersonalInfo()->getNames(); ?></td>
                                     <td><?= $consultation->getPatient()->getCardNumber(); ?></td>
+                                    <td><a href="<?php home_url('/'.$rc->getRequestUrlParam(0).'/update-consultation/?consultation-id='.$consultation->getId())?>"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                     <td><input type="checkbox" name="consultation-ids[]" value="<?= $consultation->getId(); ?>"></td>
                                 </tr>
                                 <?php

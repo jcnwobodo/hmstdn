@@ -359,6 +359,9 @@ abstract class AdminAndReceptionistCommand extends EmployeeCommand
 
             $data['consultation-id'] = $fields['consultation-id'] = $consultation->getId();
         }
+        else{
+            $requestContext->redirect(home_url("/".$requestContext->getRequestUrlParam(0)."/manage-consultations/",0));
+        }
         $data['fields'] = $fields;
 
         $requestContext->setResponseData($data);

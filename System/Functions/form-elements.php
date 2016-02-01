@@ -48,19 +48,19 @@ function drop_month_days($name, $current_val=null, $atr='class="form-control"')
     return drop_num(31, 1, $name, $current_val, 1, $atr);
 }
 
-function drop_hours($name, $current_val=null, $mode12=true)
+function drop_hours($name, $current_val=null, $attr='class="form-control"', $mode12=true)
 {
-    return drop_num($mode12?12:23, $mode12?1:0, $name,  is_null($current_val) ? date('g') : $current_val);
+    return drop_num($mode12?12:23, $mode12?1:0, $name,  $current_val, 1, $attr);
 }
 
-function drop_minutes($name, $current_val=null)
+function drop_minutes($name, $current_val=null, $attr='class="form-control"')
 {
-    return drop_num(59, 0, $name, is_null($current_val) ? date('i') : $current_val);
+    return drop_num(59, 0, $name, $current_val, 1, $attr);
 }
 
-function drop_AmPM($name, $current_val=null)
+function drop_AmPM($name, $current_val=null, $attr='class="form-control"')
 {
-    $rv = "<select name='{$name}' class='form-control'>";
+    $rv = "<select name='{$name}' {$attr}>";
     $rv.= "<option value='AM' ".selected($current_val, 'AM').">AM</option>";
     $rv.= "<option value='PM' ".selected($current_val, 'PM').">PM</option>";
     $rv.= "</select>";
