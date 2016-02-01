@@ -83,7 +83,7 @@ class PersonalInfoMapper extends Mapper
             $object->getLastName(),
             $object->getOtherNames(),
             $object->getGender(),
-            $object->getDateOfBirth()->getDateTimeInt(),
+            is_object($object->getDateOfBirth()) ? $object->getDateOfBirth()->getDateTimeInt() : NULL,
             $object->getNationality(),
             $object->getStateOfOrigin(),
             $object->getLga(),

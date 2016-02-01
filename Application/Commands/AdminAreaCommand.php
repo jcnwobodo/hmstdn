@@ -841,6 +841,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
         $types = array('admin', 'doctor', 'lab_technician', 'receptionist');
         $type = ( $requestContext->fieldIsSet('type') && in_array($requestContext->getField('type'), $types)) ? $requestContext->getField('type') : 'doctor';
         $data['type'] = $type;
+        $data['clinics'] = Clinic::getMapper('Clinic')->findByStatus(Clinic::STATUS_APPROVED);
 
         if($requestContext->fieldIsSet("add"))
         {
@@ -866,9 +867,10 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
             /*
             $passport = !empty($_FILES['passport-photo']) ? $requestContext->getFile('passport-photo') : null;
             */
-            $employee_id = $fields['employee-id'];
+            $clinic = Clinic::getMapper('Clinic')->find($fields['clinic']);
             $department = $fields['department'];
             $specialization = $fields['specialization'];
+            $employee_id = $fields['employee-id'];
             $password1 = $fields['password1'];
             $password2 = $fields['password2'];
 
@@ -889,9 +891,10 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                 and strlen($contact_email)
                 and (strlen($contact_phone)==11)
                 //and !is_null($passport)
-                and strlen($employee_id)
+                and is_object($clinic)
                 and strlen($department)
                 and strlen($specialization)
+                and strlen($employee_id)
                 and strlen($password1) and $password1 === $password2
             )
             {
@@ -962,6 +965,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
 
                     $emp_data = new EmploymentData();
                     $emp_data->setId($user->getId());
+                    $emp_data->setClinic($clinic);
                     $emp_data->setDepartment($department);
                     $emp_data->setSpecialization($specialization);
 

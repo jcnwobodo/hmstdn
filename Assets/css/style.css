@@ -31,6 +31,6 @@ body{
     padding-bottom: 5em;
 }
 
-input[required], select[required]{
-    border-left: 2px solid red;
+input[required], select[required], textarea[required]{
+    border-left: 1px solid red;
 }

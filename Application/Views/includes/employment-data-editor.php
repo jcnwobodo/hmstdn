@@ -13,6 +13,27 @@
     <div class="form-group form-group-sm">
         <div class="row">
             <div class="col-sm-3">
+                <label for="clinic"><span class="glyphicon glyphicon-plus-sign"></span> Clinic</label>
+            </div>
+            <div class="col-sm-9">
+                <select name="clinic" class="form-control" id="clinic" required>
+                    <option></option>
+                    <?php
+                    foreach($clinics as $clinic)
+                    {
+                        ?>
+                        <option value="<?= $clinic->getId(); ?>" <?= selected($clinic->getId(), isset($fields['clinic']) ? $fields['clinic'] : null); ?>><?= $clinic->getName(); ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <div class="row">
+            <div class="col-sm-3">
                 <label for="department">Department</label>
             </div>
             <div class="col-sm-9">

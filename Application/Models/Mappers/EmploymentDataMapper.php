@@ -49,6 +49,7 @@ class EmploymentDataMapper extends Mapper
     {
         $values = array(
             $object->getId(),
+            $object->getClinic()->getId(),
             $object->getDepartment(),
             $object->getSpecialization()
         );
@@ -58,6 +59,7 @@ class EmploymentDataMapper extends Mapper
     protected function doUpdate(Models\DomainObject $object )
     {
         $values = array(
+            $object->getClinic()->getId(),
             $object->getDepartment(),
             $object->getSpecialization(),
             $object->getId()

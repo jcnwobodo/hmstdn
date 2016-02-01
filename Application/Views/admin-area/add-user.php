@@ -9,6 +9,7 @@
 
 $rc = \System\Request\RequestContext::instance();
 $data = $rc->getResponseData();
+$clinics = $data['clinics'];
 
 $fields = $rc->getAllFields();
 if($rc->fieldIsSet('add')) if($data['status']==1) $fields = array();
