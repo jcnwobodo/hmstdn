@@ -123,7 +123,7 @@ abstract class User extends DomainObject implements I_StatefulObject
             } break;
 
             case (User::UT_RECEPTIONIST) :{
-                $command = 'reception';
+                $command = 'receptionist';
             } break;
 
             case (User::UT_DOCTOR) :{

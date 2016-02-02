@@ -83,7 +83,7 @@ require_once("header.php");
                             foreach($data['clinics'] as $clinic)
                             {
                                 ?>
-                                <option value="<?= $clinic->getId(); ?>" <?= selected($clinic->getId(), isset($fields['clinic']) ? $fields['clinic'] : null); ?>><?= $clinic->getName(); ?></option>
+                                <option value="<?= $clinic->getId(); ?>" <?= selected($clinic->getId(), isset($fields['clinic']) ? $fields['clinic'] : null); ?>>[<?= $clinic->getClinicId(); ?>] <?= $clinic->getName(); ?></option>
                                 <?php
                             }
                             ?>

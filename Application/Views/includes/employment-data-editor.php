@@ -59,7 +59,7 @@
                 <label for="employee-id">Employee ID</label>
             </div>
             <div class="col-sm-9">
-                <input name="employee-id" id="employee-id" required type="email" maxlength="50" class="form-control" placeholder="firstname.lastname@company.com" value="<?= isset($fields['employee-id']) ? $fields['employee-id'] : ''; ?>"/>
+                <input name="employee-id" id="employee-id" required type="text" maxlength="25" class="form-control" placeholder="HCID/DEPT/SN" value="<?= isset($fields['employee-id']) ? $fields['employee-id'] : ''; ?>"/>
             </div>
         </div>
     </div>

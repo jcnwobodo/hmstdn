@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2016 at 10:53 PM
+-- Generation Time: Feb 02, 2016 at 08:28 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -42,9 +42,9 @@ CREATE TABLE `app_clinics` (
 --
 
 INSERT INTO `app_clinics` (`id`, `clinic_id`, `name`, `location_state`, `location_street`, `contact_email`, `contact_phone`, `status`) VALUES
-(1, 'HC/01', 'University of Nigeria Medical Center Nsukka', 22, 'University of Nigeria, Nsukka', 'enugu.medical@unn.edu.ng', '08031231238', 1),
-(2, 'HC/02', 'University of Nigeria Teaching Hospital Ituku', 22, 'Ituku Ozalla, Nkanu-West', 'ituku@unth.ng', '08031231231', 1),
-(3, 'HC/03', 'University of Nigeria Teaching Hospital Enugu', 22, 'Old Park, Ogui Enugu', 'enugu@unth.ng', '08031231232', 1);
+(1, 'UNNMED', 'University of Nigeria Medical Center Nsukka', 22, 'University of Nigeria, Nsukka', 'enugu.medical@unn.edu.ng', '08031231238', 1),
+(2, 'UNTHIT', 'University of Nigeria Teaching Hospital Ituku', 22, 'Ituku Ozalla, Nkanu-West', 'ituku@unth.ng', '08031231231', 1),
+(3, 'UNTHEN', 'University of Nigeria Teaching Hospital Enugu', 22, 'Old Park, Ogui Enugu', 'enugu@unth.ng', '08031231232', 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,8 @@ INSERT INTO `app_consultations` (`id`, `clinic`, `doctor`, `patient`, `meeting_d
 (17, 1, 19, 15, 1454367600, 1454396400, 1454400000, NULL, NULL, NULL, 2),
 (18, 1, 5, 20, 1454367600, 1454400000, 1454403600, NULL, NULL, NULL, 2),
 (19, 3, 20, 21, 1454540400, 1454572800, 1454576400, NULL, NULL, NULL, 2),
-(20, 1, 19, 18, 1454367600, 1454410800, 1454414400, NULL, NULL, NULL, 2);
+(20, 1, 19, 18, 1454367600, 1454410800, 1454414400, NULL, NULL, NULL, 2),
+(21, 1, 19, 15, 1454454000, 1454482800, 1454486400, NULL, NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -147,7 +148,7 @@ INSERT INTO `app_employment_data` (`id`, `clinic`, `department`, `specialization
 (6, 1, 'Lab. Sciences', 'Last Scientist'),
 (18, 1, 'Reception', 'Receptionist'),
 (19, 1, 'Pediatrics', 'Pediatrician'),
-(20, 3, 'Dental Care', 'Dentist');
+(20, 1, 'Dental Care', 'Dentist');
 
 -- --------------------------------------------------------
 
@@ -1222,7 +1223,13 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (57, '56afbf5876d011.89981403', 19, 'Doctor', 1454358360, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454358969, 0),
 (58, '56afc1c52f4e40.77235415', 6, 'LabTechnician', 1454358981, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454359084, 0),
 (59, '56afc233388376.83832494', 19, 'Doctor', 1454359091, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454360030, 0),
-(60, '56afc5e7df3a53.11388787', 1, 'Admin', 1454360039, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454363328, 1);
+(60, '56afc5e7df3a53.11388787', 1, 'Admin', 1454360039, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454363706, 1),
+(61, '56b04cac3e30f0.10411943', 1, 'Admin', 1454394540, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454394963, 0),
+(62, '56b04e5b7e5545.62256829', 4, 'Receptionist', 1454394971, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397535, 0),
+(63, '56b0586f50bc69.56674670', 6, 'LabTechnician', 1454397551, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397568, 0),
+(64, '56b0589987a265.31190279', 19, 'Doctor', 1454397593, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397631, 0),
+(65, '56b058c7a69f47.18340477', 20, 'Doctor', 1454397639, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397792, 0),
+(66, '56b05968a8c523.97035703', 4, 'Receptionist', 1454397800, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397885, 1);
 
 -- --------------------------------------------------------
 
@@ -1281,16 +1288,16 @@ CREATE TABLE `site_users` (
 --
 
 INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) VALUES
-(1, 'admin@site.com', 'some-key', 'Admin', 1),
-(4, 'chukwudi.ezich@provost.com', 'some-key', 'Receptionist', 1),
-(5, 'michael.ndubuisi@site.com', 'some-key', 'Doctor', 1),
-(6, 'ogochukwu.nnamega@site.com', 'some-key', 'LabTechnician', 1),
-(7, 'blessing.ogbuokoli@unn.edu.ng', 'some-key', 'Researcher', 1),
-(11, 'james.eze@gmail.com', 'some-key', 'Researcher', 1),
-(12, 'okereke.fidelis@gmail.com', 'some-key', 'Researcher', 1),
-(18, 'receptionist1@site.com', 'some-key', 'Receptionist', 1),
-(19, 'odinakachukwu@gmail.com', 'some-key', 'Doctor', 1),
-(20, 'fidel@site.com', 'some-key', 'Doctor', 1);
+(1, 'UNNMED/ADM/001', 'some-key', 'Admin', 1),
+(4, 'UNNMED/REC/001', 'some-key', 'Receptionist', 1),
+(5, 'UNNMED/DEN/002', 'some-key', 'Doctor', 1),
+(6, 'UNNMED/LAB/001', 'some-key', 'LabTechnician', 1),
+(7, 'blessing@gmail.com', 'some-key', 'Researcher', 1),
+(11, 'james@gmail.com', 'some-key', 'Researcher', 1),
+(12, 'fidelis@gmail.com', 'some-key', 'Researcher', 1),
+(18, 'UNNMED/REC/002', 'some-key', 'Receptionist', 1),
+(19, 'UNNMED/PED/001', 'some-key', 'Doctor', 1),
+(20, 'UNNMED/DEN/001', 'some-key', 'Doctor', 1);
 
 --
 -- Indexes for dumped tables
@@ -1400,7 +1407,7 @@ ALTER TABLE `app_clinics`
 -- AUTO_INCREMENT for table `app_consultations`
 --
 ALTER TABLE `app_consultations`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `app_diseases`
 --
@@ -1440,7 +1447,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --

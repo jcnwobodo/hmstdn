@@ -29,8 +29,7 @@ include_once('header.php');
     <div class="col-md-4 col-md-offset-1">
         <form action="<?php home_url('/login/'); ?>" method="post" enctype="multipart/form-data">
             <fieldset>
-                <legend>Login</legend>
-                <p class="help-block lead">Please Login to use the system.</p>
+                <legend>Please Login to use the system.</legend>
                 <?php
                 if($requestContext->fieldIsSet('login'))
                 {
@@ -45,11 +44,14 @@ include_once('header.php');
                 <div class="form-group form-group-sm">
                     <div class="row">
                         <div class="col-xs-4 text-nowrap">
-                            <label for="username"><span class="glyphicon glyphicon-user"></span> Email</label>
+                            <label for="username"><span class="glyphicon glyphicon-user"></span> User ID</label>
                         </div>
                         <div class="col-xs-8">
-                            <input name="username" id="username" type="email" class="form-control"/>
+                            <input name="username" id="username" type="text" class="form-control" maxlength="25"/>
                         </div>
+                    </div>
+                    <div class="row">
+                        <span class="help-block col-xs-12 text-right">Staff ID for clinic staff OR email for researchers</span>
                     </div>
                 </div>
 
