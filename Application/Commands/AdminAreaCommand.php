@@ -562,7 +562,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                 foreach($clinic_ids as $clinic_id)
                 {
                     $clinic_obj = Clinic::getMapper('Clinic')->find($clinic_id);
-                    if(is_object($clinic_obj)) $clinic_obj->setStatus(Clinic::STATUS_CANCELED);
+                    if(is_object($clinic_obj)) $clinic_obj->setStatus(Clinic::STATUS_DELETED);
                 }
             } break;
             case 'restore' : {
@@ -576,7 +576,11 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                 foreach($clinic_ids as $clinic_id)
                 {
                     $clinic_obj = Clinic::getMapper('Clinic')->find($clinic_id);
-                    if(is_object($clinic_obj)) $clinic_obj->markDelete();
+                    if(is_object($clinic_obj))
+                    {
+                        $employees = EmploymentData::getMapper('EmploymentData')->findByClinic($clinic_obj);
+                        if($employees->size()==0) $clinic_obj->markDelete();
+                    }
                 }
             } break;
             default : {}

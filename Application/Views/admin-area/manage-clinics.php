@@ -71,19 +71,21 @@ require_once("header.php");
                         </table>
                     </div>
 
-                    <div class="btn-group pull-right">
+                    <div class="pull-right text-right">
                         <?php
                         switch($data['status'])
                         {
                             case 'approved' : {
                                 ?>
                                 <input name="action" type="submit" class="btn btn-danger" value="Delete">
+                                <p class="text-warning">Please ensure that all employees assigned to this clinic have been re-assigned to another clinic before deletion</p>
                                 <?php
                             } break;
                             case 'deleted' : {
                                 ?>
                                 <input name="action" type="submit" class="btn btn-primary" value="Restore">
                                 <input name="action" type="submit" class="btn btn-danger" value="Delete Permanently">
+                                <p class="text-warning">Please ensure that all employees assigned to this clinic have been re-assigned to another clinic before deletion</p>
                                 <?php
                             }
                         }

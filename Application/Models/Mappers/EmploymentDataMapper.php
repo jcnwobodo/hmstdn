@@ -19,10 +19,18 @@ class EmploymentDataMapper extends Mapper
         parent::__construct();
         $this->selectStmt = self::$PDO->prepare("SELECT * FROM app_employment_data WHERE id=?");
         $this->selectAllStmt = self::$PDO->prepare("SELECT * FROM app_employment_data");
+        $this->selectByClinicStmt = self::$PDO->prepare("SELECT * FROM app_employment_data WHERE clinic=?");
         $this->updateStmt = self::$PDO->prepare("UPDATE app_employment_data SET clinic=?, department=?, specialization=? WHERE id=?");
         $this->insertStmt = self::$PDO->prepare("INSERT INTO app_employment_data (id, clinic, department, specialization)VALUES(?,?,?,?)");
         $this->deleteStmt = self::$PDO->prepare("DELETE FROM app_employment_data WHERE id=?");
         $this->deleteByClinicStmt = self::$PDO->prepare("DELETE FROM app_employment_data WHERE clinic=?");
+    }
+
+    public function findByClinic($clinic)
+    {
+        $this->selectByClinicStmt->execute( array($clinic->getId()) );
+        $raw_data = $this->selectByClinicStmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->getCollection( $raw_data );
     }
 
     protected function targetClass()
