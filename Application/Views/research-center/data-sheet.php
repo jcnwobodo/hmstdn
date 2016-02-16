@@ -39,11 +39,7 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
             if($filtered_by!='disease') //Filtering by Location, Both or Nil
             {
                 ?>
-                <div class="height-50vh data-section full-margin-bottom">
-                <?php
-                $columnChart = new FusionCharts("column2d", "diseases-count" , '100%', '400', "chart-1", "json", $chart_data1);
-                $columnChart->render();
-                ?>
+            <div class="height-50vh data-section full-margin-bottom">
                 <div class="table-responsive clear-both">
                     <table class="table table-stripped table-bordered table-hover full-margin-top">
                         <thead>
@@ -64,10 +60,19 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
                                     <?php
                                 }
                                 ?>
+                                <button class="btn btn-sm btn-primary pull-right" type="button" data-toggle="collapse" data-target="#chart-1" aria-expanded="false" aria-controls="chart-1">
+                                    <span class="glyphicon glyphicon-resize-vertical"></span> Visualize Data
+                                </button>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="6" class="mid-padding-all"><div id="chart-1"></div></td>
+                            <td colspan="6" class="mid-padding-all">
+                                <?php
+                                $columnChart = new FusionCharts("column2d", "diseases-count" , '100%', '400', "chart-1", "json", $chart_data1);
+                                $columnChart->render();
+                                ?>
+                                <div class="collapse" id="chart-1"></div>
+                            </td>
                         </tr>
                         <tr>
                             <td width="4%">SN</td>
@@ -115,10 +120,6 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
             {
                 ?>
                 <div class="height-50vh data-section">
-                <?php
-                $columnChart = new FusionCharts("column2d", "location-count" , '100%', '400', "chart-2", "json", $chart_data2);
-                $columnChart->render();
-                ?>
                 <div class="table-responsive clear-both">
                     <table class="table table-stripped table-bordered table-hover full-margin-top">
                         <thead>
@@ -135,10 +136,19 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
                                 <?php
                                 }
                                 ?>
+                                <button class="btn btn-sm btn-primary pull-right" type="button" data-toggle="collapse" data-target="#chart-2" aria-expanded="false" aria-controls="chart-2">
+                                    <span class="glyphicon glyphicon-resize-vertical"></span> Visualize Data
+                                </button>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="mid-padding-all"><div id="chart-2"></div></td>
+                            <td colspan="4" class="mid-padding-all">
+                                <?php
+                                $columnChart = new FusionCharts("column2d", "location-count" , '100%', '400', "chart-2", "json", $chart_data2);
+                                $columnChart->render();
+                                ?>
+                                <div class="collapse" id="chart-2"></div>
+                            </td>
                         </tr>
                         <tr>
                             <td width="4%">SN</td>

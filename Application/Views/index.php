@@ -47,7 +47,7 @@ include_once('header.php');
                             <label for="username"><span class="glyphicon glyphicon-user"></span> User ID</label>
                         </div>
                         <div class="col-xs-8">
-                            <input name="username" id="username" type="text" class="form-control" maxlength="25"/>
+                            <input name="username" id="username" type="text" class="form-control" maxlength="50"/>
                         </div>
                     </div>
                     <div class="row">

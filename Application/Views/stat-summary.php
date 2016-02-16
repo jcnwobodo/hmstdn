@@ -20,17 +20,20 @@ $chart_data1 = $data['chart-data-1'];
 $chart_data2 = $data['chart-data-2'];
 
 include_once('header.php');
-include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
+//include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
 ?>
+<!--
     <script type="text/javascript" src="<?php home_url('/Application/_Libraries/fusioncharts/js/fusioncharts.js');?>"></script>
     <script type="text/javascript" src="<?php home_url('/Application/_Libraries/fusioncharts/js/themes/fusioncharts.theme.fint.js');?>"></script>
-
+-->
     <div class="text-center">
         <h2 class="page-header no-margin full-margin-bottom"><span class="glyphicon glyphicon-book"></span> Researcher's Data-sheet</h2>
+        <!--
         <p class="lead">Below are data snippets showing the top <?= $data['summary-limit']; ?> prevailing tropical diseases and worst hit states in Nigeria.</p>
         <h3>Want to find out more?</h3>
+        -->
         <p class="lead">
-            Register now as a Researcher to gain more insights form our vast data collections on tropical diseases in Nigeria.
+            Register now as a Researcher to gain access to our vast data collections on tropical diseases in Nigeria.
         </p>
         <div class="row">
             <div class="col-md-5">
@@ -46,12 +49,16 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
             </div>
         </div>
     </div>
+
+<!--
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="height-50vh data-section full-margin-bottom">
                 <?php
+                /*
                 $columnChart = new FusionCharts("column2d", "diseases-count" , '100%', '20%', "chart-1", "json", $chart_data1);
                 $columnChart->render();
+                */
                 ?>
                 <div class="table-responsive clear-both">
                     <table class="table table-stripped table-bordered table-hover full-margin-top">
@@ -90,8 +97,10 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
 
             <div class="height-50vh data-section">
                 <?php
+                /*
                 $columnChart = new FusionCharts("column2d", "location-count" , '100%', '20%', "chart-2", "json", $chart_data2);
                 $columnChart->render();
+                */
                 ?>
                 <div class="table-responsive clear-both">
                     <table class="table table-stripped table-bordered table-hover full-margin-top">
@@ -182,4 +191,5 @@ include_once("Application/_Libraries/fusioncharts/fusioncharts.php");
             </div>
         </div>
     </div>
+-->
 <?php include_once("footer.php"); ?>
