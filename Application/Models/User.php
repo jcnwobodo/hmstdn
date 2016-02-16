@@ -141,4 +141,37 @@ abstract class User extends DomainObject implements I_StatefulObject
     {
         return self::getDefaultCommand($this->getUserType());
     }
+
+    public static function getDefaultCommandTitle($user_type)
+    {
+        $command_title = null;
+        switch(ucfirst($user_type))
+        {
+            case (User::UT_ADMIN) :{
+                $command_title = 'Admin. Panel';
+            } break;
+
+            case (User::UT_LAB_TECH) :{
+                $command_title = 'Lab. Center';
+            } break;
+
+            case (User::UT_RECEPTIONIST) :{
+                $command_title = 'Reception Hall';
+            } break;
+
+            case (User::UT_DOCTOR) :{
+                $command_title = 'Consultation Room';
+            } break;
+
+            case (User::UT_RESEARCHER) :{
+                $command_title = 'Research Center';
+            }
+        }
+        return $command_title;
+    }
+
+    public function defaultCommandTitle()
+    {
+        return self::getDefaultCommandTitle($this->getUserType());
+    }
 }
