@@ -59,18 +59,19 @@ require_once("header.php");
                             <label for="disease"><span class="glyphicon glyphicon-alert"></span> Disease</label>
                         </div>
                         <div class="col-sm-9">
-                            <select name="disease" id="disease" class="form-control">
+                            <select name="diseases[]" id="diseases" class="form-control" multiple="multiple" style="height: 15em;">
                                 <?php
                                 foreach($data['diseases'] as $disease)
                                 {
                                     ?>
-                                    <option value="<?= $disease->getId(); ?>" <?= selected($disease->getId(), isset($fields['disease']) ? $fields['disease'] : null); ?>>
+                                    <option value="<?= $disease->getId(); ?>" <?= selected_multi($disease->getId(), isset($fields['diseases']) ? $fields['diseases'] : null); ?>>
                                         <?= $disease->getName(); ?>
                                     </option>
                                     <?php
                                 }
                                 ?>
                             </select>
+                            <p class="help-block">Use Ctrl + Click to select multiple diseases</p>
                         </div>
                     </div>
                 </div>

@@ -153,18 +153,23 @@ class DoctorAreaCommand extends DoctorAndLabTechnicianCommand
 
             //process request
             $consultation = Consultation::getMapper('Consultation')->find($fields['consultation']);
-            $disease = Disease::getMapper('Disease')->find($fields['disease']);
+            $disease_ids = $fields['diseases'];
             $request_date = new DateTime();
             $patient_location = Location::getMapper('Location')->find($fields['location']);
 
-            if(is_object($consultation) and is_object($disease))
+            if(is_object($consultation) and is_array($disease_ids) and sizeof($disease_ids) and is_object($patient_location))
             {
-                $test = new LabTest();
-                $test->setConsultation($consultation);
-                $test->setDisease($disease);
-                $test->setRequestDate($request_date);
-                $test->setPatientLocation($patient_location);
-                $test->setStatus(LabTest::STATUS_PENDING);
+                foreach($disease_ids as $disease_id)
+                {
+                    $disease = Disease::getMapper('Disease')->find($disease_id);
+
+                    $test = new LabTest();
+                    $test->setConsultation($consultation);
+                    $test->setDisease($disease);
+                    $test->setRequestDate($request_date);
+                    $test->setPatientLocation($patient_location);
+                    $test->setStatus(LabTest::STATUS_PENDING);
+                }
 
                 $requestContext->setFlashData("Lab. Test request placed successfully");
                 $data['status'] = 1;

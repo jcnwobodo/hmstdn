@@ -86,10 +86,10 @@ function selected($val1,$val2)
     return "";
 }
 
-function selected_multi($value, $name)
+function selected_multi($value, $options_array)
 {
-    if(! is_array($name)){$name = array(); }
-    if(in_array($value,$name)) return 'selected="selected"';
+    if(! is_array($options_array)){$options_array = array(); }
+    if(in_array($value,$options_array)) return 'selected="selected"';
 }
 function checked($value, $options)
 {
