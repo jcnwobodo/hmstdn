@@ -409,7 +409,7 @@ class AdminAreaCommand extends AdminAndReceptionistCommand
                     $user_class = str_replace(' ', '', ucwords(str_replace('_', ' ', $type)) );
                     $class = "\\Application\\Models\\".$user_class;
                     $user = new $class();
-                    $user->setUsername(strtolower($employee_id));
+                    $user->setUsername(strtoupper($employee_id));
                     $user->setPassword($password1);
                     $user->setUserType($user_class);
                     $user->setStatus(User::STATUS_ACTIVE);
