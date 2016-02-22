@@ -15,7 +15,7 @@ require_once("header.php");
     require_once("sidebar.php");
     ?>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header"><span class="glyphicon glyphicon-dashboard"></span> Welcome to <?php site_info('name')?> Administration Area.</h1>
+        <h1 class="page-header"><span class="glyphicon glyphicon-dashboard"></span> Welcome to <?php site_info('name')?> Administration Page.</h1>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
