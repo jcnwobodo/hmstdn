@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2016 at 08:28 AM
+-- Generation Time: Feb 17, 2016 at 06:03 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -148,7 +148,8 @@ INSERT INTO `app_employment_data` (`id`, `clinic`, `department`, `specialization
 (6, 1, 'Lab. Sciences', 'Last Scientist'),
 (18, 1, 'Reception', 'Receptionist'),
 (19, 1, 'Pediatrics', 'Pediatrician'),
-(20, 1, 'Dental Care', 'Dentist');
+(20, 1, 'Dental Care', 'Dentist'),
+(21, 3, 'Administration', 'Web Admin.');
 
 -- --------------------------------------------------------
 
@@ -173,7 +174,30 @@ CREATE TABLE `app_lab_tests` (
 --
 
 INSERT INTO `app_lab_tests` (`id`, `consultation`, `operator`, `disease`, `request_date`, `test_date`, `patient_location`, `result`, `status`) VALUES
-(1, 20, 6, 26, 1454358646, 1454359058, 22, 1, 1);
+(1, 20, 6, 26, 1454358646, 1454359058, 22, 1, 1),
+(2, 17, 6, 25, 1454400222, 1454400302, 22, 1, 1),
+(3, 17, 6, 26, 1454400268, 1454400302, 10, 1, 1),
+(4, 17, 6, 5, 1455615707, 1455615801, 28, 1, 1),
+(5, 17, 6, 7, 1455615707, 1455615801, 28, 1, 1),
+(6, 17, 6, 1, 1455615707, 1455615801, 28, 1, 1),
+(7, 17, 6, 3, 1455615707, 1455615801, 28, 1, 1),
+(8, 17, 6, 2, 1455615707, 1455615801, 28, 1, 1),
+(9, 17, 6, 25, 1455615707, 1455615801, 28, 1, 1),
+(10, 17, 6, 21, 1455615707, 1455615801, 28, 1, 1),
+(11, 17, 6, 16, 1455615707, 1455615801, 28, 1, 1),
+(12, 17, 6, 5, 1455615735, 1455615801, 28, 1, 1),
+(13, 17, 6, 7, 1455615735, 1455615801, 28, 1, 1),
+(14, 17, 6, 1, 1455615735, 1455615801, 28, 1, 1),
+(15, 17, 6, 3, 1455615735, 1455615801, 28, 1, 1),
+(16, 17, 6, 2, 1455615735, 1455615801, 28, 1, 1),
+(17, 17, 6, 25, 1455615735, 1455615801, 28, 1, 1),
+(18, 17, 6, 21, 1455615735, 1455615801, 28, 1, 1),
+(19, 17, 6, 16, 1455615735, 1455615801, 28, 1, 1),
+(20, 17, 6, 6, 1455728201, 1455728238, 28, 1, 1),
+(21, 17, NULL, 7, 1455728201, NULL, 28, NULL, 2),
+(22, 17, 6, 1, 1455728201, 1455728238, 28, 1, 1),
+(23, 17, 6, 27, 1455728201, 1455728241, 28, 0, 1),
+(24, 17, NULL, 3, 1455728201, NULL, 28, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -1103,6 +1127,7 @@ INSERT INTO `site_personal_info` (`id`, `photo`, `first_name`, `last_name`, `oth
 ('18', NULL, 'Madam', 'Receptionist', 'One', 'F', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'receptionist1@site.com', '08031231233', NULL),
 ('19', NULL, 'Odinakachukwu', 'Okeke', '', 'F', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'odinakachukwu@gmail.com', '08031231239', NULL),
 ('20', NULL, 'Fidelis', 'Ikworentus', '', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '08031231240', NULL),
+('21', NULL, 'Gentle', 'Joe', 'Young', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '08031231242', NULL),
 ('4', 3, 'Nice', 'Victor', 'John', 'F', 191113200, 'Nigerian', 'Anambra', 'Nnewi soutth', 'United kingdom', 'ALASKA', 'Isolo', 'ROAD T HOUSE 1', 'chukwudi@gmail.com', '08124345567', NULL),
 ('5', 17, 'Michael', 'Ndubuisi', 'Chukwuemeka', 'M', 191286000, 'Nigerian', 'Enugu', 'Udi', 'Nigeria', 'Enugu', 'Nsukka', 'Alvan-Ikoku Hostel, Rm 128, UNN', 'ndu11michael@gmail.com', '08131206054', NULL),
 ('6', 18, 'Ogochukwu', 'Nnamega', '', 'F', 759279600, 'Nigerian', 'Enugu', 'Nkanu-East', 'Nigeria', 'Enugu', 'Enugu', 'UNEC, Enugu', 'jc.nwobodo2@gmail.com', '08176309077', NULL),
@@ -1229,7 +1254,27 @@ INSERT INTO `site_sessions` (`id`, `session_id`, `user_id`, `user_type`, `start_
 (63, '56b0586f50bc69.56674670', 6, 'LabTechnician', 1454397551, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397568, 0),
 (64, '56b0589987a265.31190279', 19, 'Doctor', 1454397593, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397631, 0),
 (65, '56b058c7a69f47.18340477', 20, 'Doctor', 1454397639, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397792, 0),
-(66, '56b05968a8c523.97035703', 4, 'Receptionist', 1454397800, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454397885, 1);
+(66, '56b05968a8c523.97035703', 4, 'Receptionist', 1454397800, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454398609, 0),
+(67, '56b05c9881b258.40167833', 1, 'Admin', 1454398616, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454399844, 0),
+(68, '56b062c433ae76.29610772', 19, 'Doctor', 1454400196, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454400270, 0),
+(69, '56b0631608f5f1.92764430', 6, 'LabTechnician', 1454400278, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454400439, 0),
+(70, '56b1a18f5439c1.86417647', 1, 'Admin', 1454481807, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36', '127.0.0.1', 1454482056, 1),
+(71, '56b367132e8ac7.81817299', 1, 'Admin', 1454597907, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36', '127.0.0.1', 1454597908, 1),
+(72, '56b4ba59817e05.42331215', 1, 'Admin', 1454684761, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36', '127.0.0.1', 1454684805, 0),
+(73, '56b4bb1262fa29.74731280', 1, 'Admin', 1454684946, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36', '127.0.0.1', 1454684946, 1),
+(74, '56c18bfeb737d6.63277481', 1, 'Admin', 1455524862, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455524863, 1),
+(75, '56c2dd2a61d7d0.17770036', 6, 'LabTechnician', 1455611178, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455611188, 0),
+(76, '56c2de24b796b5.34964254', 7, 'Researcher', 1455611428, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455613364, 0),
+(77, '56c2e5bf5469a5.05222900', 1, 'Admin', 1455613375, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455614803, 0),
+(78, '56c2eb58ab2fd9.77352863', 1, 'Admin', 1455614808, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455614827, 0),
+(79, '56c2eb712d8d94.89283878', 19, 'Doctor', 1455614833, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455615779, 0),
+(80, '56c2ef29075468.49894015', 6, 'LabTechnician', 1455615785, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455615821, 0),
+(81, '56c2ef52599ae0.54516649', 7, 'Researcher', 1455615826, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455615889, 0),
+(82, '56c2ef99a99be8.40046415', 1, 'Admin', 1455615897, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455616250, 0),
+(83, '56c4a5bd0b4631.80315576', 7, 'Researcher', 1455728061, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455728104, 0),
+(84, '56c4a5ef7d3df7.36891939', 1, 'Admin', 1455728111, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455728167, 0),
+(85, '56c4a62cee3df3.74894564', 19, 'Doctor', 1455728172, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455728220, 0),
+(86, '56c4a6620a2ba2.55549036', 6, 'LabTechnician', 1455728226, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36', '127.0.0.1', 1455728263, 0);
 
 -- --------------------------------------------------------
 
@@ -1297,7 +1342,8 @@ INSERT INTO `site_users` (`id`, `username`, `password`, `user_type`, `status`) V
 (12, 'fidelis@gmail.com', 'some-key', 'Researcher', 1),
 (18, 'UNNMED/REC/002', 'some-key', 'Receptionist', 1),
 (19, 'UNNMED/PED/001', 'some-key', 'Doctor', 1),
-(20, 'UNNMED/DEN/001', 'some-key', 'Doctor', 1);
+(20, 'UNNMED/DEN/001', 'some-key', 'Doctor', 1),
+(21, 'unthen/adm/001', 'some-key', 'Admin', 1);
 
 --
 -- Indexes for dumped tables
@@ -1417,7 +1463,7 @@ ALTER TABLE `app_diseases`
 -- AUTO_INCREMENT for table `app_lab_tests`
 --
 ALTER TABLE `app_lab_tests`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `app_patients`
 --
@@ -1447,7 +1493,7 @@ ALTER TABLE `site_posts`
 -- AUTO_INCREMENT for table `site_sessions`
 --
 ALTER TABLE `site_sessions`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `site_uploads`
 --
@@ -1457,7 +1503,7 @@ ALTER TABLE `site_uploads`
 -- AUTO_INCREMENT for table `site_users`
 --
 ALTER TABLE `site_users`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
