@@ -24,6 +24,12 @@ abstract class Employee extends User
      */
     public function getEmploymentData()
     {
+        if(!is_object($this->employment_data))
+        {
+            $emp_data_mapper = EmploymentData::getMapper('EmploymentData');
+            $emp_data = $emp_data_mapper->find($this->getId());
+            $this->employment_data = $emp_data;
+        }
         return $this->employment_data;
     }
 
